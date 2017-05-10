@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Schlemmen ohne Grenzen</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'frontend/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="{% static 'frontend/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/simple-line-icons.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'frontend/css/new-age.min.css' %}" rel="stylesheet">
+    <link href="{% static 'frontend/css/schlemmen.css' %}" rel="stylesheet">
+    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
+
+    <!-- Temporary navbar container fix -->
+    <style>
+    .navbar-toggler {
+        z-index: 1;
+    }
+
+    @media (max-width: 576px) {
+        nav > .container {
+            width: 100%;
+        }
+    }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            Menu <i class="fa fa-bars"></i>
+        </button>
+        <div class="container">
+            <a class="navbar-brand" href="#anmelden">Anmelden!</a>
+            <div class="collapse navbar-collapse" id="navbarExample">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#download">Infos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Über uns</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Fragen</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="masthead">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="header-content">
+                        <div class="header-content-inner">
+                            <img src="{% static 'frontend/img/header_funk.png' %}" class="header_logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-sm-12">
+                    <div class="header-content">
+                        <div class="header-content-inner">
+                            <h1>New Age is an app landing page that will help you beautifully showcase your new mobile app, or anything else!</h1>
+                            <a href="#download" class="btn btn-outline btn-xl">Start Now for Free!</a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </header>
+
+    <section class="download bg-primary text-center" id="download">
+        <div class="container">
+            <div class="row infos1">
+                <div class="col-md-8 offset-md-2">
+                    <h2 class="section-heading">Schlemmen, rätseln, Spaß haben!</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fa fa-cutlery fa-5x"></i>
+                    <h3>Leckeres Essen</h3>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-users fa-5x"></i>
+                    <h3>Leute</h3>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-question fa-5x"></i>
+                    <h3>Rätsel</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h2>Häh?</h2>
+                <p class="text-muted">Check out what you can do with this app theme!</p>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <img src="{% static 'frontend/img/gruppenbild.jpg' %}">
+                </div>
+                <div class="col-lg-8">
+                    TODO
+                </div>    
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <div class="container">
+                <h2>Für den <br> guten Zweck.<br>Schlemmen für Sri Lanka.</h2>
+                <a href="#contact" class="btn btn-outline btn-xl">Mehr herausfinden</a>
+            </div>
+        </div>
+        <div class="overlay"></div>
+    </section>
+
+    <section class="anmelden" id="anmelden">
+        <div class="container">
+            <h2>Anmelden</h2>
+            <form id="contactForm" class="hidden-labels dropzone dz-clickable" action="{% url 'frontend:index' %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="formBox">
+                {{ form.non_field_errors }}
+                <div class="row">
+                  <div class="col-md-6">
+                      <h3>Teammitglied 1</h3>
+                      {{ form.name1 }}
+                      {{ form.handy1 }}
+                      {{ form.email1 }}
+                      <p>
+                          {{ form.newsletter1 }}
+                          <label for="{{ form.newsletter1.id_for_label }}">Ich will den Newsletter (Termin fürs nächste Schlemmen)</label>
+                      </p>
+                  </div>
+                  <div class="col-md-6">
+                      <h3>Teammitglied 2</h3>
+                      {{ form.name2 }}
+                      {{ form.handy2 }}
+                      {{ form.email2 }}
+                      <p>
+                          {{ form.newsletter2 }}
+                          <label for="{{ form.newsletter2.id_for_label }}">Mein Teampartner will ihn auch!</label>
+                      </p>
+                  </div>
+                </div>
+                <h2>Hier wird bei uns gekocht...</h2>
+                {{ form.plz }}
+                {{ form.street }}
+                <h2>Nachricht an eure Gastgeber</h2>
+                {{ form.note }}
+              </div>
+              <div class="row" style="margin-top: 8em">
+                  <div class="col-md-12">
+                      <p>
+                          {{ form.accepted_tos }}
+                          <label for="{{ form.accepted_tos.id_for_label }}">Wir akzeptieren die Datenschutzerklärung.</label>
+                      </p>
+                      <button class="btn btn-success" type="submit">
+                          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                          Schmeiß den Herd an!
+                      </button>
+                  </div>  
+              </div>
+            </form>
+      </div>
+    </section>
+
+    <section class="contact bg-primary" id="contact">
+        <div class="container">
+            <h2>We <i class="fa fa-heart"></i> new friends!</h2>
+            Bock, was in der Welt zu verändern? Arsch hoch, von sich ändert sich nix! Wir glauben, dass Bildung den Unterschied macht und wollen sie nutzen, um so die Welt positiv zu verändern!
+            <br>
+            <img src="{% static 'frontend/img/logo.svg' %}" style="width: 20%">
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <ul class="list-inline list-social">
+                <li class="list-inline-item social-twitter">
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li class="list-inline-item social-facebook">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li class="list-inline-item social-google-plus">
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                </li>
+            </ul>
+            <p>&copy; 2017 Start Bootstrap. All Rights Reserved.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#">Privacy</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">Terms</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">FAQ</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
+    <script src="{% static 'frontend/js/tether.min.js' %}"></script>
+    <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'frontend/js/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'frontend/js/new-age.min.js' %}"></script>
+
+</body>
+</html>
