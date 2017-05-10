@@ -1,5 +1,12 @@
 from django.db import models
 from geopy.geocoders import Nominatim
+import random
+
+class Cluster(models.Model):
+    color = models.CharField(max_length=100)
+
+    def generate_color(self):
+        self.color = '#{:02d}{:02d}{:02d}'.format(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
 class Household(models.Model):
     name1 = models.CharField(max_length=200)
@@ -16,6 +23,8 @@ class Household(models.Model):
     found_coords = models.BooleanField(default=False)
     longitude = models.FloatField(default=0.0)
     latitude = models.FloatField(default=0.0)
+    signup_date = models.DateTimeField()
+    cluster = models.ForeignKey(Cluster, on_delete=models.SET_NULL, null=True)
 
     def lookup_coords(self):
         geocoder = Nominatim()
