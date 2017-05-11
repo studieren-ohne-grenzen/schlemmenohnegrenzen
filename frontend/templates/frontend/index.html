@@ -25,19 +25,6 @@
     <link href="{% static 'frontend/css/schlemmen.css' %}" rel="stylesheet">
     <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
 
-    <!-- Temporary navbar container fix -->
-    <style>
-    .navbar-toggler {
-        z-index: 1;
-    }
-
-    @media (max-width: 576px) {
-        nav > .container {
-            width: 100%;
-        }
-    }
-    </style>
-
 </head>
 
 <body id="page-top">
@@ -113,7 +100,7 @@
         </div>
     </section>
 
-    <section class="features" id="features">
+    <section class="info" id="info">
         <div class="container">
             <div class="section-heading text-center">
                 <h2>Häh?</h2>
@@ -122,11 +109,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-4">
-                    <img src="{% static 'frontend/img/gruppenbild.jpg' %}">
+
                 </div>
                 <div class="col-lg-8">
                     TODO
-                </div>    
+                </div>
             </div>
         </div>
     </section>
@@ -144,60 +131,85 @@
     <section class="anmelden" id="anmelden">
         <div class="container">
             <h2>Anmelden</h2>
-            <form id="contactForm" class="hidden-labels dropzone dz-clickable" action="{% url 'frontend:index' %}" method="post" enctype="multipart/form-data">
-              {% csrf_token %}
+            <form id="contactForm" class="hidden-labels dropzone dz-clickable" action="/joinexperts#contact" method="post" enctype="multipart/form-data">
               <div class="formBox">
-                {{ form.non_field_errors }}
                 <div class="row">
                   <div class="col-md-6">
-                      <h3>Teammitglied 1</h3>
-                      {{ form.name1 }}
-                      {{ form.handy1 }}
-                      {{ form.email1 }}
-                      <p>
-                          {{ form.newsletter1 }}
-                          <label for="{{ form.newsletter1.id_for_label }}">Ich will den Newsletter (Termin fürs nächste Schlemmen)</label>
-                      </p>
+                    <h3>Teammitglied 1</h3>
+                    <label class="required"><input name="name" placeholder="Dein Name*" value="" required="" type="text"><span>Dein Name*</span></label>
+                    <label><input name="tel" placeholder="Deine Handynummer*" value="" type="tel"><span>Deine Handynummer*</span></label>
+                    <label class="required"><input name="email" placeholder="Deine E-Mail*" value="" required="" type="email"><span>Deine E-Mail*</span></label>
+                    <p>
+                        <input type="checkbox" id="newsletter1" checked="checked" />
+                        <label for="newsletter1">Ich will den Newsletter (Termin fürs nächste Schlemmen)</label>
+                    </p>
                   </div>
                   <div class="col-md-6">
-                      <h3>Teammitglied 2</h3>
-                      {{ form.name2 }}
-                      {{ form.handy2 }}
-                      {{ form.email2 }}
-                      <p>
-                          {{ form.newsletter2 }}
-                          <label for="{{ form.newsletter2.id_for_label }}">Mein Teampartner will ihn auch!</label>
-                      </p>
+                    <h3>Teammitglied 2</h3>
+                    <label class="required"><input name="name" placeholder="Sein/Ihr Name*" value="" required="" type="text"><span>Sein/Ihr Name*</span></label>
+                    <label><input name="tel" placeholder="Seine/Ihre Handynummer" value="" type="tel"><span>Seine/Ihre Telefonnummer</span></label>
+                    <label class="required"><input name="email" placeholder="Seine/Ihre E-Mail*" value="" required="" type="email"><span>Seine/Ihre E-Mail*</span></label>
+                    <p>
+                        <input type="checkbox" id="newsletter2" checked="checked" />
+                        <label for="newsletter2">Mein Teampartner will ihn auch!</label>
+                    </p>
                   </div>
                 </div>
                 <h2>Hier wird bei uns gekocht...</h2>
-                {{ form.plz }}
-                {{ form.street }}
-                <h2>Nachricht an eure Gastgeber</h2>
-                {{ form.note }}
+                <div class="row">
+                  <div class="col-md-6">
+                    <select name="zip">
+                      <option value="76131">76131 (Innen- &amp; Oststadt)</option>
+                      <option value="76133">76133 (Innen-, Nord-, West-, Südweststadt)</option>
+                      <option value="76135">76135 (West-, Südweststadt, Beiertheim-Bulach)</option>
+                      <option value="76137">76137 (Südstadt, Südweststadt)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="required"><input name="street" placeholder="Straße und Hausnummer" value="" required="" type="text"><span>Straße und Hausnummer</span></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2>Nachricht an eure Gastgeber</h2>
+                    <label><textarea name="message" placeholder="Vegetarisch? Allergien? Hier ist Platz für Nachrichten an eure Gastgeber. " rows="5"></textarea><span>Ihre Nachricht an uns</span></label>
+                  </div>
+                </div>
+              <h2>Startbeitrag</h2>
+              <div class="row">
+                  <div class="col-md-6">
+                      <h3><i class="fa fa-credit-card" aria-hidden="true"></i> Per Lastschrift</h3>
+                      TODO
+                  </div>
+                  <div class="col-md-6">
+                      <h3><i class="fa fa-money" aria-hidden="true"></i> Bar vorbeibringen</h3>
+                      TODO
+                  </div>
               </div>
               <div class="row" style="margin-top: 8em">
                   <div class="col-md-12">
                       <p>
-                          {{ form.accepted_tos }}
-                          <label for="{{ form.accepted_tos.id_for_label }}">Wir akzeptieren die Datenschutzerklärung.</label>
+                          <input type="checkbox" id="datenschutz" />
+                          <label for="datenschutz">Wir akzeptieren die Datenschutzerklärung.</label>
                       </p>
                       <button class="btn btn-success" type="submit">
                           <i class="fa fa-paper-plane" aria-hidden="true"></i>
                           Schmeiß den Herd an!
                       </button>
-                  </div>  
+                  </div>
               </div>
-            </form>
+            </div>
+          </form>
       </div>
     </section>
 
     <section class="contact bg-primary" id="contact">
         <div class="container">
+            <img src="{% static 'frontend/img/gruppenbild.jpg' %}" class="polaroid-style medium-image" style="margin-bottom: 30px">
             <h2>We <i class="fa fa-heart"></i> new friends!</h2>
             Bock, was in der Welt zu verändern? Arsch hoch, von sich ändert sich nix! Wir glauben, dass Bildung den Unterschied macht und wollen sie nutzen, um so die Welt positiv zu verändern!
             <br>
-            <img src="{% static 'frontend/img/logo.svg' %}" style="width: 20%">
+            <img src="img/logo.svg" class="small-image">
         </div>
     </section>
 
