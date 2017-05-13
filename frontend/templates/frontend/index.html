@@ -76,8 +76,30 @@
         </div>
     </header>
 
-    <section class="download bg-primary text-center" id="download">
+    <section class="download bg-primary" id="entry-container">
+        <div class="container bigger-text">
+            <h2>Schlemmt euch durch Karlsruhe, habt Spaß und knackt das Rätsel!</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <p>Alles steht bereit, der Tisch ist bereits gedeckt. Nichts steht einem tollen Abend in der Karlsruher Oberschicht mehr im Weg.</p>
+                    <p>
+                        Doch etwas stimmt nicht und ihr alle seid euch sicher, dass dies kein Zufall sein kann. Ihr seid nicht zufällig zusammen gekommen. Jemand hat euch aus einem ganz bestimmten Grund eingeladen...
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="{% static 'frontend/img/map.png' %}" style="width: 100%; height: auto; max-width: 500px">
+                </div>    
+            </div>
+        </div>
+    </section>
+
+    <section class="info" id="info">
         <div class="container">
+            <div class="section-heading text-center">
+                <h2>Häh?</h2>
+                <p class="text-muted">Check out what you can do with this app theme!</p>
+                <hr>
+            </div>
             <div class="row infos1">
                 <div class="col-md-8 offset-md-2">
                     <h2 class="section-heading">Schlemmen, rätseln, Spaß haben!</h2>
@@ -95,24 +117,6 @@
                 <div class="col-md-4">
                     <i class="fa fa-question fa-5x"></i>
                     <h3>Rätsel</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="info" id="info">
-        <div class="container">
-            <div class="section-heading text-center">
-                <h2>Häh?</h2>
-                <p class="text-muted">Check out what you can do with this app theme!</p>
-                <hr>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-
-                </div>
-                <div class="col-lg-8">
-                    TODO
                 </div>
             </div>
         </div>
@@ -209,7 +213,7 @@
             <h2>We <i class="fa fa-heart"></i> new friends!</h2>
             Bock, was in der Welt zu verändern? Arsch hoch, von sich ändert sich nix! Wir glauben, dass Bildung den Unterschied macht und wollen sie nutzen, um so die Welt positiv zu verändern!
             <br>
-            <img src="img/logo.svg" class="small-image">
+            <img src="{% static 'frontend/img/logo.svg' %}" class="small-image">
         </div>
     </section>
 

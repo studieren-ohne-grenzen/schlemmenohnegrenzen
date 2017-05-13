@@ -180,3 +180,11 @@ button.btn {
 form h2 {
     margin-top: 0.7em;
 }
+
+#entry-container h2 {
+    margin-bottom: 0.6em;
+}
+
+#entry-container p {
+    font-size: 16pt;
+}
