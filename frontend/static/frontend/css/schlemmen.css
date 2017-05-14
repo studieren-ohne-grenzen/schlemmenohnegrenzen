@@ -19,9 +19,21 @@ section.cta .cta-content h2 {
     max-width: 500px;
 }
 
-section.info {
-  background-image: url("../img/trenchcoat.png");
-  background-size: cover;
+@media screen and (min-width: 1000px) {
+  section.info {
+    background-image: url("../img/trenchcoat.svg");
+    background-size: 40% auto;
+    background-repeat: no-repeat;
+    background-position: 10%;
+  }
+  .info .container {
+    margin-left: 32%;
+  }
+
+  .info .row {
+    margin-left: 18%;
+    width: 50vw;
+  }
 }
 
 img {
@@ -89,6 +101,10 @@ button, input, optgroup, select, textarea {
     height: auto;
     width: 15vw;
   }
+
+  header.masthead {
+    background: url("../img/bg-top.jpg");
+  }
 }
 
 @media screen and (orientation:portrait) {
@@ -99,6 +115,13 @@ button, input, optgroup, select, textarea {
   .medium-image {
     height: 15vh;
     width: auto;
+  }
+  header.masthead {
+    background: url("../img/bg-top-mobile.jpg");
+    height: 95vh;
+  }
+  .header_logo {
+    margin-top: 14%;
   }
 }
 
@@ -181,10 +204,22 @@ form h2 {
     margin-top: 0.7em;
 }
 
-#entry-container h2 {
+.entry-container h2 {
     margin-bottom: 0.6em;
 }
 
-#entry-container p {
+.entry-container p {
     font-size: 16pt;
+}
+
+.row-with-margin {
+  margin-bottom: 5%;
+}
+
+.section-heading {
+  margin-bottom: 5%;
+}
+
+a {
+  text-decoration: none;
 }

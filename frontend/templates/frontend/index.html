@@ -39,13 +39,13 @@
             <div class="collapse navbar-collapse" id="navbarExample">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#download">Infos</a>
+                        <a class="nav-link" href="#einleitung">Einleitung</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#features">Über uns</a>
+                        <a class="nav-link" href="#infos">Infos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Fragen</a>
+                        <a class="nav-link" href="#about-us">Über uns</a>
                     </li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@
         </div>
     </header>
 
-    <section class="download bg-primary" id="entry-container">
+    <section class="download bg-primary" id="einleitung">
         <div class="container bigger-text">
             <h2>Schlemmt euch durch Karlsruhe, habt Spaß und knackt das Rätsel!</h2>
             <div class="row">
@@ -88,36 +88,57 @@
                 </div>
                 <div class="col-md-4">
                     <img src="{% static 'frontend/img/map.png' %}" style="width: 100%; height: auto; max-width: 500px">
-                </div>    
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="info" id="info">
+    <section class="info" id="infos">
         <div class="container">
-            <div class="section-heading text-center">
-                <h2>Häh?</h2>
-                <p class="text-muted">Check out what you can do with this app theme!</p>
-                <hr>
+            <div class="section-heading">
+                <h2>Kurz und knapp</h2>
+                <p class="text-muted">Schlemmen Ohne Grenzen folgt der Idee von Running Dinner - inzwischen schon zum siebten Mal in Karlsruhe! Dieses Mal erwartet euch aber etwas etwas ganz Neues! Schlemmt euch durch die Stadt und knackt dabei gemeinsam das Rätsel um den geheimnisvollen Bekannten...</p>
             </div>
-            <div class="row infos1">
-                <div class="col-md-8 offset-md-2">
-                    <h2 class="section-heading">Schlemmen, rätseln, Spaß haben!</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+            <div class="row row-with-margin">
+                <div class="col-sm-2">
                     <i class="fa fa-cutlery fa-5x"></i>
-                    <h3>Leckeres Essen</h3>
                 </div>
-                <div class="col-md-4">
-                    <i class="fa fa-users fa-5x"></i>
-                    <h3>Leute</h3>
+                <div class="col-sm-10">
+                    <h3>Ihr kocht...</h3>
+                    <p>Schnapp dir eine Freundin/einen Freund - zu zweit seid ihr ein Team und kocht gemeinsam in eurer WG einen Gang. Damit die Wege kurz halten können: Per Fahhrad vom Marktplatz zu eurer WG in maximal 20min</p>
                 </div>
-                <div class="col-md-4">
-                    <i class="fa fa-question fa-5x"></i>
-                    <h3>Rätsel</h3>
-                </div>
+            </div>
+            <div class="row row-with-margin">
+              <div class="col-sm-2">
+                  <i class="fa fa-users fa-5x"></i>
+              </div>
+              <div class="col-sm-10">
+                  <h3>Ihr schlemmt...</h3>
+                  <p>Bei den zwei anderen Gängen seid ihr in WGs in eurer Nachbarschaft zu Gast. Jedes Mal mit anderen Leuten.</p>
+              </div>
+            </div>
+            <div class="row row-with-margin">
+              <div class="col-sm-2">
+                  <i class="fa fa-question fa-5x"></i>
+              </div>
+              <div class="col-sm-10">
+                  <h3>Ihr jagt...</h3>
+                  <p>Folgt der Story um den myteriösen Bekannten durch die Stadt! Bei jedem Gang müsst ihr zusammen arbeiten, um das Rätsel zu knacken. Schafft ihr es, ihn in Karlsruhe zu finden?</p>
+              </div>
+            </div>
+            <div class="row row-with-margin">
+              <div class="col-sm-2">
+                  <i class="fa fa-glass fa-5x"></i>
+              </div>
+              <div class="col-sm-10">
+                  <h3>Wir feiern!</h3>
+                  <p>Zum Abschluss gehen wir alle gemeinsam feiern! Der Club wird noch bekannt gegeben.</p>
+              </div>
+            </div>
+            <div class="row row-with-margin text-center">
+              <div class="col-sm-12">
+                <a class="btn btn-info" href="http://schlemmen-ka.s-o-g.org/index.php?page=infos">Noch Fragen?</a>
+              </div>
             </div>
         </div>
     </section>
@@ -141,7 +162,7 @@
                   <div class="col-md-6">
                     <h3>Teammitglied 1</h3>
                     <label class="required"><input name="name" placeholder="Dein Name*" value="" required="" type="text"><span>Dein Name*</span></label>
-                    <label><input name="tel" placeholder="Deine Handynummer*" value="" type="tel"><span>Deine Handynummer*</span></label>
+                    <label><input name="tel" placeholder="Deine Handynummer*" value="" type="tel" required=""><span>Deine Handynummer*</span></label>
                     <label class="required"><input name="email" placeholder="Deine E-Mail*" value="" required="" type="email"><span>Deine E-Mail*</span></label>
                     <p>
                         <input type="checkbox" id="newsletter1" checked="checked" />
@@ -180,10 +201,13 @@
                   </div>
                 </div>
               <h2>Startbeitrag</h2>
+              <p>Mit 4€ pro Person unterstützt ihr unsere Arbeit, engagierte Studierende in Krisen und Kriegsgebeiten zu fördern.</p>
               <div class="row">
                   <div class="col-md-6">
                       <h3><i class="fa fa-credit-card" aria-hidden="true"></i> Per Lastschrift</h3>
-                      TODO
+                      <label class="required"><input name="depositor" placeholder="KontoinhaberIn*" value="" required="" type="text"><span>Kontoinhaber*</span></label>
+                      <label class="required"><input name="iban" placeholder="IBAN*" value="" required="" type="text"><span>IBAN*</span></label>
+                      <label><input name="bic" placeholder="BIC*" value="" required=""><span>BIC*</span></label>
                   </div>
                   <div class="col-md-6">
                       <h3><i class="fa fa-money" aria-hidden="true"></i> Bar vorbeibringen</h3>
@@ -192,6 +216,10 @@
               </div>
               <div class="row" style="margin-top: 8em">
                   <div class="col-md-12">
+                      <p>
+                        <label>Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
+                        <input name="spam" value="" required="">
+                      </p>
                       <p>
                           <input type="checkbox" id="datenschutz" />
                           <label for="datenschutz">Wir akzeptieren die Datenschutzerklärung.</label>
@@ -207,11 +235,13 @@
       </div>
     </section>
 
-    <section class="contact bg-primary" id="contact">
+    <section class="contact bg-primary" id="about-us">
         <div class="container">
             <img src="{% static 'frontend/img/gruppenbild.jpg' %}" class="polaroid-style medium-image" style="margin-bottom: 30px">
             <h2>We <i class="fa fa-heart"></i> new friends!</h2>
-            Bock, was in der Welt zu verändern? Arsch hoch, von sich ändert sich nix! Wir glauben, dass Bildung den Unterschied macht und wollen sie nutzen, um so die Welt positiv zu verändern!
+            <p>Bock, was in der Welt zu verändern? Für uns ist Bildung eine Waffe - eine Waffe gegen Diktaturen, Korruption, Armut und Hunger! Komm einfach vorbei und organisiere das nächste Schlemmen Ohne Grenzen zusammen mit uns!</p>
+            <br>
+            <a href="http://karlsruhe.s-o-g.org/" class="btn btn-info">Schau vorbei!</a>
             <br>
             <img src="{% static 'frontend/img/logo.svg' %}" class="small-image">
         </div>
@@ -230,7 +260,7 @@
                     <a href="#"><i class="fa fa-google-plus"></i></a>
                 </li>
             </ul>
-            <p>&copy; 2017 Start Bootstrap. All Rights Reserved.</p>
+            <p>&copy; 2017 Studieren Ohne Grenzen. All Rights Reserved. Background by <a href="https://www.flickr.com/photos/138248475@N03/23906675105">John Voo</a>(CC By 2.0)</p>
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <a href="#">Privacy</a>
@@ -246,8 +276,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
-    <script src="{% static 'frontend/js/tether.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="{% static 'frontend/js/tether.min.js' %}"></script> -->
     <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
 
     <!-- Plugin JavaScript -->
