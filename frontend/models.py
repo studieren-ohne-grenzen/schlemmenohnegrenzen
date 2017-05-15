@@ -3,10 +3,7 @@ from geopy.geocoders import Nominatim
 import random
 
 class Cluster(models.Model):
-    color = models.CharField(max_length=100)
-
-    def generate_color(self):
-        self.color = '#{:02d}{:02d}{:02d}'.format(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+    clusterNum = models.IntegerField(default=0)
 
 class Household(models.Model):
     name1 = models.CharField(max_length=200)

@@ -29,13 +29,14 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'frontend/js/tether.min.js' %}"></script>
     <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'frontend/js/leaflet.js' %}"></script>
     <script src="{% static 'frontend/js/clustering.js' %}"></script>
     <script>
         $(function () {
-            //var jsonstr = {{ jsonstr|safe }};
-            draw_map("");
+            var jsonstr = {{ jsonstr|safe }};
+            draw_map(jsonstr);
         });
     </script>
   </body>

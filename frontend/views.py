@@ -5,6 +5,7 @@ from frontend.models import Household, Cluster
 from frontend.forms import HouseholdForm
 from django.utils import timezone
 from .clustering import initial_clusters, balance_clusters
+import json
 
 def index(request):
     if request.method == 'POST':
@@ -39,20 +40,28 @@ def regenerate_clusters(request):
     households = Household.objects.all().filter(found_coords__exact=True)
     householdsPerCluster = 9
     numOfClusters = len(households) // 9
+    maxElems = numOfClusters * 9
+    households = households[0:maxElems]
     clusters = []
     for i in range(0, numOfClusters):
         clst = Cluster()
-        clst.generate_color()
+        clst.clusterNum = i
         clst.save()
         clusters.append(clst)
 
     initial_clusters(households, clusters)
-    #balance_clusters(households)
+    balance_clusters(households, clusters)
 
     return HttpResponseRedirect(reverse('frontend:cluster'))
 
 def cluster(request):
     #TODO: Authentication
-    all_objects = Household.objects.all()
-    #TODO: Clustering
-    return render(request, 'frontend/cluster.html')
+    all_objects = Household.objects.all().filter(found_coords__exact=True).filter(cluster__isnull=False)
+
+    jsonlst = []
+    for obj in all_objects:
+        jsonlst.append({"longitude": obj.longitude, "latitude": obj.latitude, "cluster": obj.cluster.clusterNum})
+
+    jsonstr = json.dumps(jsonlst)
+
+    return render(request, 'frontend/cluster.html', {"jsonstr": jsonstr})

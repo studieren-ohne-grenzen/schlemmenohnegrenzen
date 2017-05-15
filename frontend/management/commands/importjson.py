@@ -14,6 +14,12 @@ class Command(BaseCommand):
             f = open(filename)
             jsonlist = json.load(f)
             for elem in jsonlist:
-                household = Household(name1='a', name2='b', handy1='1', handy2='2', email1='asd', email2='asd', newsletter1=False, newsletter2=False, street=elem['address']['street'], plz=76131, note='asd', signup_date=timezone.now())
+                plz = 76131
+                try:
+                    plz = int(elem['address']['zip'])
+                except ValueError:
+                    print("Error while converting zip code", elem['address']['zip'], "to integer")
+                household = Household(name1='a', name2='b', handy1='1', handy2='2', email1='asd', email2='asd', newsletter1=False, newsletter2=False, street=elem['address']['street'], plz=plz, note='asd', signup_date=timezone.now())
                 household.lookup_coords()
                 household.save()
+
