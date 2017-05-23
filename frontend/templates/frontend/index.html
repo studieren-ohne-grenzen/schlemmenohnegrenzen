@@ -3,7 +3,8 @@
 <html lang="de">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -25,27 +26,35 @@
     <link href="{% static 'frontend/css/schlemmen.css' %}" rel="stylesheet">
     <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body id="page-top">
 
     <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
-            Menu <i class="fa fa-bars"></i>
-        </button>
+    <nav class="navbar navbar-fixed-top navbar-default" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#anmelden">Anmelden!</a>
-            <div class="collapse navbar-collapse" id="navbarExample">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#einleitung">Einleitung</a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#anmelden">Anmelden!</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#einleitung">Einleitung</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#infos">Infos</a>
+                    <li>
+                        <a class="page-scroll" href="#infos">Infos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about-us">Über uns</a>
+                    <li>
+                        <a class="page-scroll" href="#about-us">Über uns</a>
                     </li>
                 </ul>
             </div>
