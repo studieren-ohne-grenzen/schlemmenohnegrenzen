@@ -23,7 +23,21 @@
     <div class="container">
         <h1>Clustering</h1>
         <div id="mapid"></div>
-        <a class="btn btn-default" href="{% url 'frontend:regenerate_clusters' %}" role="button">Regenerate</a>
+        <a class="btn btn-default" href="{% url 'frontend:regenerate_clusters' %}" role="button">Regenerate Clusters</a>
+        <a class="btn btn-default" href="{% url 'frontend:regenerate_visiting_groups' %}" role="button">Regenerate Visiting Groups</a>
+        <h2>Falsche Einträge</h2>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Adresse</th>
+          </tr>
+          {% for entry in wrong_entries %}
+          <tr>
+            <td>{{ entry.name1 }}</td>
+            <td>{{ entry.street }}</td>
+          </tr>
+          {% endfor %}
+        </table>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

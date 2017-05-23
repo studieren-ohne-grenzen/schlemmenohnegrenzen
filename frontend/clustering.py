@@ -32,8 +32,6 @@ def getDistanceToCluster(point, cluster):
         maxDist = max(dist, maxDist)
     return maxDist
 
-
-
 def balance_clusters(datapoints, clusters):
     while clustersHaveWrongSize(clusters):
         currentMinDistance = 10000000000

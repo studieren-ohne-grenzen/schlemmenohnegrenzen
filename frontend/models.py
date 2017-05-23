@@ -5,6 +5,9 @@ import random
 class Cluster(models.Model):
     clusterNum = models.IntegerField(default=0)
 
+class VisitingGroup(models.Model):
+    visiting_group_num = models.IntegerField(default=0)
+
 class Household(models.Model):
     name1 = models.CharField(max_length=200)
     handy1 = models.CharField(max_length=200)
@@ -22,6 +25,9 @@ class Household(models.Model):
     latitude = models.FloatField(default=0.0)
     signup_date = models.DateTimeField()
     cluster = models.ForeignKey(Cluster, on_delete=models.SET_NULL, null=True)
+    first_visit = models.ForeignKey(VisitingGroup, on_delete=models.SET_NULL, null=True, related_name='household1')
+    second_visit = models.ForeignKey(VisitingGroup, on_delete=models.SET_NULL, null=True, related_name='household2')
+    third_visit = models.ForeignKey(VisitingGroup, on_delete=models.SET_NULL, null=True, related_name='household3')
 
     def lookup_coords(self):
         geocoder = Nominatim()
