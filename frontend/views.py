@@ -5,6 +5,7 @@ from frontend.models import Household, Cluster, VisitingGroup
 from frontend.forms import HouseholdForm
 from django.utils import timezone
 from .clustering import initial_clusters, balance_clusters, generate_visiting_groups
+from django.contrib.auth.decorators import login_required
 import json
 
 def index(request):
@@ -33,6 +34,7 @@ def index(request):
 def signup_successful(request):
     return render(request, 'frontend/signup_successful.html')
 
+@login_required
 def regenerate_clusters(request):
     # TODO: Authentication
     # delete all current clusters
@@ -54,6 +56,7 @@ def regenerate_clusters(request):
 
     return HttpResponseRedirect(reverse('frontend:cluster'))
 
+@login_required
 def regenerate_visiting_groups(request):
     # TODO: Authentication
 
@@ -66,6 +69,7 @@ def regenerate_visiting_groups(request):
 
     return HttpResponseRedirect(reverse('frontend:cluster'))
 
+@login_required
 def cluster(request):
     # TODO: Authentication
     all_objects = Household.objects.all().filter(found_coords__exact=True).filter(cluster__isnull=False)
