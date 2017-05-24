@@ -1,5 +1,8 @@
 from scipy.cluster.hierarchy import linkage, fcluster
 from geopy.distance import vincenty
+import cProfile, pstats, io
+from operator import itemgetter
+from frontend.models import Household, Cluster, VisitingGroup
 
 def custom_dist(x, y):
     return vincenty(x, y).m
@@ -78,3 +81,196 @@ def balance_clusters(datapoints, clusters):
                         e.save()
                         break
                 break
+
+def visiting_collision(h1, h2, h3):
+    # TODO: PLZ
+    if h1['street'] == h2['street'] or h1['street'] == h3['street'] or h2['street'] == h3['street']:
+        return True
+    else:
+        return False
+
+def get_traveling_distance(elems, dist, norm):
+    total = 0.0
+    total += dist[elems[0]][elems[1]] + dist[elems[0]][elems[2]]
+    total += dist[elems[4]][elems[3]] + dist[elems[4]][elems[5]]
+    total += dist[elems[6]][elems[7]] + dist[elems[6]][elems[8]]
+
+    total += dist[elems[3]][elems[0]] + dist[elems[3]][elems[6]] + dist[elems[3]][elems[4]]
+    total += dist[elems[1]][elems[4]] + dist[elems[1]][elems[6]] + dist[elems[1]][elems[0]]
+    total += dist[elems[2]][elems[0]] + dist[elems[2]][elems[4]] + dist[elems[2]][elems[6]]
+
+    total += dist[elems[8]][elems[3]] + dist[elems[8]][elems[1]] + dist[elems[8]][elems[2]]
+    total += dist[elems[5]][elems[1]] + dist[elems[5]][elems[2]] + dist[elems[5]][elems[3]]
+    total += dist[elems[7]][elems[2]] + dist[elems[7]][elems[3]] + dist[elems[7]][elems[1]]
+
+    return total / norm
+
+def get_score(households, elems, dist, norm):
+    score = 0.0
+    h1 = households[elems[0]]
+    h2 = households[elems[1]]
+    h3 = households[elems[2]]
+    h4 = households[elems[3]]
+    h5 = households[elems[4]]
+    h6 = households[elems[5]]
+    h7 = households[elems[6]]
+    h8 = households[elems[7]]
+    h9 = households[elems[8]]
+    if visiting_collision(h1, h2, h3) or visiting_collision(h4, h5, h6) or visiting_collision(h7, h8, h9):
+        score += 1.0
+    if visiting_collision(h1, h4, h7) or visiting_collision(h2, h5, h8) or visiting_collision(h3, h6, h9):
+        score += 1.0
+    if visiting_collision(h1, h5, h9) or visiting_collision(h2, h6, h7) or visiting_collision(h3, h4, h8):
+        score += 1.0
+
+    # keine zwei gleichzeitigen visiting groups in der selben kueche
+    if visiting_collision(h1, h5, h7) or visiting_collision(h4, h2, h3) or visiting_collision(h9, h6, h8):
+        score += 10.0
+
+    score += get_traveling_distance(elems, dist, norm)
+
+    return score
+
+def recur(households, curr_elems, scores, dist, norm):
+    for i in range(9):
+        #if len(curr_elems) == 3:
+            #print(curr_elems, i)
+        #    if curr_elems == [0, 1, 2] and i == 0:
+        #        pr.enable()
+        #        print("start")
+        #    if curr_elems == [0, 1, 3] and i == 0:
+        #        pr.disable()
+        #        print("stop")
+        #        s = io.StringIO()
+        #        ps = pstats.Stats(pr, stream=s).sort_stats('cumulative')
+        #        ps.print_stats()
+        #        print(s.getvalue())
+        if i not in curr_elems:
+            new_elems = curr_elems[:]
+            new_elems.append(i)
+            if len(new_elems) < 9:
+                recur(households, new_elems, scores, dist, norm)
+            else:
+                score = get_score(households, new_elems, dist, norm)
+                scores.append((score, new_elems))
+
+def generate_visiting_groups(clusters):
+    curr_v_num = 0
+
+    for cluster in clusters:
+        scores = []
+        households = []
+        household_a = cluster.household_set.all()
+        for h in household_a:
+            households.append({'street': h.street, 'plz': h.plz, 'longitude': h.longitude, 'latitude': h.latitude})
+        #pr = cProfile.Profile()
+
+        # generate distance matrix
+        dist = []
+        maxdist = 0.0
+        for h in households:
+            tmp = []
+            for j in households:
+                d = custom_dist((h["latitude"], h["longitude"]), (j["latitude"], j["longitude"]))
+                maxdist = max(maxdist, d)
+                tmp.append(d)
+            dist.append(tmp)
+
+        recur(households, [], scores, dist, maxdist * 27.0)
+        scores.sort(key=itemgetter(0))
+        score = scores[0][1]
+        print(scores[0])
+        h1 = household_a[score[0]]
+        h2 = household_a[score[1]]
+        h3 = household_a[score[2]]
+        h4 = household_a[score[3]]
+        h5 = household_a[score[4]]
+        h6 = household_a[score[5]]
+        h7 = household_a[score[6]]
+        h8 = household_a[score[7]]
+        h9 = household_a[score[8]]
+        v1 = VisitingGroup()
+        v1.visiting_group_num = curr_v_num
+        v1.save()
+        curr_v_num += 1
+        v2 = VisitingGroup()
+        v2.visiting_group_num = curr_v_num
+        v2.save()
+        curr_v_num += 1
+        v3 = VisitingGroup()
+        v3.visiting_group_num = curr_v_num
+        v3.save()
+        curr_v_num += 1
+        v4 = VisitingGroup()
+        v4.visiting_group_num = curr_v_num
+        v4.save()
+        curr_v_num += 1
+        v5 = VisitingGroup()
+        v5.visiting_group_num = curr_v_num
+        v5.save()
+        curr_v_num += 1
+        v6 = VisitingGroup()
+        v6.visiting_group_num = curr_v_num
+        v6.save()
+        curr_v_num += 1
+        v7 = VisitingGroup()
+        v7.visiting_group_num = curr_v_num
+        v7.save()
+        curr_v_num += 1
+        v8 = VisitingGroup()
+        v8.visiting_group_num = curr_v_num
+        v8.save()
+        curr_v_num += 1
+        v9 = VisitingGroup()
+        v9.visiting_group_num = curr_v_num
+        v9.save()
+        curr_v_num += 1
+        h1.first_visit = v1
+        h2.first_visit = v1
+        h3.first_visit = v1
+        h4.first_visit = v2
+        h5.first_visit = v2
+        h6.first_visit = v2
+        h7.first_visit = v3
+        h8.first_visit = v3
+        h9.first_visit = v3
+
+        h1.second_visit = v4
+        h4.second_visit = v4
+        h7.second_visit = v4
+        h2.second_visit = v5
+        h5.second_visit = v5
+        h8.second_visit = v5
+        h3.second_visit = v6
+        h6.second_visit = v6
+        h7.second_visit = v6
+
+        h1.third_visit = v7
+        h5.third_visit = v7
+        h9.third_visit = v7
+        h2.third_visit = v8
+        h6.third_visit = v8
+        h7.third_visit = v8
+        h3.third_visit = v9
+        h4.third_visit = v9
+        h8.third_visit = v9
+
+        v1.save()
+        v2.save()
+        v3.save()
+        v4.save()
+        v5.save()
+        v6.save()
+        v7.save()
+        v8.save()
+        v9.save()
+
+        h1.save()
+        h2.save()
+        h3.save()
+        h4.save()
+        h5.save()
+        h6.save()
+        h7.save()
+        h8.save()
+        h9.save()
