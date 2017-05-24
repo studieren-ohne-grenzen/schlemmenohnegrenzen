@@ -131,39 +131,31 @@ def get_score(households, elems, dist, norm):
 
     return score
 
-def recur(households, curr_elems, scores, dist, norm):
+def recur(households, curr_elems, curr_score, dist, norm):
+    curr_elems.append(-1)
     for i in range(9):
-        #if len(curr_elems) == 3:
-            #print(curr_elems, i)
-        #    if curr_elems == [0, 1, 2] and i == 0:
-        #        pr.enable()
-        #        print("start")
-        #    if curr_elems == [0, 1, 3] and i == 0:
-        #        pr.disable()
-        #        print("stop")
-        #        s = io.StringIO()
-        #        ps = pstats.Stats(pr, stream=s).sort_stats('cumulative')
-        #        ps.print_stats()
-        #        print(s.getvalue())
         if i not in curr_elems:
-            new_elems = curr_elems[:]
-            new_elems.append(i)
-            if len(new_elems) < 9:
-                recur(households, new_elems, scores, dist, norm)
+            curr_elems[-1] = i
+            if len(curr_elems) < 9:
+                recur(households, curr_elems, curr_score, dist, norm)
             else:
-                score = get_score(households, new_elems, dist, norm)
-                scores.append((score, new_elems))
+                score = get_score(households, curr_elems, dist, norm)
+                if curr_score[0] > score:
+                    curr_score[0] = score
+                    curr_score[1] = curr_elems[:]
+    curr_elems.pop()
 
 def generate_visiting_groups(clusters):
     curr_v_num = 0
+    #pr = cProfile.Profile()
+    #pr.enable()
 
     for cluster in clusters:
-        scores = []
+        currscore = [100000000000.0, []]
         households = []
         household_a = cluster.household_set.all()
         for h in household_a:
             households.append({'street': h.street, 'plz': h.plz, 'longitude': h.longitude, 'latitude': h.latitude})
-        #pr = cProfile.Profile()
 
         # generate distance matrix
         dist = []
@@ -176,10 +168,9 @@ def generate_visiting_groups(clusters):
                 tmp.append(d)
             dist.append(tmp)
 
-        recur(households, [], scores, dist, maxdist * 27.0)
-        scores.sort(key=itemgetter(0))
-        score = scores[0][1]
-        print(scores[0])
+        recur(households, [], currscore, dist, maxdist * 27.0)
+        print(currscore)
+        score = currscore[1]
         h1 = household_a[score[0]]
         h2 = household_a[score[1]]
         h3 = household_a[score[2]]
@@ -274,3 +265,8 @@ def generate_visiting_groups(clusters):
         h7.save()
         h8.save()
         h9.save()
+    #pr.disable()
+    #s = io.StringIO()
+    #ps = pstats.Stats(pr, stream=s).sort_stats('cumulative')
+    #ps.print_stats()
+    #print(s.getvalue())
