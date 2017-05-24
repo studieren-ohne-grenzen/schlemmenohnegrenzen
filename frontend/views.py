@@ -36,7 +36,6 @@ def signup_successful(request):
 
 @login_required
 def regenerate_clusters(request):
-    # TODO: Authentication
     # delete all current clusters
     Cluster.objects.all().delete()
     households = Household.objects.all().filter(found_coords__exact=True)
@@ -58,8 +57,6 @@ def regenerate_clusters(request):
 
 @login_required
 def regenerate_visiting_groups(request):
-    # TODO: Authentication
-
     # delete all current visiting groups
     VisitingGroup.objects.all().delete()
 
@@ -71,7 +68,6 @@ def regenerate_visiting_groups(request):
 
 @login_required
 def cluster(request):
-    # TODO: Authentication
     all_objects = Household.objects.all().filter(found_coords__exact=True).filter(cluster__isnull=False)
 
     jsonlst = []
