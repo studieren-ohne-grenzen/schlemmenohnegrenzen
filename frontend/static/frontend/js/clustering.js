@@ -17,17 +17,15 @@ function draw_map(jsonstr) {
     var numOfClusters = jsonstr.length / 9;
 
     for (i = 0; i < numOfClusters; i++) {
+        currColor = getRandomColor();
         var currList = []
         for (j = 0; j < jsonstr.length; j++) {
             if (jsonstr[j].cluster == i) {
                 currList.push([jsonstr[j].latitude, jsonstr[j].longitude]);
+                L.circle([jsonstr[j].latitude, jsonstr[j].longitude], {color: currColor, fillColor: currColor, fillOpacity: 0.5, radius: 40}).bindPopup(jsonstr[j].name1 + "<br>" + jsonstr[j].name2 + "<br>" + jsonstr[j].street + "<br>Cluster: " + jsonstr[j].cluster).addTo(mymap);
             }
         }
         console.log(getRandomColor())
-        L.polygon(currList, {color: getRandomColor()}).addTo(mymap);
+        L.polygon(currList, {color: currColor}).addTo(mymap);
     }
-
-    jsonstr.forEach(function(entry) {
-        L.marker([entry.latitude, entry.longitude]).bindPopup("Cluster: " + entry.cluster).addTo(mymap);
-    });
 }

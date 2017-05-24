@@ -72,7 +72,7 @@ def cluster(request):
 
     jsonlst = []
     for obj in all_objects:
-        jsonlst.append({"longitude": obj.longitude, "latitude": obj.latitude, "cluster": obj.cluster.clusterNum})
+        jsonlst.append({"longitude": obj.longitude, "latitude": obj.latitude, "cluster": obj.cluster.clusterNum, "name1": obj.name1, "name2": obj.name2, "street": obj.street})
 
     jsonstr = json.dumps(jsonlst)
 
