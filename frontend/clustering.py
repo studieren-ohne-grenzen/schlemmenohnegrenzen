@@ -19,39 +19,62 @@ def initial_clusters(datapoints, clusters):
 
 def clustersHaveWrongSize(clusters):
     for cluster in clusters:
-        if cluster.household_set.count() > 9:
+        if cluster["size"] > 9:
             return True
         else:
             False
 
-def getDistanceToCluster(point, cluster):
-    maxDist = 0
-    set = cluster.household_set.all()
+def getDistanceToCluster(point, cluster, set):
+    maxDist = 0.0
     for elem in set:
-        dist = custom_dist((point.latitude, point.longitude), (elem.latitude, elem.longitude))
+        dist = custom_dist((point["latitude"], point["longitude"]), (elem["latitude"], elem["longitude"]))
         maxDist = max(dist, maxDist)
     return maxDist
 
 def balance_clusters(datapoints, clusters):
-    while clustersHaveWrongSize(clusters):
+    new_clusters = []
+    new_households = []
+    for cluster in clusters:
+        elems = cluster.household_set.all()
+        for e in elems:
+            new_households.append({"longitude": e.longitude, "latitude": e.latitude, "id": e.id, "cluster": len(new_clusters)})
+        new_clusters.append({"size": len(elems), "clusterNum": cluster.clusterNum})
+
+    while clustersHaveWrongSize(new_clusters):
         currentMinDistance = 10000000000
         currentSrcElem = None
         currentDstCluster = None
 
-        for point in datapoints:
-            if point.cluster.household_set.count() > 9:
+        for point in new_households:
+            if new_clusters[point["cluster"]]["size"] > 9:
                 pointCurrMinDist = 1000000000
                 pointCurrDstClust = None
-                for cluster in clusters:
-                    if cluster.household_set.count() < 9:
-                        dist = getDistanceToCluster(point, cluster)
+                for c in range(len(new_clusters)):
+                    if new_clusters[c]["size"] < 9:
+                        set = []
+                        for p in new_households:
+                            if p["cluster"] == c:
+                                set.append(p)
+                        dist = getDistanceToCluster(point, cluster, set)
                         if dist < pointCurrMinDist:
                             pointCurrMinDist = dist
-                            pointCurrDstClust = cluster
+                            pointCurrDstClust = c
                 if pointCurrMinDist < currentMinDistance:
                     currentMinDistance = pointCurrMinDist
                     currentDstCluster = pointCurrDstClust
                     currentSrcElem = point
 
-        currentSrcElem.cluster = currentDstCluster
-        currentSrcElem.save()
+        tmp_cluster = currentSrcElem["cluster"]
+        currentSrcElem["cluster"] = currentDstCluster
+        new_clusters[tmp_cluster]["size"] -= 1
+        new_clusters[currentDstCluster]["size"] += 1
+
+    for point in new_households:
+        for e in datapoints:
+            if e.id == point["id"]:
+                for c in clusters:
+                    if c.clusterNum == new_clusters[point["cluster"]]["clusterNum"]:
+                        e.cluster = c
+                        e.save()
+                        break
+                break
