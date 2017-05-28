@@ -34,3 +34,8 @@ class HouseholdForm(forms.Form):
             if not kontoinhaber:
                 self.add_error('kontoinhaber', "Es muss ein gültiger Kontoinhaber eingegeben werden.")
 
+    def clean_captcha(self):
+        captcha = self.cleaned_data['captcha']
+        if not captcha.capitalize() == 'Karlsruhe':
+            raise forms.ValidationError("Es wurde die falsche Stadt eingegeben.")
+        return captcha

@@ -153,22 +153,38 @@
     <section class="anmelden" id="anmelden">
         <div class="container">
             <h2>Anmelden</h2>
-            <form id="contactForm" class="hidden-labels dropzone dz-clickable" action="{% url 'frontend:index' %}" method="post" enctype="multipart/form-data">
+            <form id="contactForm" class="hidden-labels dropzone dz-clickable" action="{% url 'frontend:index' %}#anmelden" method="post" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="formBox">
                 <div class="row">
                   <div class="col-md-6">
                     <h3>Teammitglied 1</h3>
-                    {% if form.name1.errors %}
-                    <div class="form-group has-danger">
-                      {{ form.name1 }}
-                      <div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
-                    </div>
-                    {% else %}
-                    {{ form.name1 }}
-                    {% endif %}
-                    {{ form.handy1 }}
-                    {{ form.email1 }}
+                      {% if form.name1.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.name1 }}
+                          <div class="form-control-feedback">{{ form.name1.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.name1 }}
+                      {% endif %}
+
+                      {% if form.handy1.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.handy1 }}
+                          <div class="form-control-feedback">{{ form.handy1.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.handy1 }}
+                      {% endif %}
+
+                      {% if form.email1.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.email1 }}
+                          <div class="form-control-feedback">{{ form.email1.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.email1 }}
+                      {% endif %}
                     <div class="form-check">
                         <label class="form-check-label">
                             {{ form.newsletter1 }} Ich will den Newsletter (Termin fürs nächste Schlemmen)
@@ -177,9 +193,32 @@
                   </div>
                   <div class="col-md-6">
                     <h3>Teammitglied 2</h3>
-                    {{ form.name2 }}
-                    {{ form.handy2 }}
-                    {{ form.email2 }}
+                    {% if form.name2.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.name2 }}
+                          <div class="form-control-feedback">{{ form.name2.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.name2 }}
+                      {% endif %}
+
+                      {% if form.handy2.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.handy2 }}
+                          <div class="form-control-feedback">{{ form.handy2.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.handy2 }}
+                      {% endif %}
+
+                      {% if form.email2.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.email2 }}
+                          <div class="form-control-feedback">{{ form.email2.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.email2 }}
+                      {% endif %}
                     <div class="form-check">
                         <label class="form-check-label">
                             {{ form.newsletter2 }} Mein Teampartner will ihn auch!
@@ -190,10 +229,24 @@
                 <h2>Hier wird bei uns gekocht...</h2>
                 <div class="row">
                   <div class="col-md-6">
-                    {{ form.plz }}
+                    {% if form.plz.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.plz }}
+                          <div class="form-control-feedback">{{ form.plz.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.plz }}
+                      {% endif %}
                   </div>
                   <div class="col-md-6">
-                    {{ form.street }}
+                    {% if form.street.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.street }}
+                          <div class="form-control-feedback">{{ form.street.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.street }}
+                      {% endif %}
                   </div>
                 </div>
                 <div class="row">
@@ -246,10 +299,18 @@
               </div>
               <div class="row" style="margin-top: 8em">
                   <div class="col-md-12">
-                      <div class="form-group">
+                      {% if form.captcha.errors %}
+                        <div class="form-group has-danger">
                           <label for="{{ form.captcha.id_for_label }}">Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
                           {{ form.captcha }}
-                      </div>
+                          <div class="form-control-feedback">{{ form.captcha.errors }}</div>
+                        </div>
+                      {% else %}
+                        <div class="form-group">
+                          <label for="{{ form.captcha.id_for_label }}">Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
+                          {{ form.captcha }}
+                        </div>
+                      {% endif %}
                       <div class="form-check">
                         <label class="form-check-label">
                             {{ form.accepted_tos }} Wir akzeptieren die Datenschutzerklärung.

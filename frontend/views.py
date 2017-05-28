@@ -11,7 +11,7 @@ import json
 def index(request):
     if request.method == 'POST':
         form = HouseholdForm(request.POST)
-        if form.is_valid() and form.cleaned_data['captcha'].capitalize() == "Karlsruhe":
+        if form.is_valid():
             house = Household(name1=form.cleaned_data['name1'],
                 name2=form.cleaned_data['name2'],
                 email1=form.cleaned_data['email1'],
