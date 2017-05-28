@@ -81,5 +81,6 @@ def cluster(request):
     jsonstr = json.dumps(jsonlst)
 
     wrong_entries = Household.objects.all().filter(found_coords__exact=False)
+    personal_payers = Household.objects.all().filter(personal_payment__exact=True)
 
-    return render(request, 'frontend/cluster.html', {"jsonstr": jsonstr, "wrong_entries": wrong_entries})
+    return render(request, 'frontend/cluster.html', {"jsonstr": jsonstr, "wrong_entries": wrong_entries, "personal_payers": personal_payers})
