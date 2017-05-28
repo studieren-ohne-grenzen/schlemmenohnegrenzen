@@ -11,7 +11,7 @@ import json
 def index(request):
     if request.method == 'POST':
         form = HouseholdForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and form.cleaned_data['captcha'].capitalize() == "Karlsruhe":
             house = Household(name1=form.cleaned_data['name1'],
                 name2=form.cleaned_data['name2'],
                 email1=form.cleaned_data['email1'],
@@ -23,7 +23,11 @@ def index(request):
                 plz=form.cleaned_data['plz'],
                 street=form.cleaned_data['street'],
                 note=form.cleaned_data['note'],
-                signup_date=timezone.now())
+                kontoinhaber=form.cleaned_data['kontoinhaber'],
+                iban=form.cleaned_data['iban'],
+                bic=form.cleaned_data['bic'],
+                signup_date=timezone.now(),
+                personal_payment=form.cleaned_data['personal_payment'])
             house.lookup_coords()
             house.save()
             return HttpResponseRedirect(reverse('frontend:signup_successful'))

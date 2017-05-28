@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-sm-10">
                     <h3>Ihr kocht...</h3>
-                    <p>Schnapp dir eine Freundin/einen Freund - zu zweit seid ihr ein Team und kocht gemeinsam in eurer WG einen Gang. Damit die Wege kurz halten können: Per Fahhrad vom Marktplatz zu eurer WG in maximal 20min</p>
+                    <p>Schnapp dir eine Freundin/einen Freund - zu zweit seid ihr ein Team und kocht gemeinsam in eurer WG einen Gang. Damit die Wege kurz halten können: Per Fahrrad vom Marktplatz zu eurer WG in maximal 20min</p>
                 </div>
             </div>
             <div class="row row-with-margin">
@@ -153,74 +153,108 @@
     <section class="anmelden" id="anmelden">
         <div class="container">
             <h2>Anmelden</h2>
-            <form id="contactForm" class="hidden-labels dropzone dz-clickable" action="/joinexperts#contact" method="post" enctype="multipart/form-data">
+            <form id="contactForm" class="hidden-labels dropzone dz-clickable" action="{% url 'frontend:index' %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="formBox">
                 <div class="row">
                   <div class="col-md-6">
                     <h3>Teammitglied 1</h3>
-                    <label class="required"><input name="name" placeholder="Dein Name*" value="" required="" type="text"><span>Dein Name*</span></label>
-                    <label><input name="tel" placeholder="Deine Handynummer*" value="" type="tel" required=""><span>Deine Handynummer*</span></label>
-                    <label class="required"><input name="email" placeholder="Deine E-Mail*" value="" required="" type="email"><span>Deine E-Mail*</span></label>
-                    <p>
-                        <input type="checkbox" id="newsletter1" checked="checked" />
-                        <label for="newsletter1">Ich will den Newsletter (Termin fürs nächste Schlemmen)</label>
-                    </p>
+                    {% if form.name1.errors %}
+                    <div class="form-group has-danger">
+                      {{ form.name1 }}
+                      <div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
+                    </div>
+                    {% else %}
+                    {{ form.name1 }}
+                    {% endif %}
+                    {{ form.handy1 }}
+                    {{ form.email1 }}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            {{ form.newsletter1 }} Ich will den Newsletter (Termin fürs nächste Schlemmen)
+                        </label>
+                    </div>
                   </div>
                   <div class="col-md-6">
                     <h3>Teammitglied 2</h3>
-                    <label class="required"><input name="name" placeholder="Sein/Ihr Name*" value="" required="" type="text"><span>Sein/Ihr Name*</span></label>
-                    <label><input name="tel" placeholder="Seine/Ihre Handynummer" value="" type="tel"><span>Seine/Ihre Telefonnummer</span></label>
-                    <label class="required"><input name="email" placeholder="Seine/Ihre E-Mail*" value="" required="" type="email"><span>Seine/Ihre E-Mail*</span></label>
-                    <p>
-                        <input type="checkbox" id="newsletter2" checked="checked" />
-                        <label for="newsletter2">Mein Teampartner will ihn auch!</label>
-                    </p>
+                    {{ form.name2 }}
+                    {{ form.handy2 }}
+                    {{ form.email2 }}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            {{ form.newsletter2 }} Mein Teampartner will ihn auch!
+                        </label>
+                    </div>
                   </div>
                 </div>
                 <h2>Hier wird bei uns gekocht...</h2>
                 <div class="row">
                   <div class="col-md-6">
-                    <select name="zip">
-                      <option value="76131">76131 (Innen- &amp; Oststadt)</option>
-                      <option value="76133">76133 (Innen-, Nord-, West-, Südweststadt)</option>
-                      <option value="76135">76135 (West-, Südweststadt, Beiertheim-Bulach)</option>
-                      <option value="76137">76137 (Südstadt, Südweststadt)</option>
-                    </select>
+                    {{ form.plz }}
                   </div>
                   <div class="col-md-6">
-                    <label class="required"><input name="street" placeholder="Straße und Hausnummer" value="" required="" type="text"><span>Straße und Hausnummer</span></label>
+                    {{ form.street }}
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
                     <h2>Nachricht an eure Gastgeber</h2>
-                    <label><textarea name="message" placeholder="Vegetarisch? Allergien? Hier ist Platz für Nachrichten an eure Gastgeber. " rows="5"></textarea><span>Ihre Nachricht an uns</span></label>
+                    {{ form.note }}
                   </div>
                 </div>
               <h2>Startbeitrag</h2>
-              <p>Mit 4€ pro Person unterstützt ihr unsere Arbeit, engagierte Studierende in Krisen und Kriegsgebeiten zu fördern.</p>
+              <p>Mit 4€ pro Person unterstützt ihr unsere Arbeit, engagierte Studierende in Krisen- und Kriegsgebieten zu fördern.</p>
               <div class="row">
                   <div class="col-md-6">
                       <h3><i class="fa fa-credit-card" aria-hidden="true"></i> Per Lastschrift</h3>
-                      <label class="required"><input name="depositor" placeholder="KontoinhaberIn*" value="" required="" type="text"><span>Kontoinhaber*</span></label>
-                      <label class="required"><input name="iban" placeholder="IBAN*" value="" required="" type="text"><span>IBAN*</span></label>
-                      <label><input name="bic" placeholder="BIC*" value="" required=""><span>BIC*</span></label>
+                      {% if form.kontoinhaber.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.kontoinhaber }}
+                          <div class="form-control-feedback">{{ form.kontoinhaber.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.kontoinhaber }}
+                      {% endif %}
+
+                      {% if form.iban.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.iban }}
+                          <div class="form-control-feedback">{{ form.iban.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.iban }}
+                      {% endif %}
+
+                      {% if form.bic.errors %}
+                        <div class="form-group has-danger">
+                          {{ form.bic }}
+                          <div class="form-control-feedback">{{ form.bic.errors }}</div>
+                        </div>
+                      {% else %}
+                        {{ form.bic }}
+                      {% endif %}
                   </div>
                   <div class="col-md-6">
                       <h3><i class="fa fa-money" aria-hidden="true"></i> Bar vorbeibringen</h3>
-                      TODO
+                      <p>Falls ihr Bedenken habt eure Kontodaten einzugeben könnt ihr den Startbeitrag auch jeden Dienstag ab 19:30 in unseren wöchentlichen Treffen im Campus der FH, Gebäude A, Raum 111 bezahlen.</p>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                            {{ form.personal_payment }} Ich möchte den Startbeitrag persönlich vorbeibringen!
+                        </label>
+                      </div>
                   </div>
               </div>
               <div class="row" style="margin-top: 8em">
                   <div class="col-md-12">
-                      <p>
-                        <label>Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
-                        <input name="spam" value="" required="">
-                      </p>
-                      <p>
-                          <input type="checkbox" id="datenschutz" />
-                          <label for="datenschutz">Wir akzeptieren die Datenschutzerklärung.</label>
-                      </p>
+                      <div class="form-group">
+                          <label for="{{ form.captcha.id_for_label }}">Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
+                          {{ form.captcha }}
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                            {{ form.accepted_tos }} Wir akzeptieren die Datenschutzerklärung.
+                        </label>
+                      </div>
                       <button class="btn btn-success" type="submit">
                           <i class="fa fa-paper-plane" aria-hidden="true"></i>
                           Schmeiß den Herd an!
