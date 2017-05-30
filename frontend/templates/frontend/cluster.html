@@ -11,6 +11,7 @@
     <link href="{% static 'frontend/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'frontend/css/leaflet.css' %}" rel="stylesheet">
     <link href="{% static 'frontend/css/clustering.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'frontend/css/font-awesome.min.css' %}">
 
   </head>
   <body>
@@ -26,6 +27,7 @@
               <th>Name 1</th>
               <th>Name 2</th>
               <th>Adresse</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -34,6 +36,7 @@
               <td>{{ entry.name1 }}</td>
               <td>{{ entry.name2 }}</td>
               <td>{{ entry.street }}</td>
+              <td><a class="btn btn-danger btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
             </tr>
             {% endfor %}
           </tbody>

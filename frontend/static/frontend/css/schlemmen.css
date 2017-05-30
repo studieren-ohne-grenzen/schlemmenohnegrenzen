@@ -141,3 +141,9 @@ form h2 {
 a {
   text-decoration: none;
 }
+
+.mandat {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}

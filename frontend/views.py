@@ -22,6 +22,7 @@ def index(request):
                 newsletter2=form.cleaned_data['newsletter2'],
                 plz=form.cleaned_data['plz'],
                 street=form.cleaned_data['street'],
+                gpsstreet=form.cleaned_data['street'],
                 note=form.cleaned_data['note'],
                 kontoinhaber=form.cleaned_data['kontoinhaber'],
                 iban=form.cleaned_data['iban'],
@@ -37,6 +38,9 @@ def index(request):
 
 def signup_successful(request):
     return render(request, 'frontend/signup_successful.html')
+
+def confirmation(request):
+    return render(request, 'frontend/confirmation.html')
 
 @login_required
 def regenerate_clusters(request):

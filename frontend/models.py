@@ -20,6 +20,7 @@ class Household(models.Model):
     newsletter2 = models.BooleanField(default=False)
     plz = models.IntegerField(default=76133, choices=plz_choices)
     street = models.CharField(max_length=200)
+    gpsstreet = models.CharField(max_length=200)
     note = models.CharField(max_length=2000)
     found_coords = models.BooleanField(default=False)
     longitude = models.FloatField(default=0.0)
@@ -36,7 +37,7 @@ class Household(models.Model):
 
     def lookup_coords(self):
         geocoder = Nominatim()
-        address = self.street + ", " + str(self.plz) + " Karlsruhe"
+        address = self.gpsstreet + ", " + str(self.plz) + " Karlsruhe"
         tmp = geocoder.geocode(address, timeout=10)
         if tmp == None:
             self.found_coords = False
