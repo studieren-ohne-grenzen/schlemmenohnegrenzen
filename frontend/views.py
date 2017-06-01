@@ -31,6 +31,18 @@ def index(request):
                 personal_payment=form.cleaned_data['personal_payment'])
             house.lookup_coords()
             house.save()
+            
+            from django.core.mail import send_mail
+            
+            # TODO real, variable text and sepa information with due date 
+            send_mail(
+                'Schlemmen Ohne Grenzen Bestätigung',
+                'Wir haben deine Anmeldung erhalten.',
+                EMAIL_SENDER,
+                [email1, email2],
+                fail_silently=False,
+            )
+            
             return HttpResponseRedirect(reverse('frontend:signup_successful'))
     else:
         form = HouseholdForm()
