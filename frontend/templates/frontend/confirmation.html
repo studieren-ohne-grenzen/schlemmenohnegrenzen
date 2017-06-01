@@ -35,30 +35,31 @@
             <p><strong>SEPA-Lastschriftmandat</strong></p>
 
             <p>Zahlungsempfänger: Studieren Ohne Grenzen e.V.<br>
-            Gläubiger Identifikationsnummer:<br>
-            Mandatsreferenz: asd</p>
+            Gläubiger Identifikationsnummer: DE25ZZZ00000252980<br>
+            Mandatsreferenz: {{ mandatsreferenz }}</p>
             
             <p>Ich ermächtige den Zahlungsempfänger, Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von dem Zahlungsempfänger auf mein Konto gezogenen Lastschriften einzulösen.</p>
             <p>Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.</p>
             <table>
                 <tr>
                     <td>Name des Zahlungspflichtigen:</td>
-                    <td>Peter Mustermann</td>
+                    <td>{{ kontoinhaber }}</td>
                 </tr>
                 <tr>
                     <td>IBAN:</td>
-                    <td>123213213123123123123</td>
+                    <td>{{ iban }}</td>
                 </tr>
                 <tr>
                     <td>BIC:</td>
-                    <td>SAD234234A</td>
+                    <td>{{ bic }}</td>
                 </tr>
             </table>
         </div>
-        <form>
+        <form  action="{% url 'frontend:confirmation' %}" method="post">
+            {% csrf_token %}
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" required>
+                    {{ form.mandat }}
                     Ich möchte das Mandat erteilen (elektronische Übermittlung)
                 </label>
             </div>

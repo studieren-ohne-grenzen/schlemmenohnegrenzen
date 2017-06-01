@@ -8,6 +8,6 @@ urlpatterns = [
     url(r'^regenerate_clusters', views.regenerate_clusters, name='regenerate_clusters'),
     url(r'^regenerate_visiting_groups', views.regenerate_visiting_groups, name='regenerate_visiting_groups'),
     url(r'^cluster', views.cluster, name='cluster'),
-    url(r'^confirmation', views.confirmation, name='cluster'),
+    url(r'^confirmation', views.confirmation, name='confirmation'),
     url(r'^.*$', views.index, name='index')
 ]

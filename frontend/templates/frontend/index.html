@@ -143,7 +143,7 @@
     <section class="anmelden" id="anmelden">
         <div class="container">
             <h2>Anmelden</h2>
-            <form id="contactForm" class="hidden-labels dropzone dz-clickable" action="{% url 'frontend:index' %}#anmelden" method="post" enctype="multipart/form-data">
+            <form id="contactForm" action="{% url 'frontend:index' %}#anmelden" method="post">
               {% csrf_token %}
               <div class="formBox">
                 <div class="row">

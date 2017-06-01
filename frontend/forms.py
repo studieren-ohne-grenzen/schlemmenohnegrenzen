@@ -39,3 +39,6 @@ class HouseholdForm(forms.Form):
         if not captcha.capitalize() == 'Karlsruhe':
             raise forms.ValidationError("Es wurde die falsche Stadt eingegeben.")
         return captcha
+
+class LastschriftForm(forms.Form):
+    mandat = forms.BooleanField(initial=False, required=True, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))

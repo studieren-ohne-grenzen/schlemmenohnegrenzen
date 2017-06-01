@@ -3,6 +3,9 @@ from geopy.geocoders import Nominatim
 from .choices import plz_choices
 import random
 
+class MandatsreferenzCounter(models.Model):
+    cnt = models.IntegerField(default=0)
+
 class Cluster(models.Model):
     clusterNum = models.IntegerField(default=0)
 
@@ -30,10 +33,11 @@ class Household(models.Model):
     first_visit = models.ForeignKey(VisitingGroup, on_delete=models.SET_NULL, null=True, related_name='household1')
     second_visit = models.ForeignKey(VisitingGroup, on_delete=models.SET_NULL, null=True, related_name='household2')
     third_visit = models.ForeignKey(VisitingGroup, on_delete=models.SET_NULL, null=True, related_name='household3')
-    iban = models.CharField(max_length=200)
-    bic = models.CharField(max_length=200)
-    kontoinhaber = models.CharField(max_length=200)
+    iban = models.CharField(max_length=200, null=True)
+    bic = models.CharField(max_length=200, null=True)
+    kontoinhaber = models.CharField(max_length=200, null=True)
     personal_payment = models.BooleanField(default=False)
+    mandatsreferenz = models.CharField(max_length=35, null=True)
 
     def lookup_coords(self):
         geocoder = Nominatim()
