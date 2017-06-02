@@ -1,31 +1,6 @@
+{% extends "frontend/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Etudes Sans Frontières - Studieren Ohne Grenzen Deutschland e.V.">
-
-    <title>Schlemmen ohne Grenzen</title>
-
-    <link href="{% static 'frontend/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link rel="stylesheet" href="{% static 'frontend/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'frontend/css/simple-line-icons.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'frontend/css/new-age.min.css' %}" rel="stylesheet">
-    <link href="{% static 'frontend/css/schlemmen.css' %}" rel="stylesheet">
-</head>
-
-<body id="page-top">
-
+{% block content %}
     <div class="container">
         <h1>Fast geschafft</h1>
         <p>Um die Anmeldung abzuschließen musst du uns eine Erlaubnis erteilen, die 4€ Startbeitrag pro Person von deinem Konto einzuziehen.</p>
@@ -66,44 +41,4 @@
             <button type="submit" class="btn btn-primary btn-sm">Anmeldung abschließen</button>
         </form>
     </div>
-
-    <footer>
-        <div class="container">
-            <ul class="list-inline list-social">
-                <li class="list-inline-item social-twitter">
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li class="list-inline-item social-facebook">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li class="list-inline-item social-google-plus">
-                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                </li>
-            </ul>
-            <p>&copy; 2017 Studieren Ohne Grenzen. All Rights Reserved. Background by <a href="https://www.flickr.com/photos/138248475@N03/23906675105">John Voo</a>(CC By 2.0)</p>
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a href="#">Privacy</a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="#">Terms</a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="#">FAQ</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-
-    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
-    <script src="{% static 'frontend/js/tether.min.js' %}"></script>
-    <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="{% static 'frontend/js/jquery.easing.min.js' %}"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="{% static 'frontend/js/new-age.min.js' %}"></script>
-
-</body>
-</html>
+{% endblock %}
