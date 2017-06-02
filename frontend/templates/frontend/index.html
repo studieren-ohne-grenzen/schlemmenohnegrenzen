@@ -1,28 +1,29 @@
 {% extends "frontend/base.html" %}
 {% load static %}
-{% block content %}
+{% block navbar %}
     <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
             Menu <i class="fa fa-bars"></i>
         </button>
         <div class="container">
-            <a class="navbar-brand" href="#anmelden">Anmelden!</a>
+            <a class="navbar-brand" href="{% url 'frontend:index' %}#anmelden">Anmelden!</a>
             <div class="collapse navbar-collapse" id="navbarExample">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#einleitung">Einleitung</a>
+                        <a class="nav-link" href="{% url 'frontend:index' %}#einleitung">Einleitung</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#infos">Infos</a>
+                        <a class="nav-link" href="{% url 'frontend:index' %}#infos">Infos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about-us">Über uns</a>
+                        <a class="nav-link" href="{% url 'frontend:index' %}#about-us">Über uns</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
+{% endblock %}
+{% block content %}
     <header class="masthead">
         <div class="container">
             <div class="row">
@@ -99,7 +100,7 @@
             </div>
             <div class="row row-with-margin text-center">
               <div class="col-sm-12">
-                <a class="btn btn-info" href="http://schlemmen-ka.s-o-g.org/index.php?page=infos">Noch Fragen?</a>
+                <a class="btn btn-info" href="{% url 'frontend:faq' %}">Noch Fragen?</a>
               </div>
             </div>
         </div>
@@ -278,7 +279,7 @@
                       {% endif %}
                       <div class="form-check">
                         <label class="form-check-label">
-                            {{ form.accepted_tos }} Wir akzeptieren die <a href="/bedingungen" target="_blank">Datenschutzerklärung &amp; rechtliche Bedingungen</a>.
+                            {{ form.accepted_tos }} Wir akzeptieren die <a href="{% url 'frontend:bedingungen' %}" target="_blank">Datenschutzerklärung &amp; rechtliche Bedingungen</a>.
                         </label>
                       </div>
                       <button class="btn btn-success" type="submit">

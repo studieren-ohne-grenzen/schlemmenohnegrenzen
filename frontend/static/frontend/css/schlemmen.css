@@ -29,7 +29,7 @@ section.cta .cta-content h2 {
   }
   .info .container {
     margin-left: 32%;
-    width: 68%; /* Daniel: Das hier habe ich eingefuegt um das vertikale scrolling zu fixen. Bei Bedarf anpassen! */
+    width: 68%;
   }
 
   .info .row {
