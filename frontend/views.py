@@ -12,13 +12,13 @@ import json
 def email_senden(house):
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
     'Hallo {},\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\nViele Grüße\nStudieren Ohne Grenzen Karlsruhe'.format(house.name1),
-    'info@schlemmen-ohne-grenzen.de',
+    'hallo@schlemmen-ohne-grenzen.de',
     [house.email1],
     fail_silently=False)
 
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
     'Hallo {},\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\nViele Grüße\nStudieren Ohne Grenzen Karlsruhe'.format(house.name2),
-    'info@schlemmen-ohne-grenzen.de',
+    'hallo@schlemmen-ohne-grenzen.de',
     [house.email2],
     fail_silently=False)
 
@@ -48,7 +48,7 @@ def index(request):
                     mandatsreferenz=None)
                 house.lookup_coords()
                 house.save()
-                #email_senden(house)
+                email_senden(house)
                 return HttpResponseRedirect(reverse('frontend:signup_successful'))
             else:
                 request.session['name1'] = form.cleaned_data['name1']
@@ -113,7 +113,7 @@ def confirmation(request):
                 mandatsreferenz=request.session['mandatsreferenz'])
             house.lookup_coords()
             house.save()
-            #email_senden(house)
+            email_senden(house)
             request.session.flush()
             return HttpResponseRedirect(reverse('frontend:signup_successful'))
     else:
