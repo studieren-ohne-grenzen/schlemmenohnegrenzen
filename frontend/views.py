@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 import json
 
 def email_senden(house):
+
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
     'Hallo {},\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\nViele Grüße\nStudieren Ohne Grenzen Karlsruhe'.format(house.name1),
     'hallo@schlemmen-ohne-grenzen.de',
@@ -76,6 +77,9 @@ def index(request):
 def signup_successful(request):
     return render(request, 'frontend/signup_successful.html')
 
+def bedingungen(request):
+    return render(request, 'frontend/bedingungen.html')
+
 def generate_mandatsreferenz():
     cnt = -1
     if MandatsreferenzCounter.objects.count() == 0:
@@ -89,7 +93,7 @@ def generate_mandatsreferenz():
         cnt = mc.cnt
         mc.save()
     return "SCHLEMMEN20170621KA{:05d}".format(cnt)
-    
+
 
 def confirmation(request):
     if request.method == 'POST':

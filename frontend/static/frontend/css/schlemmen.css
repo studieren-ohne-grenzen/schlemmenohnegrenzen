@@ -14,6 +14,9 @@ h1, h2, h3 {
 .infos1 {
     margin-bottom: 5%;
 }
+#infos .col-sm-2 {
+  text-align: center;
+}
 section.cta .cta-content h2 {
     max-width: 500px;
 }
@@ -100,6 +103,9 @@ img {
   }
   .header_logo {
     margin-top: 14%;
+  }
+  #infos i {
+    margin: 7% 0;
   }
 }
 

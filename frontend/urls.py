@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^cluster', views.cluster, name='cluster'),
     url(r'^confirmation', views.confirmation, name='confirmation'),
     url(r'^faq', views.faq, name='faq'),
+    url(r'^bedingungen', views.bedingungen, name='bedingungen'),
     url(r'^.*$', views.index, name='index')
 ]
