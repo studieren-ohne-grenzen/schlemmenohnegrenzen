@@ -22,6 +22,9 @@ def email_senden(house):
     [house.email2],
     fail_silently=False)
 
+def faq(request):
+    return render(request, 'frontend/faq.html')
+
 def index(request):
     if request.method == 'POST':
         form = HouseholdForm(request.POST)

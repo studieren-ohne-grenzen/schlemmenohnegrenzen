@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^regenerate_visiting_groups', views.regenerate_visiting_groups, name='regenerate_visiting_groups'),
     url(r'^cluster', views.cluster, name='cluster'),
     url(r'^confirmation', views.confirmation, name='confirmation'),
+    url(r'^faq', views.faq, name='faq'),
     url(r'^.*$', views.index, name='index')
 ]
