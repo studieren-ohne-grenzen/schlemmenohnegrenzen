@@ -1,5 +1,6 @@
 *.pyc
 *.swp
+.directory
 .DS_Store
 db.sqlite3
 schlemmen/settings.py
