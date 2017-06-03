@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Etudes Sans Frontières - Studieren Ohne Grenzen Deutschland e.V.">
+
+    <title>Schlemmen ohne Grenzen</title>
+
+    <link href="{% static 'frontend/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="{% static 'frontend/css/font-awesome.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'frontend/css/new-age.min.css' %}" rel="stylesheet">
+    <link href="{% static 'frontend/css/schlemmen.css' %}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    {% block navbar %}
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse" id="mainNav">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            Menu <i class="fa fa-bars"></i>
+        </button>
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'frontend:index' %}#anmelden">Anmelden!</a>
+            <div class="collapse navbar-collapse" id="navbarExample">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'frontend:index' %}#einleitung">Einleitung</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'frontend:index' %}#infos">Infos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'frontend:index' %}#about-us">Über uns</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    <section class="contact bg-primary" id="about-us">
+        <div class="container">
+            <img src="{% static 'frontend/img/gruppenbild.jpg' %}" class="polaroid-style medium-image" style="margin-bottom: 30px">
+            <h2>We <i class="fa fa-heart"></i> new friends!</h2>
+            <p>Bock, was in der Welt zu verändern? Für uns ist Bildung eine Waffe - eine Waffe gegen Diktaturen, Korruption, Armut und Hunger! Komm einfach vorbei und organisiere das nächste Schlemmen Ohne Grenzen zusammen mit uns!</p>
+            <br>
+            <a href="http://karlsruhe.s-o-g.org/" class="btn btn-info">Schau vorbei!</a>
+            <br>
+<<<<<<< HEAD
+            <img src="{% static 'frontend/img/logo_sog.png' %}" class="small-image">
+=======
+            <img src="{% static 'frontend/img/logo.png' %}" class="small-image">
+>>>>>>> af31170eb73ef5f62f401773135672d1a0da362d
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <ul class="list-inline list-social">
+                <li class="list-inline-item social-twitter">
+                    <a href="https://twitter.com/esfdeutschland"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li class="list-inline-item social-facebook">
+                    <a href="https://www.facebook.com/studierenohnegrenzen"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li class="list-inline-item social-youtube">
+                    <a href="https://www.youtube.com/user/ESFdeutschland"><i class="fa fa-youtube"></i></a>
+                </li>
+            </ul>
+            <p>&copy; 2017 Studieren Ohne Grenzen. All Rights Reserved. Background by <a href="https://www.flickr.com/photos/138248475@N03/23906675105">John Voo</a>(CC By 2.0)</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="{% url 'frontend:bedingungen' %}">Privacy &amp; Rechtliches</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.studieren-ohne-grenzen.org/impressum/">Impressum</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
+    <script src="{% static 'frontend/js/tether.min.js' %}"></script>
+    <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'frontend/js/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'frontend/js/new-age.min.js' %}"></script>
+
+</body>
+</html>
