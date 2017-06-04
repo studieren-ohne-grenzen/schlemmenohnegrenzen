@@ -11,23 +11,23 @@ import json
 
 def email_senden(house):
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
-    'Hallo {},\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\nViele Grüße\nStudieren Ohne Grenzen Karlsruhe'.format(house.name1),
+    'Hallo {},\n\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\n\nViele Grüße\n\nStudieren Ohne Grenzen Karlsruhe'.format(house.name1),
     'hallo@schlemmen-ohne-grenzen.de',
     [house.email1],
-    fail_silently=False)
+    fail_silently=True)
 
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
-    'Hallo {},\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\nViele Grüße\nStudieren Ohne Grenzen Karlsruhe'.format(house.name2),
+    'Hallo {},\n\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\n\nViele Grüße\n\nStudieren Ohne Grenzen Karlsruhe'.format(house.name2),
     'hallo@schlemmen-ohne-grenzen.de',
     [house.email2],
-    fail_silently=False)
+    fail_silently=True)
 
     if not house.personal_payment:
         send_mail('Schlemmen Ohne Grenzen SEPA-Lastschriftmandat',
         'Zahlungsempfänger: Studieren Ohne Grenzen e.V.\nGläubiger Identifikationsnummer: DE25ZZZ00000252980\nMandatsreferenz: {}\n\nIch ermächtige den Zahlungsempfänger, Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von dem Zahlungsempfänger auf mein Konto gezogenen Lastschriften einzulösen.\n\nHinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.\n\nName des Zahlungspflichtigen: {}\nIBAN: Aus Datenschutzgründen entfernt\nBIC: Aus Datenschutzgründen entfernt\nDurchführung am: 03.07.2017'.format(house.mandatsreferenz, house.kontoinhaber),
         'hallo@schlemmen-ohne-grenzen.de',
         [house.email1],
-        fail_silently=False)
+        fail_silently=True)
 
     send_mail('[Info] Schlemmen Anmeldung',
     '{} und {} haben sich gerade angemeldet'.format(house.name1, house.name2),
