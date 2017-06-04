@@ -44,12 +44,12 @@
     <section class="download bg-primary" id="einleitung">
         <div class="container bigger-text">
             <h2>Schlemmt euch durch Karlsruhe, habt Spaß und knackt das Rätsel!</h2>
-            <h3 style="margin-top: 3%">21. Juni ab 18:00 geht's los!</h3>
+            <h3 style="margin-top: 3%">21. Juni um 18:00 Uhr geht's los!</h3>
             <div class="row">
                 <div class="col-md-8">
-                    <p>Alles steht bereit, der Tisch ist bereits gedeckt. Nichts steht einem tollen Abend in der Karlsruher Oberschicht mehr im Weg.</p>
+                    <p>Alles steht bereit, der Tisch ist schon gedeckt. Nichts steht einem tollen Abend in der Karlsruher Oberschicht mehr im Weg.</p>
                     <p>
-                        Doch etwas stimmt nicht und ihr alle seid euch sicher, dass dies kein Zufall sein kann. Ihr seid nicht zufällig zusammen gekommen. Jemand hat euch aus einem ganz bestimmten Grund eingeladen...
+                        Doch etwas stimmt nicht und ihr seid alle euch sicher, dass dies kein Zufall sein kann... Ihr seid nicht zufällig zusammen gekommen. Jemand hat euch aus einem ganz bestimmten Grund eingeladen...
                     </p>
                 </div>
                 <div class="col-md-4">
@@ -63,7 +63,7 @@
         <div class="container">
             <div class="section-heading">
                 <h2>Kurz und knapp</h2>
-                <p class="text-muted">Schlemmen Ohne Grenzen folgt der Idee von Running Dinner - inzwischen schon zum siebten Mal in Karlsruhe! Dieses Mal erwartet euch aber etwas etwas ganz Neues! Schlemmt euch durch die Stadt und knackt dabei gemeinsam das Rätsel um den geheimnisvollen Bekannten...</p>
+                <p class="text-muted">Schlemmen Ohne Grenzen folgt der Idee von Running Dinner - inzwischen schon zum siebten Mal in Karlsruhe! Dieses Mal erwartet euch aber etwas ganz Neues! Schlemmt euch durch die Stadt und knackt dabei gemeinsam das Rätsel um den geheimnisvollen Bekannten...</p>
             </div>
             <div class="row row-with-margin">
                 <div class="col-sm-2">
@@ -98,7 +98,7 @@
               </div>
               <div class="col-sm-10">
                   <h3>Wir feiern!</h3>
-                  <p>Zum Abschluss gehen wir alle gemeinsam feiern! Der Club wird noch bekannt gegeben.</p>
+                  <p>Der Fall gelöst, die Mägen voll, die Stimmung auf dem Höhepunkt - gemeinsam geht's nun in die Stadtmitte feiern. Natürlich mit freiem Eintritt für alle Schlemmer!</p>
               </div>
             </div>
             <div class="row row-with-margin text-center">
@@ -258,7 +258,7 @@
                   </div>
                   <div class="col-md-6">
                       <h3><i class="fa fa-money" aria-hidden="true"></i> Bar vorbeibringen</h3>
-                      <p>Falls ihr Bedenken habt eure Kontodaten einzugeben könnt ihr den Startbeitrag auch jeden Dienstag ab 19:30 in unseren wöchentlichen Treffen im Campus der FH, Gebäude A, Raum 111 bezahlen.</p>
+                      <p>Ihr könnt den Startbeitrag auch jeden Dienstag ab 19:30 in unseren wöchentlichen Treffen auf dem Campus der FH, Gebäude A (bibliothek), Raum 111 vorbeibringen. Bitte spätestens am 20. Juni.</p>
                       <div class="form-check">
                         <label class="form-check-label">
                             {{ form.personal_payment }} Ich möchte den Startbeitrag persönlich vorbeibringen!
@@ -294,5 +294,36 @@
             </div>
           </form>
       </div>
+    </section>
+
+    <section class="contact bg-primary" id="about-us">
+        <div class="container">
+          <h2>We <i class="fa fa-heart"></i> new friends!</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <img src="{% static 'frontend/img/logo_sog.png' %}" class="small-image-by-height">
+              <p>Bock, was in der Welt zu verändern? Für uns ist Bildung eine Waffe - eine Waffe gegen Diktaturen, Korruption, Armut und Hunger!</p>
+              <p style="font-style: italic">Bildung ist die mächtigste Waffe, die wir nutzen können, um die Welt zu verändern. (Nelson Manedela)</p>
+              <p>Vor drei Jahren haben wir Schlemmen Ohne Grenzen nach Karlsruhe gebracht und bieten euch jetzt mit der Krimi Edition ein einzigartiges Event! Aber wir brauchen dringend deine Hilfe! Komm einfach mal vorbei!</p>
+              <a href="http://karlsruhe.s-o-g.org/" class="btn btn-info">Schau vorbei!</a>
+              <br>
+              <img src="{% static 'frontend/img/gruppenbild.jpg' %}" class="polaroid-style small-image" style="margin-bottom: 30px">
+            </div>
+            <div class="col-md-6">
+              <img src="{% static 'frontend/img/logo_aim.svg' %}" class="small-image-by-height">
+              <p>
+                aim ist ein Team von engagierten Studenten, die es sich zur Aufgabe gemacht haben regelmäßige Veranstaltungen für die Studierenden der Fakultät Wirtschaftswissenschaften an der Hochschule Karlsruhe zu organisieren.
+              </p>
+              <p>
+                Diese Projekte bieten Informationen, Hilfe und den Erwerb von Softskills bei Themen wie Auslandsaufenthalte, Knüpfung von Kontakten zu Unternehmen oder Fragen zu Bewerbungen im Ausland.
+                Auch für die Freizeit bieten wir Feste und Parties - unter anderem auch das "aim Running Dinner".
+              </p>
+              <br>
+              <a href="http://www.aim-karlsruhe.de/" class="btn btn-info">Schau vorbei!</a>
+              <br>
+              <img src="{% static 'frontend/img/aim_gruppenbild.jpg' %}" class="polaroid-style-inverted small-image" style="margin-bottom: 30px">
+            </div>
+          </div>
+        </div>
     </section>
 {% endblock %}

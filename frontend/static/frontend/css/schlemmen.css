@@ -78,6 +78,10 @@ img {
   transform: rotate(6deg);
 }
 
+.signup_success {
+  padding: 10% 0;
+}
+
 @media screen and (orientation:landscape) {
   .medium-image {
     height: auto;
