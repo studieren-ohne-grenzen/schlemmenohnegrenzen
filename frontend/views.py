@@ -13,9 +13,10 @@ from django.template.loader import get_template
 def email_senden(house):
     content = get_template("mail/confirmation.html").render(house)
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
-        content,
+        "",
         'hallo@schlemmen-ohne-grenzen.de',
         [house.email1,house.email2],
+        html_message=content,
         fail_silently=False)
 
     if not house.personal_payment:
