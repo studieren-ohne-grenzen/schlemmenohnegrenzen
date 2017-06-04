@@ -7,6 +7,6 @@ Ich ermächtige den Zahlungsempfänger, Zahlungen von meinem Konto mittels Lasts
 Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.
 
 Name des Zahlungspflichtigen: {{house.kontoinhaber}}
-IBAN: {{house.iban}}
+IBAN: {{iban_start}} XXXX XXXX XXXX XXX {{iban_end}}
 BIC: {{house.bic}}
 Durchführung am: 03.07.2017

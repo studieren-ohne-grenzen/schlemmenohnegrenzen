@@ -21,7 +21,9 @@ def email_senden(house):
         fail_silently=False)
 
     if not house.personal_payment:
-        payment_txt_content = get_template("mail/sepa.txt").render({'house': house})
+        iban_start = house.iban[:4]
+        iban_end = house.iban[-3:]
+        payment_txt_content = get_template("mail/sepa.txt").render({'house': house, 'iban_start': iban_start, 'iban_end': iban_end})
         #payment_html_content = get_template("mail/confirmation.html").render(house)
         send_mail('Schlemmen Ohne Grenzen SEPA-Lastschriftmandat',
         payment_txt_content,
