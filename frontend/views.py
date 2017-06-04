@@ -10,7 +10,6 @@ from django.core.mail import send_mail
 import json
 
 def email_senden(house):
-
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
     'Hallo {},\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\nViele Grüße\nStudieren Ohne Grenzen Karlsruhe'.format(house.name1),
     'hallo@schlemmen-ohne-grenzen.de',
