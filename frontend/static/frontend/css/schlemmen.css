@@ -65,12 +65,17 @@ img {
       ul.list-social li.social-youtube a:hover {
         background-color: #b31217; }
 
-.polaroid-style {
+.polaroid-style, .polaroid-style-inverted {
   transform: rotate(-6deg);
   border-radius: 4px;
   border: 1px solid #eee;
   padding: 8px;
   background: #fff;
+  margin-top: 15px;
+}
+
+.polaroid-style-inverted {
+  transform: rotate(6deg);
 }
 
 @media screen and (orientation:landscape) {
@@ -81,6 +86,10 @@ img {
   .small-image {
     height: auto;
     width: 15vw;
+  }
+  .small-image-by-height {
+    height: 25vh;
+    width: auto;
   }
 
   header.masthead {
@@ -93,9 +102,9 @@ img {
     height: 30vh;
     width: auto;
   }
-  .medium-image {
-    height: 15vh;
-    width: auto;
+  .small-image, .small-image-by-height {
+    width: 80vw;
+    height: auto;
   }
   header.masthead {
     background: url("../img/bg-top-mobile.jpg");
