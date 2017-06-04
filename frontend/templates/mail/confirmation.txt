@@ -1,4 +1,4 @@
-Hallo {name1} und {name2},
+Hallo {{house.name1}} und {{house.name2}},
 
 Wir haben eure Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.
 
