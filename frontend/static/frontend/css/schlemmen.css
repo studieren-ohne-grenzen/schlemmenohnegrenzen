@@ -167,6 +167,7 @@ form h2 {
 
 a {
   text-decoration: none;
+  color: #c39624;
 }
 
 .mandat {
@@ -206,10 +207,6 @@ a {
 
 .remove-top {
   margin-top: -20px;
-}
-
-a {
-  color: #c39624;
 }
 
 .bg-facebook {
