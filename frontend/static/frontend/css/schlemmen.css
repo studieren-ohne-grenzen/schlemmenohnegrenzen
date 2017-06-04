@@ -184,6 +184,10 @@ a {
   font-size: 7em;
 }
 
+.envelope-size {
+  font-size: 10em;
+}
+
 .remove-top {
   margin-top: -20px;
 }
