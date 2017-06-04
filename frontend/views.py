@@ -29,6 +29,12 @@ def email_senden(house):
         [house.email1],
         fail_silently=False)
 
+    send_mail('[Info] Schlemmen Anmeldung',
+    '{} und {} haben sich gerade angemeldet'.format(house.name1, house.name2),
+    'hallo@schlemmen-ohne-grenzen.de',
+    ['hallo@schlemmen-ohne-grenzen.de'],
+    fail_silently=True)
+
 def faq(request):
     return render(request, 'frontend/faq.html')
 
