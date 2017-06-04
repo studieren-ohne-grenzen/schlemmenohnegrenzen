@@ -11,21 +11,23 @@ import json
 from django.template.loader import get_template
 
 def email_senden(house):
-    content = get_template("mail/confirmation.html").render(house)
+    txt_content = get_template("mail/confirmation.txt").render(house)
+    html_content = get_template("mail/confirmation.html").render(house)
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
-        "",
+        txt_content,
         'hallo@schlemmen-ohne-grenzen.de',
         [house.email1,house.email2],
-        html_message=content,
+        html_message=html_content,
         fail_silently=False)
 
     if not house.personal_payment:
-        payment_content = get_template("mail/confirmation.html").render(house)
+        payment_txt_content = get_template("mail/confirmation.txt").render(house)
+        payment_html_content = get_template("mail/confirmation.html").render(house)
         send_mail('Schlemmen Ohne Grenzen SEPA-Lastschriftmandat',
-        ''
+        payment_txt_content,
         'hallo@schlemmen-ohne-grenzen.de',
         [house.email1],
-        html_message=payment_content
+        html_message=payment_content,
         fail_silently=True)
 
     send_mail('[Info] Schlemmen Anmeldung',
