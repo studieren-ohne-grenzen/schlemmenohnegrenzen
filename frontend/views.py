@@ -8,19 +8,15 @@ from .clustering import initial_clusters, balance_clusters, generate_visiting_gr
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 import json
+from django.template.loader import get_template
 
 def email_senden(house):
+    content = get_template("mail/confirmation.html").render(house)
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
-    'Hallo {},\n\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\n\nViele Grüße\n\nStudieren Ohne Grenzen Karlsruhe'.format(house.name1),
-    'hallo@schlemmen-ohne-grenzen.de',
-    [house.email1],
-    fail_silently=True)
-
-    send_mail('Schlemmen Ohne Grenzen Bestätigung!',
-    'Hallo {},\n\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\n\nViele Grüße\n\nStudieren Ohne Grenzen Karlsruhe'.format(house.name2),
-    'hallo@schlemmen-ohne-grenzen.de',
-    [house.email2],
-    fail_silently=True)
+        content,
+        'hallo@schlemmen-ohne-grenzen.de',
+        [house.email1,house.email2],
+        fail_silently=False)
 
     if not house.personal_payment:
         send_mail('Schlemmen Ohne Grenzen SEPA-Lastschriftmandat',
