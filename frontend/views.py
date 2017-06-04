@@ -27,7 +27,7 @@ def email_senden(house):
         payment_txt_content,
         'hallo@schlemmen-ohne-grenzen.de',
         [house.email1],
-        html_message=payment_content,
+        html_message=payment_html_content,
         fail_silently=True)
 
     send_mail('[Info] Schlemmen Anmeldung',
