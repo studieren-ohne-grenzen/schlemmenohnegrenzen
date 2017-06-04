@@ -1,0 +1,7 @@
+Hallo {name1} und {name2},
+
+Wir haben eure Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.
+
+Viele Grüße
+
+Studieren Ohne Grenzen Karlsruhe

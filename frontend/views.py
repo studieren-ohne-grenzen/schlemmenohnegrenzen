@@ -8,25 +8,26 @@ from .clustering import initial_clusters, balance_clusters, generate_visiting_gr
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 import json
+from django.template.loader import get_template
 
 def email_senden(house):
+    txt_content = get_template("mail/confirmation.txt").render(house)
+    html_content = get_template("mail/confirmation.html").render(house)
     send_mail('Schlemmen Ohne Grenzen Bestätigung!',
-    'Hallo {},\n\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\n\nViele Grüße\n\nStudieren Ohne Grenzen Karlsruhe'.format(house.name1),
-    'hallo@schlemmen-ohne-grenzen.de',
-    [house.email1],
-    fail_silently=True)
-
-    send_mail('Schlemmen Ohne Grenzen Bestätigung!',
-    'Hallo {},\n\nWir haben deine Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.\n\nViele Grüße\n\nStudieren Ohne Grenzen Karlsruhe'.format(house.name2),
-    'hallo@schlemmen-ohne-grenzen.de',
-    [house.email2],
-    fail_silently=True)
+        txt_content,
+        'hallo@schlemmen-ohne-grenzen.de',
+        [house.email1,house.email2],
+        html_message=html_content,
+        fail_silently=False)
 
     if not house.personal_payment:
+        payment_txt_content = get_template("mail/confirmation.txt").render(house)
+        payment_html_content = get_template("mail/confirmation.html").render(house)
         send_mail('Schlemmen Ohne Grenzen SEPA-Lastschriftmandat',
-        'Zahlungsempfänger: Studieren Ohne Grenzen e.V.\nGläubiger Identifikationsnummer: DE25ZZZ00000252980\nMandatsreferenz: {}\n\nIch ermächtige den Zahlungsempfänger, Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von dem Zahlungsempfänger auf mein Konto gezogenen Lastschriften einzulösen.\n\nHinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.\n\nName des Zahlungspflichtigen: {}\nIBAN: Aus Datenschutzgründen entfernt\nBIC: Aus Datenschutzgründen entfernt\nDurchführung am: 03.07.2017'.format(house.mandatsreferenz, house.kontoinhaber),
+        payment_txt_content,
         'hallo@schlemmen-ohne-grenzen.de',
         [house.email1],
+        html_message=payment_html_content,
         fail_silently=True)
 
     send_mail('[Info] Schlemmen Anmeldung',
