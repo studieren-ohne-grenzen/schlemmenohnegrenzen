@@ -79,7 +79,15 @@ img {
 }
 
 .signup_success {
-  padding: 10% 0;
+  padding: 5% 0;
+}
+
+.small-container {
+  padding: 0 50px 0 20px;
+}
+
+.facebook-event-container {
+  padding-bottom: 150px;
 }
 
 @media screen and (orientation:landscape) {
@@ -192,10 +200,23 @@ a {
   font-size: 10em;
 }
 
+.facebook-event-logo {
+  font-size: 10em;
+}
+
 .remove-top {
   margin-top: -20px;
 }
 
 a {
   color: #c39624;
+}
+
+.bg-facebook {
+  background-color: #3b5998;
+  color: #fff;
+}
+
+.bg-facebook i {
+  color: #fff;
 }

@@ -1,10 +1,34 @@
 {% extends "frontend/base.html" %}
 {% block content %}
-<section class="contact bg-primary" id="anmelden">
+<section class="contact bg-primary small-container" id="anmelden">
     <div class="container signup_success">
-        <h1>Anmeldung abgeschlossen!</h1>
-        <p>Vielen Dank für die Anmeldung. Du solltest demnächst eine Mail mit einer Bestätigung und weiteren Informationen erhalten. Falls du keine Mail erhältst, kontaktiere uns bitte.</p>
-        <p>Welchen Gang ihr kochen dürft, bei wem ihr zu Gast seid und auch die Hinweise zu euren Rätseln erhaltet ihr am 19. Juni gegen 20:00 Uhr.</p>
+        <div class="row">
+          <div class="col-md-2">
+            <i class="fa fa-check facebook-event-logo"></i>
+          </div>
+          <div class="col-md-10">
+            <h2>Anmeldung abgeschlossen!</h2>
+            <p>Vielen Dank für die Anmeldung. Du solltest eine Bestätigungsmail bekommen haben - schau bitte mal nach. Falls du keine Mail erhältst, kontaktiere uns bitte.</p>
+            <p>Welchen Gang ihr kochen dürft, bei wem ihr zu Gast seid und auch die Hinweise zu euren Rätseln erhaltet ihr am 19. Juni gegen 20:00 Uhr.</p>
+          </div>
+        </div>
+    </div>
+</section>
+<section class="bg-facebook small-container facebook-event-container" id="anmelden">
+    <div class="container signup_success">
+        <div class="row">
+          <div class="col-md-2">
+            <i class="fa fa-facebook facebook-event-logo"></i>
+          </div>
+          <div class="col-md-10">
+            <h2>Eine kleine Bitte: Auf Facebook teilen?</h2>
+            <p>Werbung zu machen ist viel Arbeit und teuer.
+              <br>
+              Aber du könntest uns mit einer kleinen Geste echt weiterhelfen!</p>
+              <p>Zeig auf Facebook, dass du an dem Event teilnimmst - kleiner Act für dich, aber für uns echt wichtig! Danke dir!</p>
+              <a class="btn btn-primary" href="https://www.facebook.com/events/1936788426542614/">Zum Event</a>
+          </div>
+        </div>
     </div>
 </section>
 {% endblock %}
