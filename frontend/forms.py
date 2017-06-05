@@ -28,6 +28,8 @@ class HouseholdForm(forms.Form):
         iban = cleaned_data.get("iban")
         bic = cleaned_data.get("bic")
         kontoinhaber = cleaned_data.get("kontoinhaber")
+        kontoinhaber_street = cleaned_data.get("kontoinhaber_street")
+        kontoinhaber_city = cleaned_data.get("kontoinhaber_city")
         if not personal_payment:
             if not iban:
                 self.add_error('iban', "Es muss eine gültige IBAN eingegeben werden.")
@@ -35,6 +37,10 @@ class HouseholdForm(forms.Form):
                 self.add_error('bic', "Es muss eine gültige BIC eingegeben werden.")
             if not kontoinhaber:
                 self.add_error('kontoinhaber', "Es muss ein gültiger Kontoinhaber eingegeben werden.")
+            if not kontoinhaber_street:
+                self.add_error('kontoinhaber_street', "Es muss eine gültige Straße eingegeben werden.")
+            if not kontoinhaber_city:
+                self.add_error('kontoinhaber_city', "Es müssen gültige PLZ und Ort eingegeben werden.")
 
     def clean_captcha(self):
         captcha = self.cleaned_data['captcha']
