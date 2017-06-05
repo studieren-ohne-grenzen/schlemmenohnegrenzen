@@ -82,6 +82,8 @@ def index(request):
                 request.session['street'] = form.cleaned_data['street']
                 request.session['note'] = form.cleaned_data['note']
                 request.session['kontoinhaber'] = form.cleaned_data['kontoinhaber']
+                request.session['kontoinhaber_city'] = form.cleaned_data['kontoinhaber_city']
+                request.session['kontoinhaber_street'] = form.cleaned_data['kontoinhaber_street']
                 request.session['iban'] = form.cleaned_data['iban']
                 request.session['bic'] = form.cleaned_data['bic']
                 return HttpResponseRedirect(reverse('frontend:confirmation'))
@@ -128,6 +130,8 @@ def confirmation(request):
                 gpsstreet=request.session['street'],
                 note=request.session['note'],
                 kontoinhaber=request.session['kontoinhaber'],
+                kontoinhaber_city=request.session['kontoinhaber_city'],
+                kontoinhaber_street=request.session['kontoinhaber_street'],
                 iban=request.session['iban'],
                 bic=request.session['bic'],
                 signup_date=timezone.now(),
@@ -149,6 +153,8 @@ def confirmation(request):
         mandatsreferenz = request.session['mandatsreferenz']
     return render(request, 'frontend/confirmation.html', {
         'kontoinhaber': request.session['kontoinhaber'],
+        'kontoinhaber_city': request.session['kontoinhaber_city'],
+        'kontoinhaber_street': request.session['kontoinhaber_street'],
         'iban': request.session['iban'],
         'bic': request.session['bic'],
         'mandatsreferenz': mandatsreferenz,

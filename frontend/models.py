@@ -38,6 +38,8 @@ class Household(models.Model):
     kontoinhaber = models.CharField(max_length=200, null=True)
     personal_payment = models.BooleanField(default=False)
     mandatsreferenz = models.CharField(max_length=35, null=True)
+    kontoinhaber_city = models.CharField(max_length=200)
+    kontoinhaber_street = models.CharField(max_length=200)
 
     def lookup_coords(self):
         geocoder = Nominatim()

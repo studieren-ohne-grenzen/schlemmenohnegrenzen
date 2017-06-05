@@ -15,6 +15,8 @@ class HouseholdForm(forms.Form):
     note = forms.CharField(max_length=2000, required=False, widget=forms.Textarea(attrs={'placeholder': 'Vegetarisch? Allergien? Hier ist Platz für Nachrichten an eure Gastgeber.', 'class': 'form-control'}))
     accepted_tos = forms.BooleanField(initial=False, required=True, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     kontoinhaber = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'placeholder': 'KontoinhaberIn*', 'class': 'form-control'}))
+    kontoinhaber_street = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'placeholder': 'KontoinhaberIn Straße*', 'class': 'form-control'}))
+    kontoinhaber_city = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'placeholder': 'KontoinhaberIn PLZ & Stadt*', 'class': 'form-control'}))
     iban = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'placeholder': 'IBAN*', 'class': 'form-control'}))
     bic = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'placeholder': 'BIC*', 'class': 'form-control'}))
     captcha = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
