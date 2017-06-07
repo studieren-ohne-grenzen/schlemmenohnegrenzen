@@ -1,4 +1,4 @@
-Zahlungsempfänger: Studieren Ohne Grenzen e.V.
+Zahlungsempfänger:  Etudes Sans Frontières – Studieren Ohne Grenzen Deutschland e.V.
 Gläubiger Identifikationsnummer: DE25ZZZ00000252980
 Mandatsreferenz: {{house.mandatsreferenz}}
 
