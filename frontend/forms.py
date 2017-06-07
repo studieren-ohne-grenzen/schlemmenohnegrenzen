@@ -7,7 +7,7 @@ class HouseholdForm(forms.Form):
     email1 = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Deine E-Mail*', 'class': 'form-control'}))
     newsletter1 = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     name2 = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Sein/Ihr Name*', 'class': 'form-control'}))
-    handy2 = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Seine/Ihre Handynummer*', 'class': 'form-control'}))
+    handy2 = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'placeholder': 'Seine/Ihre Handynummer', 'class': 'form-control'}))
     email2 = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Seine/Ihre E-Mail*', 'class': 'form-control'}))
     newsletter2 = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     plz = forms.ChoiceField(choices=plz_choices, widget=forms.Select(attrs={'class': 'form-control'}))
