@@ -59,12 +59,12 @@ def index(request):
                     street=form.cleaned_data['street'],
                     gpsstreet=form.cleaned_data['street'],
                     note=form.cleaned_data['note'],
-                    kontoinhaber=None,
-                    iban=None,
-                    bic=None,
+                    kontoinhaber="",
+                    iban="",
+                    bic="",
                     signup_date=timezone.now(),
                     personal_payment=True,
-                    mandatsreferenz=None)
+                    mandatsreferenz="")
                 house.lookup_coords()
                 house.save()
                 email_senden(house)
