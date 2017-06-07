@@ -20,6 +20,19 @@ h1, h2, h3 {
 section.cta .cta-content h2 {
     max-width: 500px;
 }
+
+section.gewinnen {
+    position: relative;
+    padding: 250px 0;
+    background-image: url(../img/bg-door.jpg);
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #fff;
+}
+
 @media screen and (min-width: 1000px) {
   section.info {
     background-image: url("../img/trenchcoat.svg");
