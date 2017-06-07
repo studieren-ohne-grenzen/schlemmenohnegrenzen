@@ -117,15 +117,6 @@
                     {{ form.kontoinhaber }}
                   {% endif %}
 
-                  {% if form.kontoinhaber_city.errors %}
-                    <div class="form-group has-danger">
-                      {{ form.kontoinhaber_city }}
-                      <div class="form-control-feedback">{{ form.kontoinhaber_city.errors }}</div>
-                    </div>
-                  {% else %}
-                    {{ form.kontoinhaber_city }}
-                  {% endif %}
-
                   {% if form.kontoinhaber_street.errors %}
                     <div class="form-group has-danger">
                       {{ form.kontoinhaber_street }}
@@ -133,6 +124,15 @@
                     </div>
                   {% else %}
                     {{ form.kontoinhaber_street }}
+                  {% endif %}
+
+                  {% if form.kontoinhaber_city.errors %}
+                  <div class="form-group has-danger">
+                    {{ form.kontoinhaber_city }}
+                    <div class="form-control-feedback">{{ form.kontoinhaber_city.errors }}</div>
+                  </div>
+                  {% else %}
+                  {{ form.kontoinhaber_city }}
                   {% endif %}
 
                   {% if form.iban.errors %}
