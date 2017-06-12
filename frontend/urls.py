@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^confirmation', views.confirmation, name='confirmation'),
     url(r'^faq', views.faq, name='faq'),
     url(r'^bedingungen', views.bedingungen, name='bedingungen'),
+    url(r'^hilfe', views.hilfe, name='hilfe'),
     url(r'^.*$', views.index, name='index')
 ]

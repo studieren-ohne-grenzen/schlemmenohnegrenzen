@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 import json
 from django.template.loader import get_template
+from .hilfen import hilfen
+from datetime import datetime
 
 def email_senden(house):
     txt_content = get_template("mail/confirmation.txt").render({'house': house})
@@ -40,6 +42,15 @@ def email_senden(house):
 
 def faq(request):
     return render(request, 'frontend/faq.html')
+
+def hilfe(request):
+    newhilfen = []
+
+    for hilfe in hilfen:
+        if hilfe['datetime'] < datetime.now():
+            newhilfen.append(hilfe)
+
+    return render(request, 'frontend/hilfe.html', {'hilfen': newhilfen})
 
 def index(request):
     if request.method == 'POST':
