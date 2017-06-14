@@ -11,6 +11,8 @@ Abhängigkeiten (Django, geopy usw.) können nun mit ```pip install -r requireme
 
 In Zukunft kann mit dem Befehl ```workon schlemmen``` wieder ins virtualenv gewechselt werden.
 
+Für die Hilfe Seite, die zu bestimmten Zeiten Tipps darstellen kann, wird eine hilfen.py benötigt, die separat deployed werden muss (damit sie keiner der Schlemmer vor dem Event hier finden kann.)
+
 ## Start der Development-Umgebung
 
 Mit ```python manage.py runserver``` kann ein Development-Server gestartet werden.

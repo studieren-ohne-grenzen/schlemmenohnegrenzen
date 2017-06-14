@@ -2,11 +2,11 @@ from django import forms
 from .choices import plz_choices
 
 class HouseholdForm(forms.Form):
-    name1 = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Dein Name*', 'class': 'form-control'}))
+    name1 = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Dein Vorname & Name*', 'class': 'form-control'}))
     handy1 = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Deine Handynummer*', 'class': 'form-control'}))
     email1 = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Deine E-Mail*', 'class': 'form-control'}))
     newsletter1 = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
-    name2 = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Sein/Ihr Name*', 'class': 'form-control'}))
+    name2 = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Sein/Ihr Vorname & Name*', 'class': 'form-control'}))
     handy2 = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'placeholder': 'Seine/Ihre Handynummer', 'class': 'form-control'}))
     email2 = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Seine/Ihre E-Mail*', 'class': 'form-control'}))
     newsletter2 = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))

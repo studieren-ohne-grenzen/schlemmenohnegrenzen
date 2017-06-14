@@ -103,6 +103,10 @@ img {
   padding-bottom: 150px;
 }
 
+.header-content-inner {
+  text-align: center;
+}
+
 @media screen and (orientation:landscape) {
   .medium-image {
     height: auto;
