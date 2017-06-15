@@ -3,6 +3,7 @@ Hallo {{house.name1}} und {{house.name2}},
 Es freut uns, dass ihr dabei seid :)
 Wie ihr ja schon wisst, wird es am 21.06 um 18 Uhr mit dem ersten Gang losgehen.
 Euch erwarten eine aufregende Story und bei jedem Gang neue, coole Leute.
+Ihr erhaltet alle weiteren Infos dann am Abend des 19.06 - insbesondere auch welchen Gang ihr kochen dürft.
 
 Habt ihr noch Fragen, könnt ihr uns entweder direkt auf diese Mail antworten oder uns per Whatsapp schreiben:
 +49 177 197 69 19
@@ -16,6 +17,6 @@ Handy 2: {{house.handy2}}
 Nachricht an die Gastgeber:
 {{house.note}}
 
-Viele Grüße
+Viele Grüße und vielleicht sehen wir uns am Mittwoch!
 
 Studieren Ohne Grenzen Karlsruhe
