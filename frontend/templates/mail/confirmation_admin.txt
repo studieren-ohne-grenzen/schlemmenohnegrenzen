@@ -1,0 +1,13 @@
+{{house.name1}} und {{house.name2}} haben sich gerade angemeldet.
+
+Nachricht: {{house.note}}
+Daten korrekt: {{house.found_coords}}
+Barzahlung: {{house.personal_payment}}
+
+Mail 1: {{house.email1}}
+Mail 2: {{house.email2}}
+Handy 1: {{house.handy1}}
+Handy 2: {{house.handy2}}
+
+PlZ: {{house.plz}}
+Straße: {{house.street}}
