@@ -1,6 +1,20 @@
 Hallo {{house.name1}} und {{house.name2}},
 
-Wir haben eure Anmeldung erhalten. Weitere Informationen folgen dann in Kürze.
+Es freut uns, dass ihr dabei seid :)
+Wie ihr ja schon wisst, wird es am 21.06 um 18 Uhr mit dem ersten Gang losgehen.
+Euch erwarten eine aufregende Story und bei jedem Gang neue, coole Leute.
+
+Habt ihr noch Fragen, könnt ihr uns entweder direkt auf diese Mail antworten oder uns per Whatsapp schreiben:
++49 177 197 69 19
+
+Damit eure Gäste euch auch wirklich finden können, kontrolliert bitte nochmal kurz eure Daten:
+PlZ: {{house.plz}}
+Straße: {{house.street}}
+Handy 1: {{house.handy1}}
+Handy 2: {{house.handy2}}
+
+Nachricht an die Gastgeber:
+{{house.note}}
 
 Viele Grüße
 

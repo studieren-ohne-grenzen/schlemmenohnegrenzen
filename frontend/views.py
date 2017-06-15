@@ -34,8 +34,9 @@ def email_senden(house):
         #html_message=payment_html_content,
         fail_silently=True)
 
+    admin_content = get_template("mail/confirmation_admin.txt").render({'house': house})
     send_mail('[Info] Schlemmen Anmeldung',
-    '{} und {} haben sich gerade angemeldet'.format(house.name1, house.name2),
+    admin_content,
     'hallo@schlemmen-ohne-grenzen.de',
     ['hallo@schlemmen-ohne-grenzen.de'],
     fail_silently=True)
