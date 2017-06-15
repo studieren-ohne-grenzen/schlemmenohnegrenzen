@@ -182,40 +182,52 @@ def generate_visiting_groups(clusters):
         h9 = household_a[score[8]]
         v1 = VisitingGroup()
         v1.visiting_group_num = curr_v_num
+        v1.dinner = 0
         v1.save()
         curr_v_num += 1
         v2 = VisitingGroup()
         v2.visiting_group_num = curr_v_num
+        v2.dinner = 0
         v2.save()
         curr_v_num += 1
         v3 = VisitingGroup()
         v3.visiting_group_num = curr_v_num
+        v3.dinner = 0
         v3.save()
         curr_v_num += 1
         v4 = VisitingGroup()
         v4.visiting_group_num = curr_v_num
+        v4.dinner = 1
         v4.save()
         curr_v_num += 1
         v5 = VisitingGroup()
         v5.visiting_group_num = curr_v_num
+        v5.dinner = 1
         v5.save()
         curr_v_num += 1
         v6 = VisitingGroup()
         v6.visiting_group_num = curr_v_num
+        v6.dinner = 1
         v6.save()
         curr_v_num += 1
         v7 = VisitingGroup()
         v7.visiting_group_num = curr_v_num
+        v7.dinner = 2
         v7.save()
         curr_v_num += 1
         v8 = VisitingGroup()
         v8.visiting_group_num = curr_v_num
+        v8.dinner = 2
         v8.save()
         curr_v_num += 1
         v9 = VisitingGroup()
         v9.visiting_group_num = curr_v_num
+        v9.dinner = 2
         v9.save()
         curr_v_num += 1
+        v1.gastgeber = h1
+        v2.gastgeber = h5
+        v3.gastgeber = h7
         h1.first_visit = v1
         h2.first_visit = v1
         h3.first_visit = v1
@@ -226,6 +238,9 @@ def generate_visiting_groups(clusters):
         h8.first_visit = v3
         h9.first_visit = v3
 
+        v4.gastgeber = h4
+        v5.gastgeber = h2
+        v6.gastgeber = h3
         h1.second_visit = v4
         h4.second_visit = v4
         h7.second_visit = v4
@@ -234,8 +249,11 @@ def generate_visiting_groups(clusters):
         h8.second_visit = v5
         h3.second_visit = v6
         h6.second_visit = v6
-        h7.second_visit = v6
+        h9.second_visit = v6
 
+        v7.gastgeber = h9
+        v8.gastgeber = h6
+        v9.gastgeber = h8
         h1.third_visit = v7
         h5.third_visit = v7
         h9.third_visit = v7

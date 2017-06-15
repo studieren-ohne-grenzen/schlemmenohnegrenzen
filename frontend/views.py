@@ -11,6 +11,7 @@ import json
 from django.template.loader import get_template
 from .hilfen import hilfen
 from datetime import datetime
+from django.db.models import F
 
 def email_senden(house):
     txt_content = get_template("mail/confirmation.txt").render({'house': house})
@@ -217,4 +218,28 @@ def cluster(request):
     wrong_entries = Household.objects.all().filter(found_coords__exact=False)
     personal_payers = Household.objects.all().filter(personal_payment__exact=True)
 
-    return render(request, 'frontend/cluster.html', {"jsonstr": jsonstr, "wrong_entries": wrong_entries, "personal_payers": personal_payers})
+    vs = VisitingGroup.objects.all().filter(dinner=0)
+    vorspeise = []
+
+    for v in vs:
+        house = v.household1.all()
+        vorspeise.append({'street': v.gastgeber.street, 'name1': v.gastgeber.name1 + ' & ' + v.gastgeber.name2, 'name2': house[0].name1 + ' & ' + house[0].name2 + ', ' + house[0].street, 'name3': house[1].name1 + ' & ' + house[1].name2 + ', ' + house[1].street, 'name4': house[2].name1 + ' & ' + house[2].name2 + ', ' + house[2].street})
+    
+    hs = VisitingGroup.objects.all().filter(dinner=1)
+    hauptspeise = []
+
+    for v in hs:
+        house = v.household2.all()
+        if len(house) == 3:
+            hauptspeise.append({'street': v.gastgeber.street, 'name1': v.gastgeber.name1 + ' & ' + v.gastgeber.name2, 'name2': house[0].name1 + ' & ' + house[0].name2 + ', ' + house[0].street, 'name3': house[1].name1 + ' & ' + house[1].name2 + ', ' + house[1].street, 'name4': house[2].name1 + ' & ' + house[2].name2 + ', ' + house[2].street})
+        else:
+            print(len(house))
+    
+    ns = VisitingGroup.objects.all().filter(dinner=2)
+    nachspeise = []
+
+    for v in ns:
+        house = v.household3.all()
+        nachspeise.append({'street': v.gastgeber.street, 'name1': v.gastgeber.name1 + ' & ' + v.gastgeber.name2, 'name2': house[0].name1 + ' & ' + house[0].name2 + ', ' + house[0].street, 'name3': house[1].name1 + ' & ' + house[1].name2 + ', ' + house[1].street, 'name4': house[2].name1 + ' & ' + house[2].name2 + ', ' + house[2].street})
+
+    return render(request, 'frontend/cluster.html', {"jsonstr": jsonstr, "wrong_entries": wrong_entries, "personal_payers": personal_payers, 'vorspeise': vorspeise, 'hauptspeise': hauptspeise, 'nachspeise': nachspeise})

@@ -11,6 +11,8 @@ class Cluster(models.Model):
 
 class VisitingGroup(models.Model):
     visiting_group_num = models.IntegerField(default=0)
+    dinner = models.IntegerField(default = 0)
+    gastgeber = models.ForeignKey('Household', on_delete=models.SET_NULL, null=True, blank=True)
 
 class Household(models.Model):
     name1 = models.CharField(max_length=200)
