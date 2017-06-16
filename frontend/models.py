@@ -1,6 +1,6 @@
 from django.db import models
 from geopy.geocoders import Nominatim
-from .choices import plz_choices
+from .choices import plz_choices, puzzle_choices
 import random
 
 class MandatsreferenzCounter(models.Model):
@@ -42,6 +42,7 @@ class Household(models.Model):
     mandatsreferenz = models.CharField(max_length=35, blank=True)
     kontoinhaber_city = models.CharField(max_length=200, blank=True)
     kontoinhaber_street = models.CharField(max_length=200, blank=True)
+    puzzle = models.IntegerField(default=0, choices=puzzle_choices)
 
     def lookup_coords(self):
         geocoder = Nominatim()

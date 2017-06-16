@@ -237,6 +237,16 @@ def generate_visiting_groups(clusters):
         h7.first_visit = v3
         h8.first_visit = v3
         h9.first_visit = v3
+        
+        h1.puzzle = 91;
+        h2.puzzle = 92;
+        h3.puzzle = 93;
+        h4.puzzle = 94;
+        h5.puzzle = 95;
+        h6.puzzle = 96;
+        h7.puzzle = 97;
+        h8.puzzle = 98;
+        h9.puzzle = 99;
 
         v4.gastgeber = h4
         v5.gastgeber = h2

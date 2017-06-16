@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from frontend.models import Cluster, Household
 import json
 from django.utils import timezone
-from .choices import plz_choices
+from ...choices import plz_choices
 
 class Command(BaseCommand):
     help = 'Imports a JSON file to the database'
@@ -20,7 +20,25 @@ class Command(BaseCommand):
                     plz = int(elem['address']['zip'])
                 except ValueError:
                     print("Error while converting zip code", elem['address']['zip'], "to integer")
-                household = Household(name1='a', name2='b', handy1='1', handy2='2', email1='asd', email2='asd', newsletter1=False, newsletter2=False, street=elem['address']['street'], gpsstreet=elem['address']['street'], plz=plz, note='asd', signup_date=timezone.now(), iban="", bic="", kontoinhaber="" personal_payer=True)
-                household.lookup_coords()
-                household.save()
+                
+                house = Household(name1="Name 1",
+                    name2="Name 2",
+                    email1="schlemmen1@s.denniskeck.de",
+                    email2="schlemmen2@s.denniskeck.de",
+                    handy1="handy1",
+                    handy2="handy2",
+                    newsletter1=False,
+                    newsletter2=False,
+                    plz=plz,
+                    street=elem['address']['street'],
+                    gpsstreet=elem['address']['street'],
+                    note="Das ist die Notiz",
+                    kontoinhaber="",
+                    iban="",
+                    bic="",
+                    signup_date=timezone.now(),
+                    personal_payment=True,
+                    mandatsreferenz="")
+                house.lookup_coords()
+                house.save()
 
