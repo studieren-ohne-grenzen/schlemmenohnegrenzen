@@ -22,10 +22,10 @@ function draw_map(jsonstr) {
         for (j = 0; j < jsonstr.length; j++) {
             if (jsonstr[j].cluster == i) {
                 currList.push([jsonstr[j].latitude, jsonstr[j].longitude]);
-                L.circle([jsonstr[j].latitude, jsonstr[j].longitude], {color: currColor, fillColor: currColor, fillOpacity: 0.5, radius: 40}).bindPopup(jsonstr[j].name1 + "<br>" + jsonstr[j].name2 + "<br>" + jsonstr[j].street + "<br>Cluster: " + jsonstr[j].cluster).addTo(mymap);
+                L.circle([jsonstr[j].latitude, jsonstr[j].longitude], { color: currColor, fillColor: currColor, fillOpacity: 0.5, radius: 40 }).bindPopup(jsonstr[j].name1 + "<br>" + jsonstr[j].name2 + "<br>" + jsonstr[j].street + "<br>Cluster: " + jsonstr[j].cluster).addTo(mymap);
             }
         }
         console.log(getRandomColor())
-        L.polygon(currList, {color: currColor}).addTo(mymap);
+        L.polygon(currList, { color: currColor }).addTo(mymap);
     }
 }

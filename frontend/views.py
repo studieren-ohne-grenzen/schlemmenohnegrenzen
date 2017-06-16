@@ -196,6 +196,14 @@ def regenerate_clusters(request):
     return HttpResponseRedirect(reverse('frontend:cluster'))
 
 @login_required
+def regenerate_gps(request):
+    houses = Household.objects.all()
+    for house in houses:
+        house.lookup_coords()
+        house.save()
+    return HttpResponseRedirect(reverse('frontend:cluster'))
+
+@login_required
 def regenerate_visiting_groups(request):
     # delete all current visiting groups
     VisitingGroup.objects.all().delete()
