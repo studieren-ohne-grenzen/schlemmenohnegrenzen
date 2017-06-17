@@ -45,6 +45,9 @@ def email_senden(house):
 def faq(request):
     return render(request, 'frontend/faq.html')
 
+def charaktere(request):
+    return render(request, 'frontend/charaktere.html')    
+
 def hilfe(request):
     newhilfen = []
 
@@ -240,7 +243,7 @@ def cluster(request):
     for v in vs:
         house = v.household1.all()
         vorspeise.append({'street': v.gastgeber.street, 'name1': v.gastgeber.name1 + ' & ' + v.gastgeber.name2, 'name2': house[0].name1 + ' & ' + house[0].name2 + ', ' + house[0].street, 'name3': house[1].name1 + ' & ' + house[1].name2 + ', ' + house[1].street, 'name4': house[2].name1 + ' & ' + house[2].name2 + ', ' + house[2].street})
-    
+
     hs = VisitingGroup.objects.all().filter(dinner=1)
     hauptspeise = []
 
@@ -250,7 +253,7 @@ def cluster(request):
             hauptspeise.append({'street': v.gastgeber.street, 'name1': v.gastgeber.name1 + ' & ' + v.gastgeber.name2, 'name2': house[0].name1 + ' & ' + house[0].name2 + ', ' + house[0].street, 'name3': house[1].name1 + ' & ' + house[1].name2 + ', ' + house[1].street, 'name4': house[2].name1 + ' & ' + house[2].name2 + ', ' + house[2].street})
         else:
             print(len(house))
-    
+
     ns = VisitingGroup.objects.all().filter(dinner=2)
     nachspeise = []
 

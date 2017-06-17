@@ -1,0 +1,45 @@
+body.characters {
+  background-color :#f5f5f5;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  font-family: 'Nothing You Could Do', cursive;
+}
+.list h1, .list h2, .list h3, .list h4, .list h5 {
+  font-family: 'Nothing You Could Do', cursive;
+}
+.list h5 {
+  font-size: 30px;
+  color: #cd0000;
+}
+.list h4 {
+  color: #cd0000;
+  font-size: 30px;
+  letter-spacing: -2px;
+  text-align: left;
+}
+.list {
+  color: #555;
+  font-size: 12pt;
+  padding: 0 !important;
+  width: calc(100% - 50px);
+  font-family: 'Nothing You Could Do', cursive;
+  border: 1px solid #dedede;
+  border-left: 3px solid #ffaa9f;
+  margin-left: 30px;
+  padding-left: 20px;
+}
+.list .row {
+  .rowst-style: none;
+  border-bottom: 1px dotted #ccc;
+  height: auto;
+  padding: 10px;
+  padding-left: 30px;
+  margin-left: 5px;
+}
+.list img {
+  height: 16vh;
+  width: auto;
+  float: left;
+  margin-left: 10px;
+}
