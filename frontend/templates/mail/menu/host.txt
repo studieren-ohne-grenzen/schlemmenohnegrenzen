@@ -1,0 +1,19 @@
+BEI EUCH!
+{{host.street}}
+
+Zu Gast:
+Team 1
+{{guest1.name1}} und {{guest1.name2}}
+{{guest1.handy1}}
+{{guest1.handy2}}
+
+Nachricht an euch:
+{{guest1.note}}
+
+Team 2
+{{guest2.name1}} und {{guest2.name2}}
+{{guest2.handy1}}
+{{guest2.handy2}}
+
+Nachricht an euch:
+{{guest2.note}}

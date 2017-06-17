@@ -45,6 +45,9 @@ def email_senden(house):
 def faq(request):
     return render(request, 'frontend/faq.html')
 
+def charaktere(request):
+    return render(request, 'frontend/charaktere.html')    
+
 def hilfe(request):
     newhilfen = []
 
@@ -179,9 +182,17 @@ def regenerate_clusters(request):
     # delete all current clusters
     Cluster.objects.all().delete()
     households = Household.objects.all().filter(found_coords__exact=True)
-    householdsPerCluster = 9
-    numOfClusters = len(households) // 9
-    maxElems = numOfClusters * 9
+
+    remainder = len(households) % 9
+    print(remainder)
+    numOf12Clusters = 0
+    if remainder >= 6:
+        numOf12Clusters = 2
+    elif remainder >= 3:
+        numOf12Clusters = 1
+
+    numOfClusters = len(households) // 9 # should also work with 12 because remainder is discarded
+    maxElems = numOfClusters * 9 + numOf12Clusters * 3
     households = households[0:maxElems]
     clusters = []
     for i in range(0, numOfClusters):
@@ -191,7 +202,7 @@ def regenerate_clusters(request):
         clusters.append(clst)
 
     initial_clusters(households, clusters)
-    balance_clusters(households, clusters)
+    balance_clusters(households, clusters, numOf12Clusters)
 
     return HttpResponseRedirect(reverse('frontend:cluster'))
 
@@ -209,7 +220,6 @@ def regenerate_visiting_groups(request):
     VisitingGroup.objects.all().delete()
 
     clusters = Cluster.objects.all()
-
     generate_visiting_groups(clusters)
 
     return HttpResponseRedirect(reverse('frontend:cluster'))
@@ -233,7 +243,7 @@ def cluster(request):
     for v in vs:
         house = v.household1.all()
         vorspeise.append({'street': v.gastgeber.street, 'name1': v.gastgeber.name1 + ' & ' + v.gastgeber.name2, 'name2': house[0].name1 + ' & ' + house[0].name2 + ', ' + house[0].street, 'name3': house[1].name1 + ' & ' + house[1].name2 + ', ' + house[1].street, 'name4': house[2].name1 + ' & ' + house[2].name2 + ', ' + house[2].street})
-    
+
     hs = VisitingGroup.objects.all().filter(dinner=1)
     hauptspeise = []
 
@@ -243,7 +253,7 @@ def cluster(request):
             hauptspeise.append({'street': v.gastgeber.street, 'name1': v.gastgeber.name1 + ' & ' + v.gastgeber.name2, 'name2': house[0].name1 + ' & ' + house[0].name2 + ', ' + house[0].street, 'name3': house[1].name1 + ' & ' + house[1].name2 + ', ' + house[1].street, 'name4': house[2].name1 + ' & ' + house[2].name2 + ', ' + house[2].street})
         else:
             print(len(house))
-    
+
     ns = VisitingGroup.objects.all().filter(dinner=2)
     nachspeise = []
 

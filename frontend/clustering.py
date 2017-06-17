@@ -9,23 +9,23 @@ def custom_dist(x, y):
 
 def initial_clusters(datapoints, clusters):
     listOfCoords = []
-    print(len(datapoints))
     numOfClusters = len(datapoints) // 9
     for elem in datapoints:
         listOfCoords.append([elem.latitude, elem.longitude])
     z = linkage(listOfCoords, method='complete', metric=custom_dist)
     tmp = fcluster(z, numOfClusters, criterion='maxclust')
-    numOfClusters = len(datapoints) // 9
     for i in range(len(tmp)):
         datapoints[i].cluster = clusters[tmp[i] - 1]
         datapoints[i].save()
 
 def clustersHaveWrongSize(clusters):
     for cluster in clusters:
-        if cluster["size"] > 9:
+        if cluster["is12"] and cluster["size"] > 12:
             return True
-        else:
-            False
+        elif not cluster["is12"] and cluster["size"] > 9:
+            return True
+
+    return False
 
 def getDistanceToCluster(point, cluster, set):
     maxDist = 0.0
@@ -34,31 +34,38 @@ def getDistanceToCluster(point, cluster, set):
         maxDist = max(dist, maxDist)
     return maxDist
 
-def balance_clusters(datapoints, clusters):
+def balance_clusters(datapoints, clusters, numOf12Clusters):
+    print(numOf12Clusters)
     new_clusters = []
     new_households = []
+    cl12 = 0
     for cluster in clusters:
         elems = cluster.household_set.all()
         for e in elems:
             new_households.append({"longitude": e.longitude, "latitude": e.latitude, "id": e.id, "cluster": len(new_clusters)})
-        new_clusters.append({"size": len(elems), "clusterNum": cluster.clusterNum})
-
+        new_clusters.append({"size": len(elems), "clusterNum": cluster.clusterNum, "is12": False})
+        if cl12 < numOf12Clusters:
+            cluster.is12 = True
+            cluster.save()
+            new_clusters[-1]["is12"] = True # TODO: Sort by max size
+            cl12 += 1
+    
     while clustersHaveWrongSize(new_clusters):
         currentMinDistance = 10000000000
         currentSrcElem = None
         currentDstCluster = None
 
         for point in new_households:
-            if new_clusters[point["cluster"]]["size"] > 9:
+            if (not new_clusters[point["cluster"]]["is12"] and new_clusters[point["cluster"]]["size"] > 9) or (new_clusters[point["cluster"]]["is12"] and new_clusters[point["cluster"]]["size"] > 12):
                 pointCurrMinDist = 1000000000
                 pointCurrDstClust = None
                 for c in range(len(new_clusters)):
-                    if new_clusters[c]["size"] < 9:
-                        set = []
+                    if (not new_clusters[c]["is12"] and new_clusters[c]["size"] < 9) or (new_clusters[c]["is12"] and new_clusters[c]["size"] < 12):
+                        set_ = []
                         for p in new_households:
                             if p["cluster"] == c:
-                                set.append(p)
-                        dist = getDistanceToCluster(point, cluster, set)
+                                set_.append(p)
+                        dist = getDistanceToCluster(point, cluster, set_)
                         if dist < pointCurrMinDist:
                             pointCurrMinDist = dist
                             pointCurrDstClust = c
@@ -105,7 +112,8 @@ def get_traveling_distance(elems, dist, norm):
 
     return total / norm
 
-def get_score(households, elems, dist, norm):
+def get_score(households, elems, dist, norm, is12):
+    # TODO: is12
     score = 0.0
     h1 = households[elems[0]]
     h2 = households[elems[1]]
@@ -131,15 +139,29 @@ def get_score(households, elems, dist, norm):
 
     return score
 
-def recur(households, curr_elems, curr_score, dist, norm):
+def recur(households, curr_elems, curr_score, dist, norm, is12):
+    #if (len(curr_elems) < 4):
+    #    print(curr_elems)
+
     curr_elems.append(-1)
-    for i in range(9):
+    if is12:
+        cnt = 12
+        if curr_score[0] < 1.0:
+            return
+    else:
+        cnt = 9
+
+    for i in range(cnt):
         if i not in curr_elems:
             curr_elems[-1] = i
-            if len(curr_elems) < 9:
-                recur(households, curr_elems, curr_score, dist, norm)
+            if len(curr_elems) < cnt:
+                recur(households, curr_elems, curr_score, dist, norm, is12)
             else:
-                score = get_score(households, curr_elems, dist, norm)
+                score = get_score(households, curr_elems, dist, norm, is12)
+                if is12 and score < 1.0:
+                    curr_score[0] = score
+                    curr_score[1] = curr_elems[:]
+                    return
                 if curr_score[0] > score:
                     curr_score[0] = score
                     curr_score[1] = curr_elems[:]
@@ -168,7 +190,7 @@ def generate_visiting_groups(clusters):
                 tmp.append(d)
             dist.append(tmp)
 
-        recur(households, [], currscore, dist, maxdist * 27.0)
+        recur(households, [], currscore, dist, maxdist * 27.0, cluster.is12)
         print(currscore)
         score = currscore[1]
         h1 = household_a[score[0]]
@@ -180,6 +202,12 @@ def generate_visiting_groups(clusters):
         h7 = household_a[score[6]]
         h8 = household_a[score[7]]
         h9 = household_a[score[8]]
+        if cluster.is12:
+            print(len(household_a))
+            h10 = household_a[score[9]]
+            h11 = household_a[score[10]]
+            h12 = household_a[score[11]]
+
         v1 = VisitingGroup()
         v1.visiting_group_num = curr_v_num
         v1.dinner = 0
@@ -225,6 +253,23 @@ def generate_visiting_groups(clusters):
         v9.dinner = 2
         v9.save()
         curr_v_num += 1
+        if cluster.is12:
+            v10 = VisitingGroup()
+            v10.visiting_group_num = curr_v_num
+            v10.dinner = 0
+            v10.save()
+            curr_v_num += 1
+            v11 = VisitingGroup()
+            v11.visiting_group_num = curr_v_num
+            v11.dinner = 1
+            v11.save()
+            curr_v_num += 1
+            v12 = VisitingGroup()
+            v12.visiting_group_num = curr_v_num
+            v12.dinner = 2
+            v12.save()
+            curr_v_num += 1
+
         v1.gastgeber = h1
         v2.gastgeber = h5
         v3.gastgeber = h7
@@ -237,42 +282,97 @@ def generate_visiting_groups(clusters):
         h7.first_visit = v3
         h8.first_visit = v3
         h9.first_visit = v3
+        if cluster.is12:
+            h10.first_visit = v10
+            h11.first_visit = v10
+            h12.first_visit = v10
+            v10.gastgeber = h10
         
-        h1.puzzle = 91;
-        h2.puzzle = 92;
-        h3.puzzle = 93;
-        h4.puzzle = 94;
-        h5.puzzle = 95;
-        h6.puzzle = 96;
-        h7.puzzle = 97;
-        h8.puzzle = 98;
-        h9.puzzle = 99;
+        if not cluster.is12:
+            h1.puzzle = 91;
+            h2.puzzle = 92;
+            h3.puzzle = 93;
+            h4.puzzle = 94;
+            h5.puzzle = 95;
+            h6.puzzle = 96;
+            h7.puzzle = 97;
+            h8.puzzle = 98;
+            h9.puzzle = 99;
+        else:
+            h1.puzzle = 1201;
+            h2.puzzle = 1202;
+            h3.puzzle = 1203;
+            h4.puzzle = 1204;
+            h5.puzzle = 1205;
+            h6.puzzle = 1206;
+            h7.puzzle = 1207;
+            h8.puzzle = 1208;
+            h9.puzzle = 1209;
+            h10.puzzle = 1210;
+            h11.puzzle = 1211;
+            h12.puzzle = 1212;
 
-        v4.gastgeber = h4
-        v5.gastgeber = h2
-        v6.gastgeber = h3
-        h1.second_visit = v4
-        h4.second_visit = v4
-        h7.second_visit = v4
-        h2.second_visit = v5
-        h5.second_visit = v5
-        h8.second_visit = v5
-        h3.second_visit = v6
-        h6.second_visit = v6
-        h9.second_visit = v6
+        if not cluster.is12:
+            v4.gastgeber = h4
+            v5.gastgeber = h2
+            v6.gastgeber = h3
+            h1.second_visit = v4
+            h4.second_visit = v4
+            h7.second_visit = v4
+            h2.second_visit = v5
+            h5.second_visit = v5
+            h8.second_visit = v5
+            h3.second_visit = v6
+            h6.second_visit = v6
+            h9.second_visit = v6
+        else:
+            v4.gastgeber = h4
+            v5.gastgeber = h2
+            v6.gastgeber = h12
+            v11.gastgeber = h3
+            h1.second_visit = v4
+            h4.second_visit = v4
+            h10.second_visit = v4
+            h2.second_visit = v5
+            h11.second_visit = v5
+            h8.second_visit = v5
+            h12.second_visit = v6
+            h6.second_visit = v6
+            h9.second_visit = v6
+            h7.second_visit = v11
+            h5.second_visit = v11
+            h3.second_visit = v11
 
-        v7.gastgeber = h9
-        v8.gastgeber = h6
-        v9.gastgeber = h8
-        h1.third_visit = v7
-        h5.third_visit = v7
-        h9.third_visit = v7
-        h2.third_visit = v8
-        h6.third_visit = v8
-        h7.third_visit = v8
-        h3.third_visit = v9
-        h4.third_visit = v9
-        h8.third_visit = v9
+        if not cluster.is12:
+            v7.gastgeber = h9
+            v8.gastgeber = h6
+            v9.gastgeber = h8
+            h1.third_visit = v7
+            h5.third_visit = v7
+            h9.third_visit = v7
+            h2.third_visit = v8
+            h6.third_visit = v8
+            h7.third_visit = v8
+            h3.third_visit = v9
+            h4.third_visit = v9
+            h8.third_visit = v9
+        else:
+            v7.gastgeber = h11
+            v8.gastgeber = h6
+            v9.gastgeber = h8
+            v12.gastgeber = h9
+            h1.third_visit = v7
+            h5.third_visit = v7
+            h11.third_visit = v7
+            h10.third_visit = v8
+            h6.third_visit = v8
+            h7.third_visit = v8
+            h3.third_visit = v9
+            h12.third_visit = v9
+            h8.third_visit = v9
+            h9.third_visit = v12
+            h2.third_visit = v12
+            h4.third_visit = v12
 
         v1.save()
         v2.save()
@@ -293,6 +393,14 @@ def generate_visiting_groups(clusters):
         h7.save()
         h8.save()
         h9.save()
+
+        if cluster.is12:
+            v10.save()
+            v11.save()
+            v12.save()
+            h10.save()
+            h11.save()
+            h12.save()
     #pr.disable()
     #s = io.StringIO()
     #ps = pstats.Stats(pr, stream=s).sort_stats('cumulative')

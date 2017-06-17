@@ -1,0 +1,5 @@
+Bei {{host.name1}} und {{host.name2}}
+{{host.street}}, {{host.plz}} Karlsruhe
+
+Zusammen mit:
+{{otherGuests.name1}} und {{otherGuests.name2}}

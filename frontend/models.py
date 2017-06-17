@@ -8,6 +8,7 @@ class MandatsreferenzCounter(models.Model):
 
 class Cluster(models.Model):
     clusterNum = models.IntegerField(default=0)
+    is12 = models.BooleanField(default=False)
 
 class VisitingGroup(models.Model):
     visiting_group_num = models.IntegerField(default=0)
