@@ -1,0 +1,30 @@
+{% extends "frontend/base_portal.html" %}
+{% load static %}
+
+{% block content %}
+<header class="masthead">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="header-content">
+                    <div class="header-content-inner">
+                        <img src="{% static 'frontend/img/header_funk.png' %}" class="header_logo" alt="Schlemmen Ohne Grenzen Logo" srcset="{% static 'frontend/img/header_funk.png' %} 1920w, {% static 'frontend/img/header_funk_1000.png' %} 1000w, {% static 'frontend/img/header_funk_600.png' %} 600w">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary">
+  <div class="container">
+    <h2><i class="fa fa-heart"></i>-lich willkommen auf der Schlemmen Hilfe Seite!</h2>
+    Hier findest du alle wichtigen Infos über den Abend.
+    <div class="row"><a href="/charaktere" class="btn btn-primary">Charakterübersicht</a></div>
+    <div class="row"><a href="/charaktere" class="btn btn-primary">Material</a></div>
+    <div class="row"><a href="/charaktere" class="btn btn-primary">Chat</a></div>
+  </div>
+</section>
+
+{% endblock %}
+</div>

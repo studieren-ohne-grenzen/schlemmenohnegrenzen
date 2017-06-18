@@ -46,7 +46,10 @@ def faq(request):
     return render(request, 'frontend/faq.html')
 
 def charaktere(request):
-    return render(request, 'frontend/charaktere.html')    
+    return render(request, 'frontend/charaktere.html')
+
+def portal(request):
+    return render(request, 'frontend/portal.html')
 
 def hilfe(request):
     newhilfen = []

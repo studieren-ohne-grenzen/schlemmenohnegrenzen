@@ -1,3 +1,23 @@
+.header_logo {
+  width: 90%;
+}
+
+header.masthead {
+  min-height: 0;
+  height: 50vh;
+}
+
+@media screen and (orientation:landscape) {
+  header.masthead {
+    height: 80vh;
+  }
+}
+
+header.masthead .header-content {
+  height: 50vh;
+  padding: 50px 50px;
+}
+
 body.characters {
   background-color :#f5f5f5;
   margin: 0 auto;
