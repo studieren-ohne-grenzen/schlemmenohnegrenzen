@@ -1,31 +1,20 @@
+{% extends "frontend/base_portal.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Etudes Sans Frontières - Studieren Ohne Grenzen Deutschland e.V.">
-    <meta http-equiv="refresh" content="600">
-    <meta name="google-site-verification" content="nBnSoThHgmzNHHPVjgGRLrpx7Xz86eXG-95P9TynV78" />
-    <title>Schlemmen ohne Grenzen</title>
-    <link href="{% static 'frontend/css/bootstrap.min.css' %}" rel="stylesheet">
-</head>
 
-<body>
-    <div class="container">
-        <h1>Hilfe</h1>
-        {% for hilfe in hilfen %}
-            <div class="hilfe">
-                <h2>{{ hilfe.title }}</h2>
-                <p>{{ hilfe.text }}</p>
-            </div>
-        {% endfor %}
-    </div>
+{% block content %}
+{% for hilfe in hilfen %}
+    <section style="background-color: {{ hilfe.color }};">
+        <div class="container">
+                <div class="hilfe">
+                    <h2>{{ hilfe.title }}</h2>
+                    <p>{{ hilfe.text }}</p>
+                </div>
+        </div>
+    </section>
+{% endfor %}
 
     <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
     <script src="{% static 'frontend/js/tether.min.js' %}"></script>
     <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
 
-</body>
-</html>
+{% endblock %}
