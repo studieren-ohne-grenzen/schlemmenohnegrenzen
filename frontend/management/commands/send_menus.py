@@ -36,7 +36,7 @@ class Command(BaseCommand):
                 ['privat@denniskeck.de'],
                 #html_message=html_content
                 )
-            
+
             self.attachBasic(mail)
             self.attachPuzzles(mail, household.puzzle)
             mail.send(fail_silently=False)
@@ -60,46 +60,91 @@ class Command(BaseCommand):
             else:
                 otherGuests = guests[1]
             return get_template("mail/menu/guest.txt").render({'host': host, 'otherGuests': otherGuests})
-    
+
     def attachBasic(self, mail):
         fd = self.getPuzzleFd('basic/einladung.pdf')
         mail.attach('Einladung von Richard Schoenborn.pdf', fd.read(), 'application/pdf')
-            
-    def attachPuzzles(self, mail, puzzle):
-        if puzzle == 91:
-            self.attachToMail(mail, 'vorspeise/1/G.jpg', 'Hinweis Vorspeise.jpg', 'image/jpeg')
-        elif puzzle == 92:
-            #(92, "9.2 Vorspeise 1.1, Hauptspeise B.G, Nachspeise N.1"),
-            self.attachToMail(mail, 'vorspeise/1/1.jpg', 'Hinweis Vorspeise.jpg', 'image/jpeg')
-        elif puzzle == 93:
-            self.attachToMail(mail, 'vorspeise/1/2.jpg', 'Hinweis Vorspeise.jpg', 'image/jpeg')
-        
-    def attachPuzzlesMainCourseB(self, mail, guestIdentifier):
+
+    def attachPuzzles(self, mail, puzzleGroup):
+        hintLists = {
+            91: '1GA1N1',
+            92: '11BGN1',
+            93: '12CGN1',
+            94: '21AGN2',
+            95: '2GB1N2',
+            96: '22C1NG',
+            97: '3GA2N2',
+            98: '31B2NG',
+            99: '32C2NG'
+        }
+        hints = hintLists[puzzleGroup]
+        for i in [0, 2, 4]:
+            self.attachPuzzleFiles(mail, hints[i], hints[i + 1])
+
+    def attachPuzzleFiles(self, mail, puzzle, guestIdentifier):
+        try:
+            method_to_call = getattr(self, 'attachPuzzleFiles' + puzzle)
+            method_to_call(mail, guestIdentifier)
+        except AttributeError as e:
+            self.attachPuzzlesDefault(mail, puzzle, guestIdentifier)
+
+    def attachPuzzlesDefault(self, mail, puzzle, guestIdentifier):
+        puzzleCourses = {
+            '1': 'vorspeise',
+            '2': 'vorspeise',
+            '3': 'vorspeise',
+            'A': 'hauptspeise',
+            'B': 'hauptspeise',
+            'C': 'hauptspeise',
+            'N': 'nachspeise'
+        }
+
+        course = puzzleCourses[puzzle]
         if guestIdentifier == 'G':
             #host
-            self.attachToMail(mail, 'hauptgang/B/hint.jpg', 'Hinweis Hauptspeise.jpg', 'image/jpeg')
-            self.attachToMail(mail, 'hauptgang/B/1.png', 'Karte 1 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/6.png', 'Karte 2 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/9.png', 'Karte 3 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/12.png', 'Karte 4 Hauptspeise.jpg', 'image/png')
+            self.attachToMail(mail, course + '/' + puzzle + '/text.pdf', 'Text ' + course.capitalize() + '.pdf', 'application/pdf')
+        self.attachToMail(mail, course + '/' + puzzle + '/' + guestIdentifier + '.jpg', 'Hinweis ' + course.capitalize() + '.jpg', 'image/jpeg')
+
+    def attachPuzzleFilesN(self, mail, guestIdentifier):
+        if guestIdentifier == 'G':
+            #host
+            self.attachToMail(mail, 'nachspeise/text.pdf', 'Text Nachspeise.pdf', 'application/pdf')
+        else:
+            self.attachToMail(mail, 'nachspeise/url.jpg', 'Hinweis Nachspeise.jpg', 'image/jpg')
+
+    def attachPuzzleFilesC(self, mail, guestIdentifier):
+        if guestIdentifier == 'G':
+            #host
+            self.attachToMail(mail, 'hauptspeise/C/Ga.jpg', 'Hinweis 1 Hauptspeise.jpg', 'image/jpg')
+            self.attachToMail(mail, 'hauptspeise/C/Gb.jpg', 'Hinweis 2 Hauptspeise.jpg', 'image/jpg')
+        else:
+            self.attachPuzzlesDefault(mail, 'C', guestIdentifier)
+
+    def attachPuzzleFilesB(self, mail, guestIdentifier):
+        if guestIdentifier == 'G':
+            #host
+            self.attachToMail(mail, 'hauptspeise/B/text.pdf', 'Text Hauptspeise.pdf', 'application/pdf')
+            self.attachToMail(mail, 'hauptspeise/B/1.png', 'Karte 1 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/6.png', 'Karte 2 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/9.png', 'Karte 3 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/12.png', 'Karte 4 Hauptspeise.png', 'image/png')
         elif guestIdentifier == '1':
             #guest 1
-            self.attachToMail(mail, 'hauptgang/B/hint.jpg', 'Hinweis Hauptspeise.jpg', 'image/jpeg')
-            self.attachToMail(mail, 'hauptgang/B/2.png', 'Karte 1 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/3.png', 'Karte 2 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/8.png', 'Karte 3 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/10.png', 'Karte 4 Hauptspeise.jpg', 'image/png')    
+            self.attachToMail(mail, 'hauptspeise/B/2.png', 'Karte 1 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/3.png', 'Karte 2 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/8.png', 'Karte 3 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/10.png', 'Karte 4 Hauptspeise.png', 'image/png')
         elif guestIdentifier == '1':
             #guest 2
-            self.attachToMail(mail, 'hauptgang/B/hint.jpg', 'Hinweis Hauptspeise.jpg', 'image/jpeg')
-            self.attachToMail(mail, 'hauptgang/B/5.png', 'Karte 1 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/7.png', 'Karte 2 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/4.png', 'Karte 3 Hauptspeise.jpg', 'image/png')
-            self.attachToMail(mail, 'hauptgang/B/11.png', 'Karte 4 Hauptspeise.jpg', 'image/png')    
-        
+            self.attachToMail(mail, 'hauptspeise/B/hint.jpg', 'Hinweis Hauptspeise.png', 'image/jpeg')
+            self.attachToMail(mail, 'hauptspeise/B/5.png', 'Karte 1 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/7.png', 'Karte 2 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/4.png', 'Karte 3 Hauptspeise.png', 'image/png')
+            self.attachToMail(mail, 'hauptspeise/B/11.png', 'Karte 4 Hauptspeise.png', 'image/png')
+
     def getPuzzleFd(self, loc):
         return open(settings.BASE_DIR + '/frontend/static/frontend/puzzles/' + loc, 'rb')
-        
+
     def attachToMail(self, mail, path, name, mime):
         fd = self.getPuzzleFd(path)
         mail.attach(name, fd.read(), mime)
