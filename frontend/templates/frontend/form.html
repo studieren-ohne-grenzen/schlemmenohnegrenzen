@@ -1,3 +1,4 @@
+{% if signupEnabled %}
 <section class="anmelden" id="anmelden">
     <div class="container">
         <h2>Anmelden</h2>
@@ -193,3 +194,11 @@
       </form>
   </div>
 </section>
+{% else %}
+<section class="anmelden" id="anmelden">
+  <div class="container">
+    <h2>Anmeldung leider schon geschlossen</h2>
+    Aber bald könnt ihr euch hier fpr den Newsletter anmelden!
+  </div>
+</section>
+{% endif %}

@@ -12,6 +12,7 @@ from django.template.loader import get_template
 from .hilfen import hilfen
 from datetime import datetime
 from django.db.models import F
+from django.conf import settings
 
 def email_senden(house):
     txt_content = get_template("mail/confirmation.txt").render({'house': house})
@@ -114,7 +115,7 @@ def index(request):
                 return HttpResponseRedirect(reverse('frontend:confirmation'))
     else:
         form = HouseholdForm()
-    return render(request, 'frontend/index.html', {'form': form})
+    return render(request, 'frontend/index.html', {'form': form, 'signupEnabled': settings.SIGNUP_ENABLED})
 
 def signup_successful(request):
     return render(request, 'frontend/signup_successful.html')
