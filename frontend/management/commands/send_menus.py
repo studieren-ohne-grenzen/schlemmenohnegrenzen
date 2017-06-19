@@ -28,8 +28,6 @@ class Command(BaseCommand):
 
             txtContent = einleitung + firstCourse + secondCourse + thirdCourse + end
 
-            #TODO send attachments with mails
-
             mail = EmailMessage('Eure Schlemmen Ohne Grenzen Speisekarte',
                 txtContent,
                 'hallo@schlemmen-ohne-grenzen.de',
@@ -115,6 +113,9 @@ class Command(BaseCommand):
             #host
             self.attachToMail(mail, course + '/' + puzzle + '/text.pdf', 'Text ' + course.capitalize() + '.pdf', 'application/pdf')
         self.attachToMail(mail, course + '/' + puzzle + '/' + guestIdentifier + '.jpg', 'Hinweis ' + course.capitalize() + '.jpg', 'image/jpeg')
+
+    def attachPuzzleFilesZ(self, mail, guestIdentifier):
+            self.attachToMail(mail, '/zusatzinfos/' + guestIdentifier + '.pdf', 'Zusatzinfo Nachspeise.pdf', 'application/pdf')
 
     def attachPuzzleFilesN(self, mail, guestIdentifier):
         if guestIdentifier == 'G':
