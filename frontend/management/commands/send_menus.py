@@ -31,7 +31,7 @@ class Command(BaseCommand):
             mail = EmailMessage('Eure Schlemmen Ohne Grenzen Speisekarte',
                 txtContent,
                 'hallo@schlemmen-ohne-grenzen.de',
-                ['privat@denniskeck.de'],
+                [household.email1, household.email2],
                 #html_message=html_content
                 )
 
