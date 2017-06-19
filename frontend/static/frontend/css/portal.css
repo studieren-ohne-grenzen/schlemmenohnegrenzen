@@ -67,3 +67,17 @@ body.characters {
 .hilfe {
   color: #ffffff;
 }
+
+.centered {
+  text-align: center;
+}
+
+.start .btn {
+  margin: 15px 0;
+}
+
+.start .btn i {
+  font-size: 2.5em;
+  float: left;
+  margin-right: 8px;
+}
