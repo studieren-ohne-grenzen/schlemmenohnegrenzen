@@ -51,6 +51,12 @@ def charaktere(request):
 def portal(request):
     return render(request, 'frontend/portal.html')
 
+def vorspeise(request):
+    return render(request, 'frontend/vorspeise.html')
+
+def nachspeise(request):
+    return render(request, 'frontend/nachspeise.html')        
+
 def hilfe(request):
     newhilfen = []
 

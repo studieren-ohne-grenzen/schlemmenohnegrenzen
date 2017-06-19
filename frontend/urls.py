@@ -15,5 +15,7 @@ urlpatterns = [
     url(r'^hilfe', views.hilfe, name='hilfe'),
     url(r'^charaktere', views.charaktere, name='charaktere'),
     url(r'^start', views.portal, name='portal'),
+    url(r'^vorspeise', views.vorspeise, name='vorspeise'),
+    url(r'^nachspeise', views.nachspeise, name='nachspeise'),
     url(r'^.*$', views.index, name='index')
 ]

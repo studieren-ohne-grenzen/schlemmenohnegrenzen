@@ -1,0 +1,16 @@
+{% extends "frontend/base_portal.html" %}
+{% load static %}
+
+{% block content %}
+    <section>
+      <div class="container">
+        <h1>Diese Seite ist erst ab Mittwoch 21:30 Uhr freigeschaltet</h1>
+        Ihr müsst euch noch etwas gedulden ;)
+      </div>  
+    </section>
+
+    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
+    <script src="{% static 'frontend/js/tether.min.js' %}"></script>
+    <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
+
+{% endblock %}
