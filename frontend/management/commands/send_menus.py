@@ -53,7 +53,7 @@ class Command(BaseCommand):
         if (host == householdMe):
             return get_template("mail/menu/host.txt").render({'host': host, 'guest1': guests[1], 'guest2': guests[2]})
         else:
-            otherGuests = list(filter(lambda x: x == host or x == householdMe, guests))[0]
+            otherGuests = list(filter(lambda x: x != host and x != householdMe, guests))[0]
             return get_template("mail/menu/guest.txt").render({'host': host, 'otherGuests': otherGuests})
 
     def attachBasic(self, mail):
@@ -148,7 +148,7 @@ class Command(BaseCommand):
             self.attachToMail(mail, 'hauptspeise/B/10.png', 'Karte 4 Hauptspeise.png', 'image/png')
         elif guestIdentifier == '2':
             #guest 2
-            self.attachToMail(mail, 'hauptspeise/B/hinweis.jpg', 'Hinweis Hauptspeise.png', 'image/jpeg')
+            self.attachToMail(mail, 'hauptspeise/B/hinweis.jpg', 'Hinweis Hauptspeise.jpg', 'image/jpeg')
             self.attachToMail(mail, 'hauptspeise/B/5.png', 'Karte 1 Hauptspeise.png', 'image/png')
             self.attachToMail(mail, 'hauptspeise/B/7.png', 'Karte 2 Hauptspeise.png', 'image/png')
             self.attachToMail(mail, 'hauptspeise/B/4.png', 'Karte 3 Hauptspeise.png', 'image/png')
