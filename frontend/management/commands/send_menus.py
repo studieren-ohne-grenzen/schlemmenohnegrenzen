@@ -51,7 +51,8 @@ class Command(BaseCommand):
 
     def renderDinner(self, host, guests, householdMe):
         if (host == householdMe):
-            return get_template("mail/menu/host.txt").render({'host': host, 'guest1': guests[1], 'guest2': guests[2]})
+            otherGuests = list(filter(lambda x: x != host, guests))
+            return get_template("mail/menu/host.txt").render({'host': host, 'guest1': otherGuests[0], 'guest2': otherGuests[1]})
         else:
             otherGuests = list(filter(lambda x: x != host and x != householdMe, guests))[0]
             return get_template("mail/menu/guest.txt").render({'host': host, 'otherGuests': otherGuests})
