@@ -55,7 +55,7 @@ def vorspeise(request):
     return render(request, 'frontend/vorspeise.html')
 
 def nachspeise(request):
-    return render(request, 'frontend/nachspeise.html')        
+    return render(request, 'frontend/nachspeise.html')
 
 def hilfe(request):
     newhilfen = []
@@ -270,4 +270,4 @@ def cluster(request):
         house = v.household3.all()
         nachspeise.append({'street': v.gastgeber.street, 'name1': v.gastgeber.name1 + ' & ' + v.gastgeber.name2, 'name2': house[0].name1 + ' & ' + house[0].name2 + ', ' + house[0].street, 'name3': house[1].name1 + ' & ' + house[1].name2 + ', ' + house[1].street, 'name4': house[2].name1 + ' & ' + house[2].name2 + ', ' + house[2].street})
 
-    return render(request, 'frontend/cluster.html', {"jsonstr": jsonstr, "wrong_entries": wrong_entries, "personal_payers": personal_payers, 'vorspeise': vorspeise, 'hauptspeise': hauptspeise, 'nachspeise': nachspeise})
+    return render(request, 'frontend/cluster.html', {"jsonstr": jsonstr, "wrong_entries": wrong_entries, "personal_payers": personal_payers, 'vorspeise': vorspeise, 'hauptspeise': hauptspeise, 'nachspeise': nachspeise, 'all_housholds': all_objects})

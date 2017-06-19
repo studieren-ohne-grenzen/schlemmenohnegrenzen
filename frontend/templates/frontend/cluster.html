@@ -63,6 +63,32 @@
           </tbody>
         </table>
 
+        <h2>Anmeldungen</h2>
+        <table class="table table-striped table-sm">
+          <thead class="thead-inverse">
+            <tr>
+              <th>Name 1</th>
+              <th>Name 2</th>
+              <th>Adresse</th>
+              <th>Tel 1</th>
+              <th>Tel 2</th>
+              <th>Nachricht</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in all_housholds %}
+            <tr>
+              <td>{{ entry.name1 }}</td>
+              <td>{{ entry.name2 }}</td>
+              <td>{{ entry.street }}</td>
+              <td>{{ entry.handy1 }}</td>
+              <td>{{ entry.handy2 }}</td>
+              <td>{{ entry.note }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
         <h2>Aktuelle Vorspeise-Gruppen</h2>
         <table class="table table-striped table-sm">
           <thead class="thead-inverse">
