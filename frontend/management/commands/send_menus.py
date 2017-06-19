@@ -148,7 +148,7 @@ class Command(BaseCommand):
             self.attachToMail(mail, 'hauptspeise/B/10.png', 'Karte 4 Hauptspeise.png', 'image/png')
         elif guestIdentifier == '2':
             #guest 2
-            self.attachToMail(mail, 'hauptspeise/B/hint.jpg', 'Hinweis Hauptspeise.png', 'image/jpeg')
+            self.attachToMail(mail, 'hauptspeise/B/hinweis.jpg', 'Hinweis Hauptspeise.png', 'image/jpeg')
             self.attachToMail(mail, 'hauptspeise/B/5.png', 'Karte 1 Hauptspeise.png', 'image/png')
             self.attachToMail(mail, 'hauptspeise/B/7.png', 'Karte 2 Hauptspeise.png', 'image/png')
             self.attachToMail(mail, 'hauptspeise/B/4.png', 'Karte 3 Hauptspeise.png', 'image/png')
