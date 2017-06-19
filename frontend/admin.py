@@ -6,6 +6,6 @@ admin.site.register(Cluster)
 admin.site.register(VisitingGroup)
 
 class HouseholdAdmin(admin.ModelAdmin):
-    list_display = ('name1', 'name2', 'signup_date')
+    list_display = ('name1', 'name2', 'street', 'signup_date')
 
 admin.site.register(Household, HouseholdAdmin)
