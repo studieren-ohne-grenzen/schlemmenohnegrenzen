@@ -1,0 +1,8 @@
+Hallo {{household.name1}} und {{household.name2}},
+
+sorry, da war noch ein Fehler in unserer Mail Vorlage. Bei euren Gastgebern fehlten noch die Handynummern und manche hatten bei ihren Gängen nur die Namen von einem Team mit dabei.
+Hier nochmal kurz eure Speisekarte mit den Nummern und allen Namen jetzt.
+
+ANSONSTEN HAT SICH NICHTS GEÄNDERT! Denkt also bitte an die Anhänge aus der anderen Mail.
+
+Danke euch :)
