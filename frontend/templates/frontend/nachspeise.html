@@ -2,11 +2,50 @@
 {% load static %}
 
 {% block content %}
+
     <section>
       <div class="container">
-        <h1>Diese Seite ist erst ab Mittwoch 21:30 Uhr freigeschaltet</h1>
-        Ihr müsst euch noch etwas gedulden ;)
-      </div>  
+        {% if locked %}
+          <h1>Diese Seite ist erst ab Mittwoch 21:30 Uhr freigeschaltet</h1>
+          Ihr müsst euch noch etwas gedulden ;)
+        {% else %}
+        <script>
+        function checkSuche() {
+          var value = document.getElementById('suche').value.toUpperCase().substr(0, 9);
+          if (levenshteinDistance(value, "MUNICHRAPE") < 3) {
+            window.location.href = 'https://schlemmen-ohne-grenzen.de/puzzle/email';
+          } else if (levenshteinDistance(value, "RICHARD") < 4) {
+            alert('Richard Schoenborn - the most sexiest man alive. Aber leider nicht die Antwort auf dieses Rätsel.')
+          } else if (value == 42) {
+            alert('Antwort auf das Leben, das Universum und alles aber leider nicht auf diese Frage. Spot the computer scientist. Wave to friend! Hi :).')
+          } else {
+            alert('Leider konnten wir keinen passenden Artikel finden.');
+          }
+        };
+
+        function levenshteinDistance (s, t) {
+          if (s.length === 0) return t.length;
+          if (t.length === 0) return s.length;
+
+          return Math.min(
+                  levenshteinDistance(s.substr(1), t) + 1,
+                  levenshteinDistance(t.substr(1), s) + 1,
+                  levenshteinDistance(s.substr(1), t.substr(1)) + (s[0] !== t[0] ? 1 : 0),
+                  5
+          );
+        };
+
+        </script>
+
+          <h1>News archive</h1>
+          <p>Das weltweite Zeitungsarchiv. Immer für dich da - immer aktuell.</p>
+          <form onsubmit="checkSuche()">
+            <input type="text" placeholder="Was suchst du?" id="suche" class="form-control" style="width: 60%"></input>
+            <br>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>Suchen</button>
+          </form>
+        {% endif %}
+      </div>
     </section>
 
 {% endblock %}
