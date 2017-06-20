@@ -11,15 +11,19 @@
         {% else %}
         <script>
         function checkSuche() {
-          var value = document.getElementById('suche').value.toUpperCase().substr(0, 9);
+          var value = document.getElementById('suche').value.toUpperCase().substr(0, 10);
           if (levenshteinDistance(value, "MUNICHRAPE") < 3) {
             window.location.href = 'https://schlemmen-ohne-grenzen.de/puzzle/email';
+            return false;
           } else if (levenshteinDistance(value, "RICHARD") < 4) {
-            alert('Richard Schoenborn - the most sexiest man alive. Aber leider nicht die Antwort auf dieses Rätsel.')
+            alert('Richard Schoenborn - the most sexiest man alive. Aber leider nicht die Antwort auf dieses Rätsel.');
+            document.getElementById('suche').value = '';
           } else if (value == 42) {
-            alert('Antwort auf das Leben, das Universum und alles aber leider nicht auf diese Frage. Spot the computer scientist. Wave to friend! Hi :).')
+            alert('Antwort auf das Leben, das Universum und alles aber leider nicht auf diese Frage. Spot the computer scientist. Wave to friend! Hi :).');
+            document.getElementById('suche').value = '';
           } else {
             alert('Leider konnten wir keinen passenden Artikel finden.');
+            document.getElementById('suche').value = '';
           }
         };
 
@@ -37,9 +41,9 @@
 
         </script>
 
-          <h1>News archive</h1>
+          <img src="{% static 'frontend/img/neews-archive.png' %}" class="header_logo" alt="Neews Logo" style="width: 40%;">
           <p>Das weltweite Zeitungsarchiv. Immer für dich da - immer aktuell.</p>
-          <form onsubmit="checkSuche()">
+          <form onsubmit="event.preventDefault();checkSuche()">
             <input type="text" placeholder="Was suchst du?" id="suche" class="form-control" style="width: 60%"></input>
             <br>
             <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>Suchen</button>

@@ -53,10 +53,10 @@ def portal(request):
     return render(request, 'frontend/portal.html')
 
 def vorspeise(request):
-    return render(request, 'frontend/vorspeise.html', {"locked": (datetime.now() < datetime(2017, 6, 21, 18, 00))})
+    return render(request, 'frontend/vorspeise.html', {"locked": (datetime.now() < datetime(2017, 6, 21, 17, 00))})
 
 def nachspeise(request):
-    return render(request, 'frontend/nachspeise.html', {"locked": (datetime.now() < datetime(2017, 6, 21, 21, 30))})
+    return render(request, 'frontend/nachspeise.html', {"locked": (datetime.now() < datetime(2017, 6, 21, 21, 20))})
 
 def hilfe(request):
     newhilfen = []
