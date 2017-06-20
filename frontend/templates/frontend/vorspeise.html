@@ -4,13 +4,17 @@
 {% block content %}
 <section>
   <div class="container">
-    <h1>Diese Seite ist erst ab Mittwoch 18:00 Uhr freigeschaltet</h1>
-    Ihr müsst euch noch etwas gedulden ;)
+  	{% if locked %}
+        <h1>Diese Seite ist erst ab Mittwoch 18:00 Uhr freigeschaltet</h1>
+        <p>Ihr müsst euch noch etwas gedulden ;)</p>
+    {% else %}
+        <h1>Vorspeise</h1>
+        <p>Bitte hört euch folgendes Hörspiel an.</p>
+        <audio controls>
+            <source src="{% static 'frontend/mp3/exposition.mp3' %}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    {% endif %}
   </div>
 </section>
-
-    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
-    <script src="{% static 'frontend/js/tether.min.js' %}"></script>
-    <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
-
 {% endblock %}
