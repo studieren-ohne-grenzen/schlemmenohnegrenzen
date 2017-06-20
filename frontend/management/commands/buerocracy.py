@@ -19,7 +19,7 @@ class Command(BaseCommand):
         f.write("Kontoinhaber,Mandatsreferenz,IBAN,BIC,Betrag,Verwendungszweck")
         f.write('\n')
         for household in objects:
-            f.write(household.kontoinhaber + ',' + household.mandatsreferenz + ',' + household.iban + ',' + household.bic + ',' + "8" + "Schlemmen ohne Grenzen")
+            f.write(household.kontoinhaber + ',' + household.mandatsreferenz + ',' + household.iban + ',' + household.bic + ',' + "8" + ',' + "Schlemmen ohne Grenzen")
             f.write('\n')
 
     def extractGuestList(self, objects):
