@@ -7,7 +7,16 @@
         <div class="container">
                 <div class="hilfe">
                     <h2>{{ hilfe.title }}</h2>
-                    <p>{{ hilfe.text }}</p>
+                    <p>
+                    {% for puzzle in hilfe.puzzles %}
+                        <a class="btn btn-primary" data-toggle="collapse" href="#{{ puzzle.id }}" aria-expanded="false" aria-controls="{{ puzzle.id }}">{{ puzzle.title }}</a>
+                    {% endfor %}
+                    {% for puzzle in hilfe.puzzles %}
+                        <div class="collapse" id="{{ puzzle.id }}">
+                            <p>{{ puzzle.text }}</p>
+                        </div>
+                    {% endfor %}
+                    </p>
                 </div>
         </div>
     </section>
