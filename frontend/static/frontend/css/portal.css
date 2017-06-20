@@ -68,6 +68,9 @@ body.characters {
   color: #ffffff;
 }
 
+.hilfe .btn {
+  margin-bottom: 20px;
+}
 
 .centered {
   text-align: center;
