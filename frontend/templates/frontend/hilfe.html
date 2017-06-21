@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block content %}
+<section>
+  <div class="container">
+    <h1>Tipps</h1>
+    <p>Hier erscheinen mit Beginn eines jeden Ganges Tipps zu eurem Rätsel. Euere Rätsel-ID steht am Anfang der der Text-pdf-Datei.</p>
+  </div>  
+</section>
 {% for hilfe in hilfen %}
     <section style="background-color: {{ hilfe.color }};">
         <div class="container">
