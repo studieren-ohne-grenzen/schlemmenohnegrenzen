@@ -23,7 +23,7 @@ class Anmelden2Form(forms.Form):
     personal_payment = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 
     def clean(self):
-        cleaned_data = super(HouseholdForm, self).clean()
+        cleaned_data = super(Anmelden2Form, self).clean()
         personal_payment = cleaned_data.get("personal_payment")
         iban = cleaned_data.get("iban")
         bic = cleaned_data.get("bic")
@@ -47,9 +47,6 @@ class Anmelden3Form(forms.Form):
     newsletter2 = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     accepted_tos = forms.BooleanField(initial=False, required=True, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     captcha = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
-
-    def clean(self):
-        cleaned_data = super(HouseholdForm, self).clean()
 
     def clean_captcha(self):
         captcha = self.cleaned_data['captcha']
