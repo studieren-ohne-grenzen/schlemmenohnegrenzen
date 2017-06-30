@@ -1,0 +1,195 @@
+.navbar {
+  background-color: black;
+}
+#mainNav .navbar-brand {
+    font-weight: 700;
+}
+.header_logo {
+    width: 100%;
+}
+h1, h2, h3 {
+    font-family: 'Cabin Sketch', cursive;
+}
+
+
+img {
+    width: 100%;
+}
+
+  ul.list-social {
+    margin-bottom: 3%; }
+    ul.list-social li a {
+      display: block;
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      border-radius: 100%;
+      color: white; }
+    ul.list-social li.social-twitter a {
+      background-color: #1da1f2; }
+      ul.list-social li.social-twitter a:hover {
+        background-color: #0d95e8; }
+    ul.list-social li.social-facebook a {
+      background-color: #3b5998; }
+      ul.list-social li.social-facebook a:hover {
+        background-color: #344e86; }
+    ul.list-social li.social-youtube a {
+      background-color: #e52d27; }
+      ul.list-social li.social-youtube a:hover {
+        background-color: #b31217; }
+
+
+.small-container {
+  padding: 0 50px 0 20px;
+}
+
+.facebook-event-container {
+  padding-bottom: 150px;
+}
+
+.header-content-inner {
+  text-align: center;
+}
+
+@media screen and (orientation:landscape) {
+  .medium-image {
+    height: auto;
+    width: 30vw;
+  }
+  .small-image {
+    height: auto;
+    width: 15vw;
+  }
+  .small-image-by-height {
+    height: 25vh;
+    width: auto;
+  }
+
+  header.masthead {
+    background: url("../img/bg-top.jpg");
+  }
+}
+
+@media screen and (orientation:portrait) {
+  .medium-image {
+    height: 30vh;
+    width: auto;
+  }
+  .small-image, .small-image-by-height {
+    width: 80vw;
+    height: auto;
+  }
+  header.masthead {
+    background: url("../img/bg-top-mobile.jpg");
+    height: 95vh;
+  }
+  .header_logo {
+    margin-top: 14%;
+  }
+  #infos i {
+    margin: 7% 0;
+  }
+}
+
+form input:not([type="radio"]):not([type="checkbox"]), form textarea:not([type="radio"]):not([type="checkbox"]), form button:not([type="radio"]):not([type="checkbox"]), form label.input-replacement:not([type="radio"]):not([type="checkbox"]) {
+    margin-bottom: 1vh;
+    box-sizing: border-box;
+    display: block;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 2px solid #4778d9!important;
+}
+button.btn {
+    width: auto;
+    padding: 1em;
+}
+
+form h2 {
+    margin-top: 0.7em;
+}
+
+.entry-container h2 {
+    margin-bottom: 0.6em;
+}
+
+.entry-container p {
+    font-size: 16pt;
+}
+
+.row-with-margin {
+  margin-bottom: 5%;
+}
+
+.section-heading {
+  margin-bottom: 5%;
+}
+
+a {
+  text-decoration: none;
+  color: #c39624;
+}
+
+.cutlery-size {
+  font-size: 8em;
+}
+
+.users-size {
+  font-size: 6em;
+}
+
+.question-size {
+  font-size: 11em;
+}
+
+.glass-size {
+  font-size: 7em;
+}
+
+.contact-size {
+  font-size: 6em;
+}
+
+.facebook-event-logo {
+  font-size: 10em;
+}
+
+.remove-top {
+  margin-top: -20px;
+}
+
+.bg-facebook {
+  background-color: #3b5998;
+  color: #fff;
+}
+
+.bg-facebook i {
+  color: #fff;
+}
+
+.signup-next-button {
+  margin-top: 30px;
+}
+
+#anmelden{
+  padding-bottom: 180px;
+}
+
+h3 > i {
+  margin-right: 10px;
+}
+
+.add-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: .7cm;
+}
+
+.add-container button.btn {
+  width: 100%;
+  height: 100%;
+}
