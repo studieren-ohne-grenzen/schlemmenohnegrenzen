@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from frontend.models import Household, Cluster, VisitingGroup, MandatsreferenzCounter
-from frontend.forms import HouseholdForm, LastschriftForm
+from frontend.forms import HouseholdForm, LastschriftForm, Anmelden1Form, Anmelden2Form, Anmelden3Form
 from django.utils import timezone
 from .clustering import initial_clusters, balance_clusters, generate_visiting_groups
 from django.contrib.auth.decorators import login_required
