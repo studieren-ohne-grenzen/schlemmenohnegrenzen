@@ -55,3 +55,15 @@ class Household(models.Model):
             self.found_coords = True
             self.longitude = tmp.longitude
             self.latitude = tmp.latitude
+
+class Post(models.Model):
+    image = models.ImageField(upload_to = 'couch/posts')
+    titel = models.CharField(max_length=200)
+    timestamp = models.DateTimeField()
+    longitude = models.FloatField(default=0.0)
+    latitude = models.FloatField(default=0.0)
+
+class Vote(models.Model):
+    post = models.ForeignKey('Post')
+    timestamp = models.DateTimeField()
+    
