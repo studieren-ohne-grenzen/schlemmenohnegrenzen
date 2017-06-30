@@ -1,0 +1,77 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% block content %}
+<section>
+    <div class="container">
+        <h2>Startbeitrag</h2>
+        <p>Mit 4€ pro Person unterstützt ihr unsere Arbeit, engagierte Studierende in Krisen- und Kriegsgebieten zu fördern.</p>
+        <form id="contactForm" action="{% url 'frontend:anmelden3' %}" method="post">
+          {% csrf_token %}
+          <div class="row">
+              <div class="col-md-6">
+                  <h3><i class="fa fa-credit-card" aria-hidden="true"></i> Per Lastschrift</h3>
+                  {% if form.kontoinhaber.errors %}
+                    <div class="form-group has-danger">
+                      {{ form.kontoinhaber }}
+                      <div class="form-control-feedback">{{ form.kontoinhaber.errors }}</div>
+                    </div>
+                  {% else %}
+                    {{ form.kontoinhaber }}
+                  {% endif %}
+
+                  {% if form.kontoinhaber_street.errors %}
+                    <div class="form-group has-danger">
+                      {{ form.kontoinhaber_street }}
+                      <div class="form-control-feedback">{{ form.kontoinhaber_street.errors }}</div>
+                    </div>
+                  {% else %}
+                    {{ form.kontoinhaber_street }}
+                  {% endif %}
+
+                  {% if form.kontoinhaber_city.errors %}
+                  <div class="form-group has-danger">
+                    {{ form.kontoinhaber_city }}
+                    <div class="form-control-feedback">{{ form.kontoinhaber_city.errors }}</div>
+                  </div>
+                  {% else %}
+                  {{ form.kontoinhaber_city }}
+                  {% endif %}
+
+                  {% if form.iban.errors %}
+                    <div class="form-group has-danger">
+                      {{ form.iban }}
+                      <div class="form-control-feedback">{{ form.iban.errors }}</div>
+                    </div>
+                  {% else %}
+                    <div class="form-group">
+                    {{ form.iban }}
+                    </div>
+                  {% endif %}
+
+                  {% if form.bic.errors %}
+                    <div class="form-group has-danger">
+                      {{ form.bic }}
+                      <div class="form-control-feedback">{{ form.bic.errors }}</div>
+                    </div>
+                  {% else %}
+                    {{ form.bic }}
+                  {% endif %}
+              </div>
+              <div class="col-md-6">
+                  <h3><i class="fa fa-money" aria-hidden="true"></i> Bar vorbeibringen</h3>
+                  <p>Ihr könnt den Startbeitrag auch jeden Dienstag ab 19:30 in unseren wöchentlichen Treffen auf dem Campus der FH, Gebäude A (bibliothek), Raum 111 vorbeibringen. Bitte spätestens am 20. Juni.</p>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                        {{ form.personal_payment }} Ich möchte den Startbeitrag persönlich vorbeibringen!
+                    </label>
+                  </div>
+              </div>
+          </div>
+          <button class="btn btn-primary pull-right">Weiter</button>
+      </form>
+    </div>
+</section>
+<script src="{% static 'frontend/js/jquery.min.js' %}"></script>
+<script src="{% static 'frontend/js/iban.js' %}"></script>
+<script src="{% static 'frontend/js/anmelden2.js' %}"></script>
+{% endblock %}
