@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from frontend.models import Household, Cluster, VisitingGroup, MandatsreferenzCounter, Post
-from frontend.forms import IndexForm, LastschriftForm, Anmelden1Form, Anmelden2Form, Anmelden3Form
+from frontend.forms import IndexForm, LastschriftForm, Anmelden1Form, Anmelden2Form, Anmelden3Form, CouchAddForm
 from django.utils import timezone
 from .clustering import initial_clusters, balance_clusters, generate_visiting_groups
 from django.contrib.auth.decorators import login_required
@@ -219,11 +219,18 @@ def confirmation(request):
 def couch(request):
     posts = list(Post.objects.all())
     posts.sort(key=lambda post: post.hotness(), reverse=True)
-    return render(request, 'frontend/couch.html', {'posts': posts})
+    return render(request, 'frontend/couch/couch.html', {'posts': posts})
 
 
 def couch_add(request):
-    return render(request, 'frontend/couch-add.html')
+    if request.method == 'POST':
+        form = CouchAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('frontend:couch'))
+    else:
+        form = CouchAddForm()
+    return render(request, 'frontend/couch/add.html')
 
 
 @login_required

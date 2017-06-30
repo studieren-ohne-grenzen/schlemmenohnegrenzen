@@ -56,3 +56,9 @@ class Anmelden3Form(forms.Form):
 
 class LastschriftForm(forms.Form):
     mandat = forms.BooleanField(initial=False, required=True, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
+
+class CouchAddForm(forms.Form):
+    title = forms.CharField(max_length=200)
+    image = forms.FileField(required=True)
+    longitude = forms.FloatField()
+    latitude = forms.FloatField()
