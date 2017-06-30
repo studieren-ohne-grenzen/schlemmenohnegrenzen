@@ -69,22 +69,64 @@ def hilfe(request):
 
 def index(request):
     if request.method == 'POST':
-        form = HouseholdForm(request.POST)
+        form = IndexForm(request.POST)
         if form.is_valid():
-            personal_payment=form.cleaned_data['personal_payment']
-            if personal_payment:
-                house = Household(name1=form.cleaned_data['name1'],
-                    name2=form.cleaned_data['name2'],
-                    email1=form.cleaned_data['email1'],
-                    email2=form.cleaned_data['email2'],
-                    handy1=form.cleaned_data['handy1'],
-                    handy2=form.cleaned_data['handy2'],
+            request.session['name1'] = form.cleaned_data['name1']
+            request.session['name2'] = form.cleaned_data['name2']
+            request.session['email1'] = form.cleaned_data['email1']
+            request.session['email2'] = form.cleaned_data['email2']
+            request.session['handy1'] = form.cleaned_data['handy1']
+            request.session['handy2'] = form.cleaned_data['handy2']
+            return HttpResponseRedirect(reverse('frontend:anmelden1'))
+    else:
+        form = IndexForm()
+    return render(request, 'frontend/index.html', {'form': form, 'signupEnabled': settings.SIGNUP_ENABLED})
+
+def anmelden1(request):
+    if request.method == 'POST':
+        form = Anmelden1Form(request.POST)
+        if form.is_valid():
+            request.session['plz'] = form.cleaned_data['plz']
+            request.session['street'] = form.cleaned_data['street']
+            request.session['note'] = form.cleaned_data['note']
+            return HttpResponseRedirect(reverse('frontend:anmelden2'))
+    else:
+        form = HouseholdForm()
+    return render(request, 'frontend/anmelden1.html', {'form': form, 'signupEnabled': settings.SIGNUP_ENABLED})
+
+def anmelden2(request):
+    if request.method == 'POST':
+        form = Anmelden2Form(request.POST)
+        if form.is_valid():
+            request.session['personal_payment'] = form.cleaned_data['personal_payment']
+            if not request.session['personal_payment']:
+                request.session['kontoinhaber'] = form.cleaned_data['kontoinhaber']
+                request.session['kontoinhaber_city'] = form.cleaned_data['kontoinhaber_city']
+                request.session['kontoinhaber_street'] = form.cleaned_data['kontoinhaber_street']
+                request.session['iban'] = form.cleaned_data['iban']
+                request.session['bic'] = form.cleaned_data['bic']
+            return HttpResponseRedirect(reverse('frontend:anmelden3'))
+    else:
+        form = Anmelden2Form()
+    return render(request, 'frontend/anmelden2.html', {'form': form, 'signupEnabled': settings.SIGNUP_ENABLED})
+
+def anmelden3(request):
+    if request.method == 'POST':
+        form = Anmelden3Form(request.POST)
+        if form.is_valid():
+            if request.session['personal_payment']:
+                house = Household(name1=request.session['name1'],
+                    name2=request.session['name2'],
+                    email1=request.session['email1'],
+                    email2=request.session['email2'],
+                    handy1=request.session['handy1'],
+                    handy2=request.session['handy2'],
                     newsletter1=form.cleaned_data['newsletter1'],
                     newsletter2=form.cleaned_data['newsletter2'],
-                    plz=form.cleaned_data['plz'],
-                    street=form.cleaned_data['street'],
-                    gpsstreet=form.cleaned_data['street'],
-                    note=form.cleaned_data['note'],
+                    plz=request.session['plz'],
+                    street=request.session['street'],
+                    gpsstreet=request.session['street'],
+                    note=request.session['note'],
                     kontoinhaber="",
                     iban="",
                     bic="",
@@ -96,26 +138,12 @@ def index(request):
                 email_senden(house)
                 return HttpResponseRedirect(reverse('frontend:signup_successful'))
             else:
-                request.session['name1'] = form.cleaned_data['name1']
-                request.session['name2'] = form.cleaned_data['name2']
-                request.session['email1'] = form.cleaned_data['email1']
-                request.session['email2'] = form.cleaned_data['email2']
-                request.session['handy1'] = form.cleaned_data['handy1']
-                request.session['handy2'] = form.cleaned_data['handy2']
                 request.session['newsletter1'] = form.cleaned_data['newsletter1']
                 request.session['newsletter2'] = form.cleaned_data['newsletter2']
-                request.session['plz'] = form.cleaned_data['plz']
-                request.session['street'] = form.cleaned_data['street']
-                request.session['note'] = form.cleaned_data['note']
-                request.session['kontoinhaber'] = form.cleaned_data['kontoinhaber']
-                request.session['kontoinhaber_city'] = form.cleaned_data['kontoinhaber_city']
-                request.session['kontoinhaber_street'] = form.cleaned_data['kontoinhaber_street']
-                request.session['iban'] = form.cleaned_data['iban']
-                request.session['bic'] = form.cleaned_data['bic']
                 return HttpResponseRedirect(reverse('frontend:confirmation'))
     else:
-        form = HouseholdForm()
-    return render(request, 'frontend/index.html', {'form': form, 'signupEnabled': settings.SIGNUP_ENABLED})
+        form = Anmelden3Form()
+    return render(request, 'frontend/anmelden3.html', {'form': form, 'signupEnabled': settings.SIGNUP_ENABLED})
 
 def signup_successful(request):
     return render(request, 'frontend/signup_successful.html')
@@ -136,6 +164,7 @@ def generate_mandatsreferenz():
         cnt = mc.cnt
         mc.save()
     return "SCHLEMMEN20170621KA{:05d}".format(cnt)
+
 
 
 def confirmation(request):
