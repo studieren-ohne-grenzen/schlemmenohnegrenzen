@@ -58,7 +58,7 @@ class LastschriftForm(forms.Form):
     mandat = forms.BooleanField(initial=False, required=True, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 
 class CouchAddForm(forms.Form):
-    title = forms.CharField(max_length=200)
+    titel = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
     image = forms.FileField(required=True)
-    longitude = forms.FloatField()
-    latitude = forms.FloatField()
+    longitude = forms.FloatField(required=False)
+    latitude = forms.FloatField(required=False)

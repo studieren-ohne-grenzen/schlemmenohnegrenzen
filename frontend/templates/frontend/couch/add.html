@@ -3,19 +3,25 @@
 <div class="container">
   <div class="row">
     <div class="post panel panel-warning">
-      <div class="panel-heading"><h3><span class="fa-thumb-tack"></span></h3><input type="text" class="form-control" /></div> 
-      <div class="panel-body">
-        <img src="" id="preview" style="display: none" />
-      </div>
-      <div class="panel-footer">
-        <input type="file" style="display: none" name="file" class="fileupload" onchange="javascript:var file = new FileReader(); file.readAsDataURL(this.files[0]); file.onload = function(e) {$('#preview').attr('src', e.target.result).show()}" />
-        <button class="btn btn-warning pull-left" type="button" onclick="javascript:$('.fileupload').click()" >
-          <span class="fa-paperclip"></span>
-        </button>
-        <button class="btn btn-success pull-right" type="button">
-          Toast ausgeben
-        </button>
-      </div>
+      <form id="couchtForm" action="{% url 'frontend:couch_add' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="panel-heading">
+          <h3><span class="fa-thumb-tack"></span></h3>
+              {{ form.titel }}
+        </div>
+        <div class="panel-body">
+          <img src="" id="preview" style="display: none" />
+        </div>
+        <div class="panel-footer">
+            <input type="file" style="display: none" name="image" required id="id_image" class="fileupload" onchange="javascript:var file = new FileReader(); file.readAsDataURL(this.files[0]); file.onload = function(e) {$('#preview').attr('src', e.target.result).show()}" />
+            <button class="btn btn-warning pull-left" type="button" onclick="javascript:$('.fileupload').click()" >
+              <span class="fa-paperclip"></span>
+            </button>
+            <button class="btn btn-success pull-right" type="submit">
+              Toast ausgeben
+            </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
