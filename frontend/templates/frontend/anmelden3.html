@@ -6,11 +6,30 @@
   <form id="contactForm" action="{% url 'frontend:anmelden1' %}#anmelden" method="post">
     {% csrf_token %}
     <div class="formBox">
-      <div class="row" style="margin-top: 8em">
+      <div class="row">
+        <h2>Newsletter</h2>
+        Du möchtest kein Schlemmen mehr verpassen? Melde dich für unseren Newsletter an. Wir spammen dich auch nicht zu ;)
+        <div class="col-md-6">
+          <div class="form-check">
+              <label class="form-check-label">
+                  {{ form.newsletter1 }} Ich will ihn!
+              </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-check">
+              <label class="form-check-label">
+                  {{ form.newsletter2 }} Mein Teampartner will ihn auch!
+              </label>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 4em">
+          <h2>Spamschutz</h2>
           <div class="col-md-12">
               {% if form.captcha.errors %}
                 <div class="form-group has-danger">
-                  <label for="{{ form.captcha.id_for_label }}">Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
+                  <label for="{{ form.captcha.id_for_label }}">In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
                   {{ form.captcha }}
                   <div class="form-control-feedback">{{ form.captcha.errors }}</div>
                 </div>
@@ -25,18 +44,14 @@
                     {{ form.accepted_tos }} Wir akzeptieren die <a href="{% url 'frontend:bedingungen' %}" target="_blank">Datenschutzerklärung &amp; rechtliche Bedingungen</a>.
                 </label>
               </div>
-              <button class="btn btn-success" type="submit">
-                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                  Schmeiß den Herd an!
-              </button>
           </div>
       </div>
     </div>
-    <button class="btn btn-primary signup-next-button pull-right" type="submit">
-      <i class="fa fa-paperplane" aria-hidden="true"></i>
+    <button class="btn btn-success signup-next-button pull-right" type="submit">
+      <i class="fa fa-paper-plane" aria-hidden="true"></i>
       Schmeiß den herd an!
     </button>
   </form>
 </div>
-</section>  
+</section>
 {% endblock %}
