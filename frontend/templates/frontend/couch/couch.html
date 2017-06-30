@@ -1,6 +1,24 @@
 {% extends "frontend/couch/base.html" %}
 {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="post panel panel-warning">
+      <div class="panel-heading"><h3><span class="fa-thumb-tack"></span> Wir haben spaß!</h3></div> 
+      <div class="panel-body">
+        <p>Bla bla bla bla bla bla bla bla bla bla bal bal bla bla bla bla bla bla bla bla bla bla bla bla bl abl abla bla bl abl abla bl abl abl abl abl abla blablabla bl bl bl abl bl abl</p>
+      </div>
+      <div class="panel-footer">
+        <span class="prosts label label-warning pull-left"><span class="fa-beer"></span> <span class="badge">4</span></span>
+        <button class="prost-this btn btn-warning pull-right" type="button">
+          <span class="fa-beer"></span> Prost!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="add-container">
-  <button class="btn btn-warning">+</button>
+  <button class="btn btn-warning" onclick="javascript:window.location='/couch_add'"><span class="fa-plus"></span></button>
 </div>
 {% endblock %}

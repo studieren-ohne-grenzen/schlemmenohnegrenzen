@@ -1,0 +1,22 @@
+{% extends "frontend/couch/base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="post panel panel-warning">
+      <div class="panel-heading"><h3><span class="fa-thumb-tack"></span></h3><input type="text" class="form-control" /></div> 
+      <div class="panel-body">
+        <img src="" id="preview" style="display: none" />
+      </div>
+      <div class="panel-footer">
+        <input type="file" style="display: none" name="file" class="fileupload" onchange="javascript:var file = new FileReader(); file.readAsDataURL(this.files[0]); file.onload = function(e) {$('#preview').attr('src', e.target.result).show()}" />
+        <button class="btn btn-warning pull-left" type="button" onclick="javascript:$('.fileupload').click()" >
+          <span class="fa-paperclip"></span>
+        </button>
+        <button class="btn btn-success pull-right" type="button">
+          Toast ausgeben
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
