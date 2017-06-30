@@ -91,7 +91,7 @@ def anmelden1(request):
             request.session['note'] = form.cleaned_data['note']
             return HttpResponseRedirect(reverse('frontend:anmelden2'))
     else:
-        form = HouseholdForm()
+        form = Anmelden1Form()
     return render(request, 'frontend/anmelden1.html', {'form': form, 'signupEnabled': settings.SIGNUP_ENABLED})
 
 def anmelden2(request):
