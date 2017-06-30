@@ -8,7 +8,7 @@
           <div class="formBox">
             <div class="row">
               <div class="col-md-6">
-                <h3>Du</h3>
+                <h3><i class="fa fa-user"></i>Du</h3>
                   {% if form.name1.errors %}
                     <div class="form-group has-danger">
                       {{ form.name1 }}
@@ -35,14 +35,9 @@
                   {% else %}
                     {{ form.email1 }}
                   {% endif %}
-                <div class="form-check">
-                    <label class="form-check-label">
-                        {{ form.newsletter1 }} Ich will den Newsletter (Termin fürs nächste Schlemmen)
-                    </label>
-                </div>
               </div>
               <div class="col-md-6">
-                <h3>Dein Teampartner</h3>
+                <h3><i class="fa fa-users"></i>Dein Teampartner</h3>
                 {% if form.name2.errors %}
                     <div class="form-group has-danger">
                       {{ form.name2 }}
@@ -69,14 +64,13 @@
                   {% else %}
                     {{ form.email2 }}
                   {% endif %}
-                <div class="form-check">
-                    <label class="form-check-label">
-                        {{ form.newsletter2 }} Mein Teampartner will ihn auch!
-                    </label>
-                </div>
               </div>
             </div>
         </div>
+        <button class="btn btn-success signup-next-button pull-right" type="submit">
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          Nächster Schritt
+        </button>
       </form>
   </div>
 </section>

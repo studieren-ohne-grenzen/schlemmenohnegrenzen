@@ -234,3 +234,15 @@ a {
 .bg-facebook i {
   color: #fff;
 }
+
+.signup-next-button {
+  margin-top: 30px;
+}
+
+#anmelden{
+  padding-bottom: 180px;
+}
+
+h3 > i {
+  margin-right: 10px;
+}
