@@ -3,6 +3,10 @@
 {% block content %}
 <section>
     <div class="container">
+      <h1>Schritt 2 von 4</h1>
+      <div class="progress">
+        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+      </div>
         <h2>Startbeitrag</h2>
         <p>Mit 4€ pro Person unterstützt ihr unsere Arbeit, engagierte Studierende in Krisen- und Kriegsgebieten zu fördern.</p>
         <form id="contactForm" action="{% url 'frontend:anmelden2' %}" method="post">
