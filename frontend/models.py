@@ -2,6 +2,9 @@ from django.db import models
 from geopy.geocoders import Nominatim
 from .choices import plz_choices, puzzle_choices
 import random
+from django.utils import timezone
+import math
+from functools import reduce
 
 class MandatsreferenzCounter(models.Model):
     cnt = models.IntegerField(default=0)
@@ -56,6 +59,7 @@ class Household(models.Model):
             self.longitude = tmp.longitude
             self.latitude = tmp.latitude
 
+
 class Post(models.Model):
     image = models.ImageField(upload_to = 'couch/posts')
     titel = models.CharField(max_length=200)
@@ -63,7 +67,15 @@ class Post(models.Model):
     longitude = models.FloatField(default=0.0)
     latitude = models.FloatField(default=0.0)
 
+    def hotness(self):
+        sum = 0.
+        for vote in self.vote_set.all():
+            sum = sum + vote.hotness()
+        return sum
+
 class Vote(models.Model):
-    post = models.ForeignKey('Post')
     timestamp = models.DateTimeField()
-    
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def hotness(self):
+        return math.exp(- (timezone.now() - self.timestamp).seconds / 7000)
