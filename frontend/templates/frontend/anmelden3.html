@@ -1,34 +1,42 @@
 {% extends "frontend/base.html" %}
 {% block content %}
-<h1>Schritt 2 von 4</h1>
-<form id="contactForm" action="{% url 'frontend:anmelden1' %}#anmelden" method="post">
-  {% csrf_token %}
-  <div class="formBox">
-    <div class="row" style="margin-top: 8em">
-        <div class="col-md-12">
-            {% if form.captcha.errors %}
-              <div class="form-group has-danger">
-                <label for="{{ form.captcha.id_for_label }}">Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
-                {{ form.captcha }}
-                <div class="form-control-feedback">{{ form.captcha.errors }}</div>
+<section>
+  <div class="container">
+    <h1>Schritt 4 von 4</h1>
+  <form id="contactForm" action="{% url 'frontend:anmelden1' %}#anmelden" method="post">
+    {% csrf_token %}
+    <div class="formBox">
+      <div class="row" style="margin-top: 8em">
+          <div class="col-md-12">
+              {% if form.captcha.errors %}
+                <div class="form-group has-danger">
+                  <label for="{{ form.captcha.id_for_label }}">Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
+                  {{ form.captcha }}
+                  <div class="form-control-feedback">{{ form.captcha.errors }}</div>
+                </div>
+              {% else %}
+                <div class="form-group">
+                  <label for="{{ form.captcha.id_for_label }}">Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
+                  {{ form.captcha }}
+                </div>
+              {% endif %}
+              <div class="form-check">
+                <label class="form-check-label">
+                    {{ form.accepted_tos }} Wir akzeptieren die <a href="{% url 'frontend:bedingungen' %}" target="_blank">Datenschutzerklärung &amp; rechtliche Bedingungen</a>.
+                </label>
               </div>
-            {% else %}
-              <div class="form-group">
-                <label for="{{ form.captcha.id_for_label }}">Spamschutz: In welcher Stadt findet Schlemmen Ohne Grenzen statt?</label>
-                {{ form.captcha }}
-              </div>
-            {% endif %}
-            <div class="form-check">
-              <label class="form-check-label">
-                  {{ form.accepted_tos }} Wir akzeptieren die <a href="{% url 'frontend:bedingungen' %}" target="_blank">Datenschutzerklärung &amp; rechtliche Bedingungen</a>.
-              </label>
-            </div>
-            <button class="btn btn-success" type="submit">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                Schmeiß den Herd an!
-            </button>
-        </div>
+              <button class="btn btn-success" type="submit">
+                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                  Schmeiß den Herd an!
+              </button>
+          </div>
+      </div>
     </div>
-  </div>
-</form>
+    <button class="btn btn-primary signup-next-button pull-right" type="submit">
+      <i class="fa fa-paperplane" aria-hidden="true"></i>
+      Schmeiß den herd an!
+    </button>
+  </form>
+</div>
+</section>  
 {% endblock %}

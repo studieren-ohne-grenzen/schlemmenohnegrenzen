@@ -1,40 +1,48 @@
 {% extends "frontend/base.html" %}
 {% block content %}
-<h1>Schritt 2 von 4</h1>
-<form id="contactForm" action="{% url 'frontend:anmelden1' %}#anmelden" method="post">
-  {% csrf_token %}
-  <div class="formBox">
-    <div class="row">
-      <h2>Hier wird bei uns gekocht...</h2>
-      <div class="row">
-        <div class="col-md-6">
-          {% if form.plz.errors %}
-              <div class="form-group has-danger">
-                {{ form.plz }}
-                <div class="form-control-feedback">{{ form.plz.errors }}</div>
-              </div>
-            {% else %}
-              {{ form.plz }}
-            {% endif %}
-        </div>
-        <div class="col-md-6">
-          {% if form.street.errors %}
-              <div class="form-group has-danger">
-                {{ form.street }}
-                <div class="form-control-feedback">{{ form.street.errors }}</div>
-              </div>
-            {% else %}
-              {{ form.street }}
-            {% endif %}
+<section>
+  <div class="container">
+    <h1>Schritt 2 von 4</h1>
+    <form id="contactForm" action="{% url 'frontend:anmelden1' %}#anmelden" method="post">
+      {% csrf_token %}
+      <div class="formBox">
+        <div class="row">
+          <h2>Hier wird bei uns gekocht...</h2>
+          <div class="row">
+            <div class="col-md-6">
+              {% if form.plz.errors %}
+                  <div class="form-group has-danger">
+                    {{ form.plz }}
+                    <div class="form-control-feedback">{{ form.plz.errors }}</div>
+                  </div>
+                {% else %}
+                  {{ form.plz }}
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+              {% if form.street.errors %}
+                  <div class="form-group has-danger">
+                    {{ form.street }}
+                    <div class="form-control-feedback">{{ form.street.errors }}</div>
+                  </div>
+                {% else %}
+                  {{ form.street }}
+                {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Nachricht an eure Gastgeber</h2>
+              {{ form.note }}
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Nachricht an eure Gastgeber</h2>
-          {{ form.note }}
-        </div>
-      </div>
-    </div>
+      <button class="btn btn-primary signup-next-button pull-right" type="submit">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        Nächster Schritt
+      </button>
+    </form>
   </div>
-</form>
+</section>
 {% endblock %}
