@@ -73,7 +73,7 @@ class Post(models.Model):
         sum = 0.
         for vote in self.vote_set.all():
             sum = sum + vote.hotness()
-        return sum
+        return sum +  math.exp(- (timezone.now() - self.timestamp).seconds / 3000)
 
     def save(self, size=1200):
         if not self.id and not self.image:
