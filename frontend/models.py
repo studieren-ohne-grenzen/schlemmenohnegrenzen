@@ -61,11 +61,11 @@ class Household(models.Model):
 
 
 class Post(models.Model):
-    image = models.ImageField(upload_to = 'frontend/static/couch/posts')
+    image = models.ImageField(upload_to = 'media/couch/posts')
     titel = models.CharField(max_length=200)
     timestamp = models.DateTimeField()
-    longitude = models.FloatField(default=0.0)
-    latitude = models.FloatField(default=0.0)
+    longitude = models.FloatField(default=0.0, null=True)
+    latitude = models.FloatField(default=0.0, null=True)
 
     def hotness(self):
         sum = 0.

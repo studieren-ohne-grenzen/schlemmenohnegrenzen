@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.conf.urls.static import static
 
 from . import views
 
@@ -24,4 +25,4 @@ urlpatterns = [
     url(r'^couch_prost/(?P<postid>\d+)/$', views.couch_prost, name='couch_prost'),
     url(r'^couch$', views.couch, name='couch'),
     url(r'^.*$', views.index, name='index')
-]
+] + static('/media/couch/posts', document_root='/media/couch/posts')
