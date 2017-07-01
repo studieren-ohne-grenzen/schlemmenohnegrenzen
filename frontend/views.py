@@ -241,12 +241,21 @@ def couch_add(request):
     return render(request, 'frontend/couch/add.html', {'form': form})
 
 def couch_prost(request, postid):
+    if 'couchProstHistory' in request.session:
+        if postid in request.session['couchProstHistory']:
+            print("Das ist unfair")
+            return render(request, 'frontend/couch/reprost.html')
+    else:
+        request.session['couchProstHistory'] = dict()
+
     vote = Vote(
-        timestamp = timezone.now(),
-        post = Post.objects.get(id = postid)
+    timestamp = timezone.now(),
+    post = Post.objects.get(id = postid)
     )
     vote.save()
+    request.session['couchProstHistory'][postid] = True;
     return HttpResponseRedirect(reverse('frontend:couch') + '#' + postid)
+
 
 @login_required
 def regenerate_clusters(request):
