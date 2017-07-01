@@ -6,4 +6,4 @@ db.sqlite3
 schlemmen/settings.py
 #frontend/hilfen.py
 frontend/static/frontend/puzzles/*
-frontend/static/frontend/couch/*
+frontend/static/couch/*

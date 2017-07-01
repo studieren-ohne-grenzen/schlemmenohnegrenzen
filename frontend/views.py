@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from frontend.models import Household, Cluster, VisitingGroup, MandatsreferenzCounter, Post
+from frontend.models import Household, Cluster, VisitingGroup, MandatsreferenzCounter, Post, Vote
 from frontend.forms import IndexForm, LastschriftForm, Anmelden1Form, Anmelden2Form, Anmelden3Form, CouchAddForm
 from django.utils import timezone
 from .clustering import initial_clusters, balance_clusters, generate_visiting_groups
@@ -229,8 +229,8 @@ def couch_add(request):
             post = Post(titel=form.cleaned_data['titel'],
                 image=request.FILES['image'],
                 timestamp=timezone.now(),
-                longitude=request.longitude,
-                latitude=request.latitude)
+                longitude=form.cleaned_data['longitude'],
+                latitude=form.cleaned_data['latitude'])
             post.save()
             return HttpResponseRedirect(reverse('frontend:couch'))
         else:
@@ -240,6 +240,13 @@ def couch_add(request):
         form = CouchAddForm()
     return render(request, 'frontend/couch/add.html', {'form': form})
 
+def couch_prost(request, postid):
+    vote = Vote(
+        timestamp = timezone.now(),
+        post = Post.objects.get(id = postid)
+    )
+    vote.save()
+    return HttpResponseRedirect(reverse('frontend:couch') + '#' + postid)
 
 @login_required
 def regenerate_clusters(request):
