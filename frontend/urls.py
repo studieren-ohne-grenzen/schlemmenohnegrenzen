@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.conf.urls.static import static
-
+from django.conf import settings
 from . import views
 
 app_name = 'frontend'
@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^couch_add$', views.couch_add, name='couch_add'),
     url(r'^couch_prost/(?P<postid>\d+)/$', views.couch_prost, name='couch_prost'),
     url(r'^couch$', views.couch, name='couch'),
-    url(r'^.*$', views.index, name='index')
-] + static('/media/couch/posts', document_root='/media/couch/posts')
+    url(r'^$', views.index, name='index')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
