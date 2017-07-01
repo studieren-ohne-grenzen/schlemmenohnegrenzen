@@ -263,7 +263,7 @@ def couch_map(request):
     posts = list(Post.objects.all())
     posts.sort(key=lambda post: post.hotness(), reverse=True)
     return render(request, 'frontend/couch/map.html', {
-      'jsonstr': json.dumps([{'lat':p.latitude, 'lng':p.longitude, 'caption':p.titel, 'url':p.image.url, 'thumbnail': p.image.url + 'thumb.jpg', 'id': p.id} for p in posts if p.latitude is not None])
+      'jsonstr': json.dumps([{'lat':p.latitude, 'lng':p.longitude, 'caption':p.titel, 'url':p.image.url, 'thumbnail': p.image.url, 'id': p.id} for p in posts if p.latitude is not None])
     })
 
 @login_required
