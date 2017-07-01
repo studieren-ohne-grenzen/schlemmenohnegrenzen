@@ -256,6 +256,12 @@ def couch_prost(request, postid):
     request.session['couchProstHistory'][postid] = True;
     return HttpResponseRedirect(reverse('frontend:couch') + '#' + postid)
 
+def couch_map(request):
+    posts = list(Post.objects.all())
+    posts.sort(key=lambda post: post.hotness(), reverse=True)
+    return render(request, 'frontend/couch/map.html', {
+      'jsonstr': json.dumps([{'lat':p.latitude, 'lng':p.longitude, 'caption':p.titel, 'url':p.image.url, 'thumbnail': p.image.url, 'id': p.id} for p in posts if p.latitude is not None])
+    })
 
 @login_required
 def regenerate_clusters(request):

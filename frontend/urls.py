@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^start', views.portal, name='portal'),
     url(r'^vorspeise', views.vorspeise, name='vorspeise'),
     url(r'^nachspeise', views.nachspeise, name='nachspeise'),
+    url(r'^couch_map$', views.couch_map, name='couch_map'),
     url(r'^couch_add$', views.couch_add, name='couch_add'),
     url(r'^couch_prost/(?P<postid>\d+)/$', views.couch_prost, name='couch_prost'),
     url(r'^couch$', views.couch, name='couch'),

@@ -1,0 +1,19 @@
+{% extends "frontend/couch/base.html" %}
+{% load static %}
+{% block content %}
+<div class="add-container">
+  <button class="btn btn-primary" onclick="javascript:window.location='/couch_add'"><span class="fa fa-plus"></span></button>
+</div>
+<div id="mapid"></div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'frontend/js/leaflet.js' %}"></script>
+<script src="{% static 'frontend/js/Leaflet.Photo.js' %}"></script>
+<script src="{% static 'frontend/js/map.js' %}"></script>
+<script>
+    $(function () {
+        var jsonstr = {{ jsonstr|safe }};
+        drawMap(jsonstr);
+    });
+</script>
+{% endblock %}
