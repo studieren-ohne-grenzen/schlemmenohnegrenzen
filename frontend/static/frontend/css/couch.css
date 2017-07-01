@@ -261,6 +261,12 @@ body > .container {
   min-height: 100%;
 }
 
+#mapid {
+    height: 600px;
+    margin-bottom: 5px;
+    width: 900px;
+}
+
 footer {
   margin-top: 1cm;
   padding-bottom: 2cm;

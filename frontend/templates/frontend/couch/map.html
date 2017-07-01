@@ -1,0 +1,18 @@
+{% extends "frontend/couch/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div id="mapid"></div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'frontend/js/leaflet.js' %}"></script>
+<script src="{% static 'frontend/js/Leaflet.Photo.js' %}"></script>
+<script src="{% static 'frontend/js/map.js' %}"></script>
+<script>
+    $(function () {
+        var jsonstr = {{ jsonstr|safe }};
+        drawMap(jsonstr);
+    });
+</script>
+{% endblock %}

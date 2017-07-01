@@ -22,6 +22,8 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'frontend/css/new-age.min.css' %}" rel="stylesheet">
     <link href="{% static 'frontend/css/couch.css' %}" rel="stylesheet">
+    <link href="{% static 'frontend/css/leaflet.css' %}" rel="stylesheet">
+    <link href="{% static 'frontend/css/Leaflet.Photo.css' %}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -70,5 +72,7 @@
     <!-- Custom scripts for this template -->
     <script src="{% static 'frontend/js/new-age.min.js' %}"></script>
 
+    {% block js %}
+    {% endblock js%}
 </body>
 </html>
