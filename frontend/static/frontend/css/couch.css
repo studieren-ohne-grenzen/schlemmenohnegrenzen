@@ -196,11 +196,15 @@ h3 > i {
 
 .add-container {
   position: fixed;
-  bottom: 0;
+  bottom: 2.2cm;
   left: 0;
   right: 0;
   padding: .5cm;
   z-index: 1000;
+}
+
+.map-container {
+  bottom: 0;
 }
 
 .add-container button.btn {
