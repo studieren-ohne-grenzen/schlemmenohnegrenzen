@@ -19,20 +19,104 @@ def initial_clusters(datapoints, clusters):
         datapoints[i].save()
 
 def clustersHaveWrongSize(clusters):
+    num_wrong = 0
     for cluster in clusters:
         if cluster["is12"] and cluster["size"] > 12:
-            return True
+            num_wrong += 1
         elif not cluster["is12"] and cluster["size"] > 9:
-            return True
+            num_wrong += 1
 
-    return False
+    print(num_wrong)
+    return num_wrong > 0
 
-def getDistanceToCluster(point, cluster, set):
-    maxDist = 0.0
+def getMinDistanceToCluster(point, set):
+    minDist = float('inf')
+    for elem in set:
+        dist = custom_dist((point["latitude"], point["longitude"]), (elem["latitude"], elem["longitude"]))
+        minDist = min(dist, minDist)
+    return minDist
+
+def getMaxDistanceToCluster(point, set):
+    maxDist = float('-inf')
     for elem in set:
         dist = custom_dist((point["latitude"], point["longitude"]), (elem["latitude"], elem["longitude"]))
         maxDist = max(dist, maxDist)
     return maxDist
+
+def getMeanDistanceToCluster(point, set):
+    meanDistance = 0.0
+    for elem in set:
+        dist = custom_dist((point["latitude"], point["longitude"]), (elem["latitude"], elem["longitude"]))
+        meanDistance = meanDistance + dist / len(set)
+    return meanDistance
+
+def get_cluster_overweight(cluster):
+    if (cluster["is12"]):
+        return cluster["size"] - 12
+    else:
+        return cluster["size"] - 9
+
+def rebalancingIteration(new_households, new_clusters):
+    currentMinDistance = 10000000000
+    currentSrcElem = None
+    currentDstCluster = None
+
+    for point in new_households:
+        srcOverweight = get_cluster_overweight(new_clusters[point["cluster"]])
+        if (srcOverweight > 0):
+            #cluster of this household is to big
+            pointCurrMinDist = 1000000000
+            pointCurrDstClust = None
+            for c in range(len(new_clusters)):
+                if (srcOverweight > (get_cluster_overweight(new_clusters[c]) + 1)):
+                    #cluster is smaller
+                    set_ = []
+                    for p in new_households:
+                        if p["cluster"] == c:
+                            set_.append(p)
+                    dist = getMinDistanceToCluster(point, set_)
+                    if dist < pointCurrMinDist:
+                        pointCurrMinDist = dist
+                        pointCurrDstClust = c
+            if pointCurrMinDist < currentMinDistance:
+                currentMinDistance = pointCurrMinDist
+                currentDstCluster = pointCurrDstClust
+                currentSrcElem = point
+
+    tmp_cluster = currentSrcElem["cluster"]
+    currentSrcElem["cluster"] = currentDstCluster
+    new_clusters[tmp_cluster]["size"] -= 1
+    new_clusters[currentDstCluster]["size"] += 1
+
+def rebalancingIterationPicking(new_households, new_clusters):
+    currentMinDistance = float('inf')
+    currentSrcElem = None
+    currentDstCluster = None
+
+    for cluster in range(len(new_clusters)):
+        targetOverweight = get_cluster_overweight(new_clusters[cluster])
+        if (targetOverweight < 0):
+            #cluster of this household is to small
+            pointCurrMinDist = float('inf')
+            currentSrcElem = None
+            currentDstCluster = cluster
+            set_ = []
+            for p in new_households:
+                if p["cluster"] == cluster:
+                    set_.append(p)
+
+            for point in new_households:
+                if (point['cluster'] != cluster and targetOverweight < (get_cluster_overweight(new_clusters[point['cluster']] ) - 1)):
+                    #cluster is bigger
+                    dist = getMinDistanceToCluster(point, set_)
+                    if dist < pointCurrMinDist:
+                        pointCurrMinDist = dist
+                        currentSrcElem= point
+
+            tmp_cluster = currentSrcElem["cluster"]
+            currentSrcElem["cluster"] = currentDstCluster
+            new_clusters[tmp_cluster]["size"] -= 1
+            new_clusters[currentDstCluster]["size"] += 1
 
 def balance_clusters(datapoints, clusters, numOf12Clusters):
     print(numOf12Clusters)
@@ -49,35 +133,10 @@ def balance_clusters(datapoints, clusters, numOf12Clusters):
             cluster.save()
             new_clusters[-1]["is12"] = True # TODO: Sort by max size
             cl12 += 1
-    
+
     while clustersHaveWrongSize(new_clusters):
-        currentMinDistance = 10000000000
-        currentSrcElem = None
-        currentDstCluster = None
-
-        for point in new_households:
-            if (not new_clusters[point["cluster"]]["is12"] and new_clusters[point["cluster"]]["size"] > 9) or (new_clusters[point["cluster"]]["is12"] and new_clusters[point["cluster"]]["size"] > 12):
-                pointCurrMinDist = 1000000000
-                pointCurrDstClust = None
-                for c in range(len(new_clusters)):
-                    if (not new_clusters[c]["is12"] and new_clusters[c]["size"] < 9) or (new_clusters[c]["is12"] and new_clusters[c]["size"] < 12):
-                        set_ = []
-                        for p in new_households:
-                            if p["cluster"] == c:
-                                set_.append(p)
-                        dist = getDistanceToCluster(point, cluster, set_)
-                        if dist < pointCurrMinDist:
-                            pointCurrMinDist = dist
-                            pointCurrDstClust = c
-                if pointCurrMinDist < currentMinDistance:
-                    currentMinDistance = pointCurrMinDist
-                    currentDstCluster = pointCurrDstClust
-                    currentSrcElem = point
-
-        tmp_cluster = currentSrcElem["cluster"]
-        currentSrcElem["cluster"] = currentDstCluster
-        new_clusters[tmp_cluster]["size"] -= 1
-        new_clusters[currentDstCluster]["size"] += 1
+        rebalancingIteration(new_households, new_clusters)
+        #rebalancingIterationPicking(new_households, new_clusters)
 
     for point in new_households:
         for e in datapoints:
@@ -287,7 +346,7 @@ def generate_visiting_groups(clusters):
             h11.first_visit = v10
             h12.first_visit = v10
             v10.gastgeber = h10
-        
+
         if not cluster.is12:
             h1.puzzle = 91;
             h2.puzzle = 92;
