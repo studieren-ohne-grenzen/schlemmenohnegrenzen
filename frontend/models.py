@@ -78,4 +78,4 @@ class Vote(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def hotness(self):
-        return math.exp(- (timezone.now() - self.timestamp).seconds / 7000)
+        return math.exp(- (timezone.now() - self.timestamp).seconds / 3000)

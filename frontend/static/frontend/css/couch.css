@@ -99,6 +99,10 @@ img {
   #infos i {
     margin: 7% 0;
   }
+
+  header.masthead .header-content {
+    padding-top: 10vh;
+  }
 }
 
 form input:not([type="radio"]):not([type="checkbox"]), form textarea:not([type="radio"]):not([type="checkbox"]), form button:not([type="radio"]):not([type="checkbox"]), form label.input-replacement:not([type="radio"]):not([type="checkbox"]) {
