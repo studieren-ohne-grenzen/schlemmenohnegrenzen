@@ -197,8 +197,8 @@ h3 > i {
 .add-container {
   position: fixed;
   bottom: 2.2cm;
-  left: 0;
   right: 0;
+  width: 3cm;
   padding: .5cm;
   z-index: 1000;
 }
