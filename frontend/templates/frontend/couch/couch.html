@@ -1,6 +1,20 @@
 {% extends "frontend/couch/base.html" %}
 {% load static %}
 {% block content %}
+<header class="masthead couchhead">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="header-content">
+                    <div class="header-content-inner">
+                        <img src="{% static 'frontend/img/header_couch.png' %}" class="header_logo" alt="Schlemmen Ohne Grenzen Couch Logo" srcset="{% static 'frontend/img/header_couch.png' %} 1920w, {% static 'frontend/img/header_couch_1000.png' %} 1000w, {% static 'frontend/img/header_couch_600.png' %} 600w">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
 <div class="container">
 {% for post in posts %}
   <div class="row" id="{{post.id}}">
