@@ -69,6 +69,15 @@ img {
   header.masthead {
     background: url("../img/bg-top.jpg");
   }
+
+  header.couchhead {
+    min-height: 80%;
+    height: 80%;
+  }
+
+  .header_logo {
+      width: 80%;
+  }
 }
 
 @media screen and (orientation:portrait) {
@@ -83,6 +92,9 @@ img {
   header.masthead {
     background: url("../img/bg-top-mobile.jpg");
     height: 95vh;
+  }
+  header.couchhead {
+    height: 60vh;
   }
   .header_logo {
     margin-top: 14%;
