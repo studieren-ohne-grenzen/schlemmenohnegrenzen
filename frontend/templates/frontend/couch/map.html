@@ -1,12 +1,10 @@
 {% extends "frontend/couch/base.html" %}
 {% load static %}
 {% block content %}
-<div class="container">
-  <div id="mapid"></div>
-</div>
 <div class="add-container">
   <button class="btn btn-primary" onclick="javascript:window.location='/couch_add'"><span class="fa fa-plus"></span></button>
 </div>
+<div id="mapid"></div>
 {% endblock %}
 {% block js %}
 <script src="{% static 'frontend/js/leaflet.js' %}"></script>

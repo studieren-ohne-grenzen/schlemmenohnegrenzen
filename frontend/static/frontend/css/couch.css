@@ -200,6 +200,7 @@ h3 > i {
   left: 0;
   right: 0;
   padding: .5cm;
+  z-index: 1000;
 }
 
 .add-container button.btn {
@@ -262,10 +263,11 @@ body > .container {
 }
 
 #mapid {
-    height: 600px;
+    height: 700px;
+    height: calc(100% - 2cm);
     margin-top: 2cm;
     margin-bottom: 5px;
-    width: 900px;
+    width: 100%;
 }
 
 footer {
