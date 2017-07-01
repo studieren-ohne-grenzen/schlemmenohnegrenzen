@@ -209,6 +209,13 @@ h3 > i {
   background: #f0ad4e;
 }
 
+.post .panel-body {
+  min-height: 5cm;
+}
+.post .panel-body img {
+  max-height: 8cm;
+}
+
 .post .panel-body,
 .post .panel-heading,
 .post .panel-footer {
