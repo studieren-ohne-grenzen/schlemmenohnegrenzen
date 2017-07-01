@@ -186,12 +186,14 @@ h3 > i {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 1.5cm;
+  padding: .5cm;
 }
 
 .add-container button.btn {
-  width: 100%;
-  height: 100%;
+  float: right;
+  width: 2cm;
+  height: 2cm;
+  font-size: 1.5em;
 }
 
 .post {
@@ -205,6 +207,13 @@ h3 > i {
 
 .post .panel-body {
   background: #f0ad4e;
+}
+
+.post .panel-body {
+  min-height: 5cm;
+}
+.post .panel-body img {
+  max-height: 8cm;
 }
 
 .post .panel-body,
