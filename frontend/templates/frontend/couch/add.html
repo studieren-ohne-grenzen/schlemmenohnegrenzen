@@ -13,7 +13,7 @@
           <img src="" id="preview" style="display: none" />
         </div>
         <div class="panel-footer">
-            <input type="file" style="display: none" name="image" required id="id_image" class="fileupload" onchange="javascript:var file = new FileReader(); file.readAsDataURL(this.files[0]); file.onload = function(e) {$('#preview').attr('src', e.target.result).show()}" />
+            <input type="file" accept="image/*" style="display: none" name="image" required id="id_image" class="fileupload" onchange="javascript:var file = new FileReader(); file.readAsDataURL(this.files[0]); file.onload = function(e) {$('#preview').attr('src', e.target.result).show()}" />
             <button class="btn btn-warning pull-left" type="button" onclick="javascript:$('.fileupload').click()" >
               <span class="fa fa-paperclip"></span>
             </button>
