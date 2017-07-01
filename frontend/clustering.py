@@ -88,6 +88,54 @@ def rebalancingIteration(new_households, new_clusters):
     new_clusters[tmp_cluster]["size"] -= 1
     new_clusters[currentDstCluster]["size"] += 1
 
+def rebalancingIterationGlobalOpt(new_households, new_clusters):
+    currentCost = judgeClusterDistribution(new_households, new_clusters)
+    sorted_points = sorted(ne_households, reverse=True, key=lambda point: judgePoint(point, households, clusters))
+    for point in sorted_points:
+        
+
+def judgeClusterDistribution(households, clusters):
+    score = 0
+    for cluster in clusters:
+        score += judgeCluster(cluster, households, clusters))
+    score = score / len(clusters)
+
+def judgeCluster(cluster, households, clusters):
+    # get mean score of the points in this cluster
+    score = 0
+    for points in households:
+        if (point['cluster'] == cluster):
+            if (centroid = ['cluster']['centroid']) is not None:
+                centroid = {'lat': 0, 'lng': 0}
+                for point in households:
+                    if (point['cluster'] == cluster):
+                        centroid['latitude'] += point['latitude']
+                        centroid['longitude'] += point['longitude']
+                centroid['latitude'] = centroid['latitude'] / cluster['size']
+                centroid['longitude'] = centroid['longitude'] / cluster['size']
+                point['cluster']['centroid'] = centroid
+             score += judgePoint(point, households, clusters)
+    score = score / cluster['size']
+
+    // Multiply by percentual difference to target size
+    score *= 2**abs(cluster['size'] - 18/*CLUSTER_SIZE*/);
+
+def judgePoint(point, households, clusters):
+    # Calculate centroid
+    centroid = ['cluster']['centroid']
+    cent_dist = custom_dist(centroid, point)
+    
+    # get mean reciprocal distance of this cluster
+    set_ = []
+    for p in new_households:
+        if p["cluster"] == c:
+            set_.append(p)
+    mean_dist = getMeanDistanceToCluster(point, set_)
+    
+    distance_score = cent_dist / mean_dist
+
+    return distance_score
+
 def rebalancingIterationPicking(new_households, new_clusters):
     currentMinDistance = float('inf')
     currentSrcElem = None
