@@ -31,6 +31,13 @@
         <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="{% url 'frontend:couch' %}">Couch</a>
+            <div class="collapse navbar-collapse" id="navbarExample">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'frontend:couch_map' %}">Toast-Karte</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     {% endblock %}
