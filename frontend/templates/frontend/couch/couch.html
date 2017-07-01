@@ -17,8 +17,7 @@
 
 <div class="container">
 {% for post in posts %}
-  <div class="row" id="{{post.id}}">
-    <div class="post panel panel-warning">
+    <div class="post panel panel-warning" id="{{post.id}}">
       <div class="panel-heading"><h3><span class="fa fa-thumb-tack"></span> {{post.titel}}</h3></div>
       <div class="panel-body">
         <img src="{% get_media_prefix %}/{{post.image}}" />
@@ -30,7 +29,6 @@
         </a>
       </div>
     </div>
-  </div>
 {% empty %}
   <p>Es hat noch niemand etwas getoastet... Sprich einen Toast aus!</p>
 {% endfor %}
