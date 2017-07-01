@@ -224,19 +224,18 @@ def couch(request):
 
 def couch_add(request):
     if request.method == 'POST':
-        print("gotPost")
         form = CouchAddForm(request.POST, request.FILES)
         if form.is_valid():
             post = Post(titel=form.cleaned_data['titel'],
                 image=request.FILES['image'],
                 timestamp=timezone.now(),
-                longitude=0.0,
-                latitude=0.0)
+                longitude=request.longitude,
+                latitude=request.latitude)
             post.save()
             return HttpResponseRedirect(reverse('frontend:couch'))
         else:
-            print("invalid")
-            print(form)
+            print("error")
+            #todo
     else:
         form = CouchAddForm()
     return render(request, 'frontend/couch/add.html', {'form': form})

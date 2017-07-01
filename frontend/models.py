@@ -61,7 +61,7 @@ class Household(models.Model):
 
 
 class Post(models.Model):
-    image = models.ImageField(upload_to = 'couch/posts')
+    image = models.ImageField(upload_to = 'frontend/static/frontend/couch/posts')
     titel = models.CharField(max_length=200)
     timestamp = models.DateTimeField()
     longitude = models.FloatField(default=0.0)

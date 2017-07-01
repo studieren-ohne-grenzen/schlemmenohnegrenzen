@@ -17,6 +17,26 @@
             <button class="btn btn-warning pull-left" type="button" onclick="javascript:$('.fileupload').click()" >
               <span class="fa fa-paperclip"></span>
             </button>
+            <input id="longitude" type="hidden" name="longitude" value=""></input>
+            <input id="latitude" type="hidden" name="latitude" value=""></input>
+
+            <script>
+              if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(addPosition, showError);
+
+                function addPosition(position) {
+                  var lat = position.coords.latitude;
+                  var long = position.coords.longitude;
+                  $('#longitude').val(long);
+                  $('#latitude').val(lat);
+                }
+
+                function showError() {
+                  alert("Wenn du deine Position nicht frei gibst, können wir das Bild leider nicht auf der Karte anzeigen :(");
+                }
+
+              }
+            </script>
             <button class="btn btn-success pull-right" type="submit">
               Toast ausgeben
             </button>
