@@ -226,11 +226,14 @@ def couch_add(request):
     if request.method == 'POST':
         form = CouchAddForm(request.POST, request.FILES)
         if form.is_valid():
+
+
             post = Post(titel=form.cleaned_data['titel'],
                 image=request.FILES['image'],
                 timestamp=timezone.now(),
                 longitude=form.cleaned_data['longitude'],
                 latitude=form.cleaned_data['latitude'])
+
             post.save()
             return HttpResponseRedirect(reverse('frontend:couch'))
         else:
@@ -260,7 +263,7 @@ def couch_map(request):
     posts = list(Post.objects.all())
     posts.sort(key=lambda post: post.hotness(), reverse=True)
     return render(request, 'frontend/couch/map.html', {
-      'jsonstr': json.dumps([{'lat':p.latitude, 'lng':p.longitude, 'caption':p.titel, 'url':p.image.url, 'thumbnail': p.image.url, 'id': p.id} for p in posts if p.latitude is not None])
+      'jsonstr': json.dumps([{'lat':p.latitude, 'lng':p.longitude, 'caption':p.titel, 'url':p.image.url, 'thumbnail': p.image.url + 'thumb.jpg', 'id': p.id} for p in posts if p.latitude is not None])
     })
 
 @login_required

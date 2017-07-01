@@ -6,6 +6,8 @@ from django.utils import timezone
 import math
 from functools import reduce
 
+from PIL import Image
+
 class MandatsreferenzCounter(models.Model):
     cnt = models.IntegerField(default=0)
 
@@ -72,6 +74,22 @@ class Post(models.Model):
         for vote in self.vote_set.all():
             sum = sum + vote.hotness()
         return sum
+
+    def save(self, size=1200):
+        if not self.id and not self.image:
+            return
+
+        super(Post, self).save()
+
+        filename = self.image.path
+        image = Image.open(filename)
+        size = 1200, image.width / 1200 * image.height
+        image.thumbnail(size, Image.ANTIALIAS)
+        image.save(filename)
+
+        size = 100, image.width / 100 * image.height
+        image.thumbnail(size, Image.ANTIALIAS)
+        image.save(filename + ".thumb.jpg")
 
 class Vote(models.Model):
     timestamp = models.DateTimeField()

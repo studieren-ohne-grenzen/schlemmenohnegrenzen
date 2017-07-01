@@ -62,3 +62,10 @@ class CouchAddForm(forms.Form):
     image = forms.FileField(required=True)
     longitude = forms.FloatField(required=False)
     latitude = forms.FloatField(required=False)
+
+    def clean_image(self):
+        file = self.cleaned_data['image']
+        if file:
+            print(file.content_type)
+            if file.content_type != 'image/jpeg' and file.content_type != 'image/gif':
+                raise forms.ValidationError(_('File type is not supported'))
