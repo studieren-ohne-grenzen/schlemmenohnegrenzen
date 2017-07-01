@@ -243,7 +243,6 @@ def couch_add(request):
 def couch_prost(request, postid):
     if 'couchProstHistory' in request.session:
         if postid in request.session['couchProstHistory']:
-            print("Das ist unfair")
             return render(request, 'frontend/couch/reprost.html')
     else:
         request.session['couchProstHistory'] = dict()
@@ -254,6 +253,7 @@ def couch_prost(request, postid):
     )
     vote.save()
     request.session['couchProstHistory'][postid] = True;
+    request.session.modified = True
     return HttpResponseRedirect(reverse('frontend:couch') + '#' + postid)
 
 def couch_map(request):
