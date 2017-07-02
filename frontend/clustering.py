@@ -3,7 +3,7 @@ from geopy.distance import vincenty
 import cProfile, pstats, io, math
 from operator import itemgetter
 from frontend.models import Household, Cluster, VisitingGroup
-from munkres import Munkres, print_matrix
+from munkres import Munkres, print_matrix, DISALLOWED
 
 def custom_dist(x, y):
     return vincenty(x, y).m
@@ -215,7 +215,7 @@ def judgePoint(point, households, clusters):
 def rebalancingIterationHungarian(households, clusters, iteration):
     current_cost = judgeClusterDistribution(households, clusters, iteration)
     # prepare matrix
-    matrix = [[None for i in range(len(households))] for i in range(len(households))]
+    matrix = [[None for i in range(len(clusters)*12)] for i in range(len(households))]
     for c, cluster in enumerate(clusters):
         # prepare cluster list
         set_ = []
@@ -224,8 +224,11 @@ def rebalancingIterationHungarian(households, clusters, iteration):
                 set_.append(point)
         for p, point in enumerate(households):
             dist = getMeanDistanceToCluster(point, set_)
-            for i in range(9):
+            for i in range(12):
                 matrix[p][c+len(clusters)*i] = dist
+                if i >= 9 and not cluster['is12']:
+                    matrix[p][c+len(clusters)*i] = DISALLOWED
+
     munkres = Munkres()
     indeces = munkres.compute(matrix)
 
@@ -262,7 +265,7 @@ def balance_clusters(datapoints, clusters, numOf12Clusters):
         #rebalancingIteration(new_households, new_clusters)
         #rebalancingIterationPicking(new_households, new_clusters)
         #improved = rebalancingIterationGlobalOpt(new_households, new_clusters, i)
-        rebalancingIterationHungarian(new_households, new_clusters, i)
+        rebalancingIterationHungarian(new_households, new_clusters, 1)
 
     for point in new_households:
         for e in datapoints:
