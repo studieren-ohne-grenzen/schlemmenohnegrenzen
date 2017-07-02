@@ -1,8 +1,9 @@
 from scipy.cluster.hierarchy import linkage, fcluster
 from geopy.distance import vincenty
-import cProfile, pstats, io
+import cProfile, pstats, io, math
 from operator import itemgetter
 from frontend.models import Household, Cluster, VisitingGroup
+from munkres import Munkres, print_matrix
 
 def custom_dist(x, y):
     return vincenty(x, y).m
@@ -19,15 +20,18 @@ def initial_clusters(datapoints, clusters):
         datapoints[i].save()
 
 def clustersHaveWrongSize(clusters):
-    num_wrong = 0
+    num_below = 0
+    num_above = 0
     for cluster in clusters:
-        if cluster["is12"] and cluster["size"] > 12:
-            num_wrong += 1
-        elif not cluster["is12"] and cluster["size"] > 9:
-            num_wrong += 1
+        #if cluster["is12"] and cluster["size"] > 12:
+        #    num_above += 1
+        if not cluster["is12"] and cluster["size"] > 9:
+            num_above += 1
+        if not cluster["is12"] and cluster["size"] < 9:
+            num_below += 1
 
-    print(num_wrong)
-    return num_wrong > 0
+    print(str(num_above) + 'too lare, ' + str(num_below)+ ' too small')
+    return num_above > 0
 
 def getMinDistanceToCluster(point, set):
     minDist = float('inf')
@@ -118,6 +122,126 @@ def rebalancingIterationPicking(new_households, new_clusters):
             new_clusters[tmp_cluster]["size"] -= 1
             new_clusters[currentDstCluster]["size"] += 1
 
+def rebalancingIterationGlobalOpt(new_households, new_clusters, iteration):
+    print('starting iteration #'+str(iteration))
+    current_cost = judgeClusterDistribution(new_households, new_clusters, iteration-1)
+    sorted_clusters = sorted(new_clusters, reverse=True, key=lambda cluster: judgeCluster(cluster, new_households, new_clusters, iteration))
+    improvements = []
+    for c, cluster in enumerate(sorted_clusters):
+        if cluster['size'] > 9:
+            continue
+        # sort points by proximity to this cluster
+        dist = dict()
+        set_ = []
+        for p in new_households:
+            if p["cluster"] == c:
+                set_.append(p)
+        for p, point in enumerate(new_households):
+            dist[p] = getMeanDistanceToCluster(point, set_)
+        # sort asc. by distance
+        closest_points = [(i, new_households[i]) for i in range(len(new_households))]
+        closest_points = sorted(closest_points, key=lambda p: dist[p[0]])
+        closest_points = [p[1] for p in closest_points]
+        
+        # try adding a close point to a needy cluster
+        target = c
+        for p, point in enumerate(closest_points):
+            if point['cluster'] == target:
+                continue
+            source = point['cluster']
+            new_clusters[source]['size'] -= 1
+            new_clusters[target]['size'] += 1
+            point['cluster'] = target
+            new_cost = judgeClusterDistribution(new_households, new_clusters, iteration)
+            new_clusters[source]['size'] += 1
+            new_clusters[target]['size'] -= 1
+            point['cluster'] = source
+            if current_cost > new_cost:
+                print(current_cost - new_cost)
+                improvements.append((
+                   new_households.index(point),
+                   source,
+                   target,
+                   current_cost - new_cost
+                ))
+    if len(improvements) == 0:
+      return False
+    sorted_improvements = sorted(improvements, reverse=True, key=itemgetter(3))
+    improvement = sorted_improvements[0]
+    print("improvement:"+str(improvement))
+    new_clusters[improvement[1]]['size'] -= 1
+    new_clusters[improvement[2]]['size'] += 1
+    new_households[improvement[0]]['cluster'] = improvement[2]
+    return True
+
+def judgeClusterDistribution(households, clusters, iteration):
+    score = 0
+    for cluster in clusters:
+        score += judgeCluster(cluster, households, clusters, iteration)
+    score = score / len(clusters)
+    return score
+
+def judgeCluster(cluster, households, clusters, iteration): 
+    # get mean score of the points in this cluster
+    score = 0
+    for point in households:
+        if (clusters[point['cluster']] == cluster):
+              score += judgePoint(point, households, clusters)
+    if cluster['size'] == 0:
+        return 0
+    density_score = score / cluster['size']
+
+    size_score = abs(9 - cluster['size']) / 9
+    #score *= 2**abs((cluster['size'] - 9) * (1+math.log(iteration))); # CLUSTER_SIZE
+    score = (2**(size_score*50)  + 4*density_score ) /2
+    return score
+
+def judgePoint(point, households, clusters):
+    # get mean reciprocal distance of this cluster
+    set_ = []
+    for p in households:
+        if p["cluster"] == point['cluster'] and p != point:
+            set_.append(p)
+    mean_dist = getMeanDistanceToCluster(point, set_)
+    min_dist = getMinDistanceToCluster(point, set_)
+    
+    if mean_dist == 0:
+        return 0
+    
+    distance_score = mean_dist
+
+    return distance_score
+
+def rebalancingIterationHungarian(households, clusters, iteration):
+    current_cost = judgeClusterDistribution(households, clusters, iteration)
+    # prepare matrix
+    matrix = [[None for i in range(len(households))] for i in range(len(households))]
+    for c, cluster in enumerate(clusters):
+        # prepare cluster list
+        set_ = []
+        for p, point in enumerate(households):
+            if point["cluster"] == c:
+                set_.append(point)
+        for p, point in enumerate(households):
+            dist = getMeanDistanceToCluster(point, set_)
+            for i in range(9):
+                matrix[p][c+len(clusters)*i] = dist
+    munkres = Munkres()
+    indeces = munkres.compute(matrix)
+
+    for p,c in indeces:
+        source = households[p]['cluster']
+        target = c % len(clusters)
+        clusters[source]['size'] -= 1
+        clusters[target]['size'] += 1
+        households[p]['cluster'] = target
+    
+    new_cost = judgeClusterDistribution(households, clusters, iteration)
+     
+    return new_cost < current_cost
+         
+
+
 def balance_clusters(datapoints, clusters, numOf12Clusters):
     print(numOf12Clusters)
     new_clusters = []
@@ -134,9 +258,13 @@ def balance_clusters(datapoints, clusters, numOf12Clusters):
             new_clusters[-1]["is12"] = True # TODO: Sort by max size
             cl12 += 1
 
-    while clustersHaveWrongSize(new_clusters):
-        rebalancingIteration(new_households, new_clusters)
+    i = 2
+    while clustersHaveWrongSize(new_clusters) and improved:
+        #rebalancingIteration(new_households, new_clusters)
         #rebalancingIterationPicking(new_households, new_clusters)
+        #improved = rebalancingIterationGlobalOpt(new_households, new_clusters, i)
+        rebalancingIterationHungarian(new_households, new_clusters, i)
+        i += 1
 
     for point in new_households:
         for e in datapoints:
