@@ -91,6 +91,7 @@ def rebalancingIteration(new_households, new_clusters):
     currentSrcElem["cluster"] = currentDstCluster
     new_clusters[tmp_cluster]["size"] -= 1
     new_clusters[currentDstCluster]["size"] += 1
+    return clustersHaveWrongSize(new_clusters)
 
 def rebalancingIterationPicking(new_households, new_clusters):
     currentMinDistance = float('inf')
@@ -121,6 +122,7 @@ def rebalancingIterationPicking(new_households, new_clusters):
             currentSrcElem["cluster"] = currentDstCluster
             new_clusters[tmp_cluster]["size"] -= 1
             new_clusters[currentDstCluster]["size"] += 1
+    return clustersHaveWrongSize(new_clusters)
 
 def rebalancingIterationGlobalOpt(new_households, new_clusters, iteration):
     print('starting iteration #'+str(iteration))
@@ -261,11 +263,15 @@ def balance_clusters(datapoints, clusters, numOf12Clusters):
             new_clusters[-1]["is12"] = True # TODO: Sort by max size
             cl12 += 1
 
-    while clustersHaveWrongSize(new_clusters):
-        #rebalancingIteration(new_households, new_clusters)
-        #rebalancingIterationPicking(new_households, new_clusters)
-        #improved = rebalancingIterationGlobalOpt(new_households, new_clusters, i)
-        rebalancingIterationHungarian(new_households, new_clusters, 1)
+    should_continue = True
+    i = 1
+    while should_continue:
+        #should_continue = rebalancingIteration(new_households, new_clusters)
+        #should_continue = rebalancingIterationPicking(new_households, new_clusters)
+        #should_continue= rebalancingIterationGlobalOpt(new_households, new_clusters, i)
+        should_continue = rebalancingIterationHungarian(new_households, new_clusters, i)
+        clustersHaveWrongSize(new_clusters)
+        i += 1
 
     for point in new_households:
         for e in datapoints:
