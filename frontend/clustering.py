@@ -92,9 +92,9 @@ def rebalancingIteration(new_households, new_clusters):
     new_clusters[currentDstCluster]["size"] += 1
 
 def rebalancingIterationGlobalOpt(new_households, new_clusters, iteration):
-    improved = False
     current_cost = judgeClusterDistribution(new_households, new_clusters, iteration-1)
     sorted_points = sorted(new_households, reverse=True, key=lambda point: judgePoint(point, new_households, new_clusters))
+    improvements = []
     for point in sorted_points:
         # sort clusters by proximity to this point
         dist = dict()
@@ -116,18 +116,26 @@ def rebalancingIterationGlobalOpt(new_households, new_clusters, iteration):
             new_clusters[target]['size'] += 1
             point['cluster'] = target
             new_cost = judgeClusterDistribution(new_households, new_clusters, iteration)
-            print("current_cost: "+str(current_cost)+', new_cost:'+str(new_cost))
-            if current_cost > new_cost:
-                improved = True
-                break
-            # else: backtrack
             new_clusters[source]['size'] += 1
             new_clusters[target]['size'] -= 1
             point['cluster'] = source
-        if improved == True:
-          print('Improved!')
-          break
-    return improved
+            print(current_cost - new_cost)
+            if current_cost > new_cost:
+                improvements.append((
+                   new_households.index(point),
+                   source,
+                   target,
+                   current_cost - new_cost
+                ))
+    if len(improvements) == 0:
+      return False
+    sorted_improvements = sorted(improvements, reverse=True, key=itemgetter(3))
+    improvement = sorted_improvements[0]
+    print("improvement:"+str(improvement))
+    new_clusters[improvement[1]]['size'] -= 1
+    new_clusters[improvement[2]]['size'] += 1
+    new_households[improvement[0]]['cluster'] = improvement[2]
+    return True
 
 def judgeClusterDistribution(households, clusters, iteration):
     score = 0
@@ -160,7 +168,10 @@ def judgePoint(point, households, clusters):
     mean_dist = getMeanDistanceToCluster(point, set_)
     min_dist = getMinDistanceToCluster(point, set_)
     
-    distance_score = mean_dist
+    if mean_dist == 0:
+        return 0
+    
+    distance_score =  (min_dist + mean_dist) / 2
 
     return distance_score
 
