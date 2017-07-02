@@ -258,13 +258,11 @@ def balance_clusters(datapoints, clusters, numOf12Clusters):
             new_clusters[-1]["is12"] = True # TODO: Sort by max size
             cl12 += 1
 
-    i = 2
-    while clustersHaveWrongSize(new_clusters) and improved:
+    while clustersHaveWrongSize(new_clusters):
         #rebalancingIteration(new_households, new_clusters)
         #rebalancingIterationPicking(new_households, new_clusters)
         #improved = rebalancingIterationGlobalOpt(new_households, new_clusters, i)
         rebalancingIterationHungarian(new_households, new_clusters, i)
-        i += 1
 
     for point in new_households:
         for e in datapoints:
