@@ -1,4 +1,4 @@
-Hey {{house.name1}} und {{house.name2}},
+Hey {{household.name1}} und {{household.name2}},
 
 letzten Dienstag hat sich euer Schlemmen Ohne Grenzen Team getroffen und das letzte Event Revue passieren lassen.
 Und wie macht das am meisten Spaß? Natürlich mit leckerem Essen - wir verraten nur so viel: die Black Pretzels gibt es wirklich ;)
