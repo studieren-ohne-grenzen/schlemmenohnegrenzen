@@ -33,24 +33,6 @@ section.gewinnen {
     color: #fff;
 }
 
-@media screen and (min-width: 1000px) {
-  section.info {
-    background-image: url("../img/trenchcoat.svg");
-    background-size: 40% auto;
-    background-repeat: no-repeat;
-    background-position: 10%;
-  }
-  .info .container {
-    margin-left: 32%;
-    width: 68%;
-  }
-
-  .info .row {
-    margin-left: 18%;
-    width: 50vw;
-  }
-}
-
 img {
     width: 100%;
 }
