@@ -18,7 +18,7 @@ class Command(BaseCommand):
 
             if (household.newsletter1):
                 text = get_template("mail/advertisement.txt").render({'name': household.name1})
-                mail = EmailMessage('Schlemmen Ohne Grenzen #8 am 30. November!',
+                mail = EmailMessage('Karlsruhe schlemmt wieder! - Schlemmen Ohne Grenzen #8 am 30. November!',
                     text,
                     'hallo@schlemmen-ohne-grenzen.de',
                     [household.email1]
@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 print(str(i) + '/' + str(total))
             if (household.newsletter2):
                 text = get_template("mail/advertisement.txt").render({'name': household.name2})
-                mail = EmailMessage('Schlemmen Ohne Grenzen #8 am 30. November!',
+                mail = EmailMessage('Karlsruhe schlemmt wieder! - Schlemmen Ohne Grenzen #8 am 30. November!',
                     text,
                     'hallo@schlemmen-ohne-grenzen.de',
                     [household.email2]
