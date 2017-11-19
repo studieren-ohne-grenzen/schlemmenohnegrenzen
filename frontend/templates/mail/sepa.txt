@@ -11,4 +11,4 @@ Straße: {{house.kontoinhaber_street}}
 Ort: {{house.kontoinhaber_city}}
 IBAN: {{iban_start}} XXXX XXXX XXXX XXX {{iban_end}}
 BIC: {{house.bic}}
-Durchführung am: 03.07.2017
+Durchführung am: 03.12.2017

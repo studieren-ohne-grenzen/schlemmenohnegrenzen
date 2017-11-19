@@ -22,7 +22,7 @@ def email_senden(house):
         'hallo@schlemmen-ohne-grenzen.de',
         [house.email1,house.email2],
         #html_message=html_content,
-        fail_silently=False)
+        fail_silently=True)
 
     if not house.personal_payment:
         iban_start = house.iban[:4]
@@ -163,7 +163,7 @@ def generate_mandatsreferenz():
         mc.cnt += 1
         cnt = mc.cnt
         mc.save()
-    return "SCHLEMMEN20170621KA{:05d}".format(cnt)
+    return "SCHLEMMEN20171130KA{:05d}".format(cnt)
 
 
 
