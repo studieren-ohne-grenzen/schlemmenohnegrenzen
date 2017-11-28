@@ -35,8 +35,8 @@ class Command(BaseCommand):
                 #html_message=html_content
                 )
 
-            self.attachBasic(mail)
-            self.attachPuzzles(mail, household.puzzle)
+            #self.attachBasic(mail)
+            #self.attachPuzzles(mail, household.puzzle)
             mail.send(fail_silently=False)
 
             send_mail('[Archiv] Speisekarte von '+household.name1+' und '+household.name2,
