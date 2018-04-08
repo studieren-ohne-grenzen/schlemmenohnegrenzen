@@ -52,7 +52,7 @@ class Anmelden3Form(forms.Form):
 
     def clean_captcha(self):
         captcha = self.cleaned_data['captcha']
-        if not captcha.capitalize() == 'Karlsruhe':
+        if not captcha.capitalize() == 'Bonn':
             raise forms.ValidationError("Es wurde die falsche Stadt eingegeben.")
         return captcha
 

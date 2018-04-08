@@ -6,7 +6,7 @@ hilfen = [{
     'color': '#cb4154',
     'puzzles': [
         {"id": "r1t1", "title": "Tipp 1", "text": "Fällt euch etwas bei den Namen auf? Sie haben alle etwas gemeinsam."},
-        {"id": "r1t2", "title": "Tipp 2", "text": "Alle stehen eindeutig für jeweils eine Straßenbahnlinie in Karlsruhe"},
+        {"id": "r1t2", "title": "Tipp 2", "text": "Alle stehen eindeutig für jeweils eine Straßenbahnlinie in Bonn"},
         {"id": "r1t3", "title": "Tipp 3", "text": "Was haben die Straßenbahnlinien gemeinsam?"},
         {"id": "r1t4", "title": "Tipp 4", "text": "Sie haben einen gemeinsamen Schnittpunkt..."},
         {"id": "r1t5", "title": "Lösung", "text": "Mathystraße"}
@@ -20,7 +20,7 @@ hilfen = [{
         {"id": "r2t1", "title": "Tipp 1", "text": "Schaut mal auf die Telefontastatur von eurem Handy"},
         {"id": "r2t2", "title": "Tipp 2", "text": "Die Zeichen stehen jeweils für eine Zahl"},
         {"id": "r2t3", "title": "Tipp 3", "text": "Die Telefonnummer ist +49 721 6095 8755. Rufe mal an. (wenn besetzt noch einmal versuchen)"},
-        {"id": "r2t4", "title": "Tipp 4", "text": "Das Geräusch steht für einen ganz bekannten Ort in Karlsruhe. Welchen denn?"},
+        {"id": "r2t4", "title": "Tipp 4", "text": "Das Geräusch steht für einen ganz bekannten Ort in Bonn. Welchen denn?"},
         {"id": "r2t5", "title": "Lösung", "text": "Schlosspark"}
         ]
     },

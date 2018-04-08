@@ -52,7 +52,7 @@ class Household(models.Model):
 
     def lookup_coords(self):
         geocoder = Nominatim()
-        address = self.gpsstreet + ", " + str(self.plz) + " Karlsruhe"
+        address = self.gpsstreet + ", " + str(self.plz) + " Bonn"
         tmp = geocoder.geocode(address, timeout=10)
         if tmp == None:
             self.found_coords = False
