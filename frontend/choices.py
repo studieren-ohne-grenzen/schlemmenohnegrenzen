@@ -1,18 +1,25 @@
 plz_choices = (
-    (76131, "76131 (Innen- & Oststadt)"),
-    (76133, "76133 (Innen-, Nord-, West-, Südweststadt)"),
-    (76135, "76135 (West-, Südweststadt, Beiertheim-Bulach)"),
-    (76137, "76137 (Südstadt, Südweststadt)"),
-    (76139, "76139 (Hagsfeld, Waldstadt)"),
-    (76149, "76149 (Nordstadt)"),
-    (76185, "76185 (Mühlburg)"),
-    (76187, "76187 (Nordweststadt)"),
-    (76227, "76227 (Durlach)")
+    (53111, "53111 Bonn-Zentrum/-Castell/Nordstadt"),
+    (53113, "53113 Bonn-Zentrum/Gronau/Kessenich/Poppelsdorf/Südstadt"),
+    (53115,
+     "53115 Bonn-Zentrum/Kessenich/Poppelsdorf/Südstadt/Venusberg/Weststadt"),
+    (53117, "53117 Auerberg /Bonn-Castell/ Buschdorf/Graurheindorf"),
+    (53119, "53119 Auerberg/Nordstadt/Tannenbusch"),
+    (53121, "53121 Dransdorf"),
+    (53123, "53123 Duisdorf/Lengsdorf/Lessenich/Meßdorf"),
+    (53125, "53125 Brüser Berg/Duisdorf/Ippendorf/Röttgen"),
+    (53127, "53127 Friesdorf/Poppelsdorf/Venusberg/ Ippendorf/Lengsdorf"),
+    (53129, "53129 Dottendorf/Kessenich/Poppelsdorf"),
+    (53179, "53179 Mehlem"),
+    (53225, "53225 Beuel Mitte/Geislar"),
+    (53227, "53227 Beuel-Mitte/-Ost"),
+    (53229, "53229 Beuel-Ost"),
 )
 
-#First number is puzzle identifier, second char is hint identifier
-#G means "Gastgeber" = host
-#Example: A.2 means that this houshold will get hint 2 for puzzle A for the main course
+# First number is puzzle identifier, second char is hint identifier
+# G means "Gastgeber" = host
+# Example: A.2 means that this houshold will get hint 2 for puzzle A for
+# the main course
 puzzle_choices = (
     (0, "Null"),
     (91, "9.1 Vorspeise 1.G, Hauptspeise A.1, Nachspeise N.1"),
