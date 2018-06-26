@@ -1,9 +1,5 @@
 Hey {{household.name1}} und {{household.name2}},
 
-letzten Dienstag hat sich euer Schlemmen Ohne Grenzen Team getroffen und das letzte Event Revue passieren lassen.
-Und wie macht das am meisten Spaß? Natürlich mit leckerem Essen - wir verraten nur so viel: die Black Pretzels gibt es wirklich ;)
-https://www.facebook.com/SOGKarlsruhe/photos/gm.1955952354626221/1402512269842231/?type=3&theater
-
 Vielen Dank, dass ihr bei Schlemmen Ohne Grenzen dabei gewesen seid! Dank euch wurde es ein großartiger Abend und auch wir hoffen,
 dass es euch ebenso Spaß gemacht hat zu kochen, zu schlemmen und zu rätseln.
 

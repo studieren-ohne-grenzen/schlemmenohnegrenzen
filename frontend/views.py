@@ -163,7 +163,7 @@ def generate_mandatsreferenz():
         mc.cnt += 1
         cnt = mc.cnt
         mc.save()
-    return "SCHLEMMEN20171130KA{:05d}".format(cnt)
+    return "SCHLEMMEN20180711KA{:05d}".format(cnt)
 
 
 
