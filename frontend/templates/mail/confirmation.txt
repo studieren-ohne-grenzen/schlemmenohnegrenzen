@@ -5,8 +5,7 @@ Wie ihr ja schon wisst, wird es am 11. Juli um 18 Uhr mit dem ersten Gang losgeh
 Euch erwarten bei jedem Gang neue, coole Leute.
 Ihr erhaltet alle weiteren Infos dann am Abend des 10. Juli - insbesondere auch welchen Gang ihr kochen dürft.
 
-Habt ihr noch Fragen, könnt ihr uns entweder direkt auf diese Mail antworten oder uns per Whatsapp schreiben:
-+49 177 197 69 19
+Habt ihr noch Fragen, könnt ihr uns direkt auf diese Mail antworten.
 
 Damit eure Gäste euch auch wirklich finden können, kontrolliert bitte nochmal kurz eure Daten:
 PlZ: {{house.plz}}
