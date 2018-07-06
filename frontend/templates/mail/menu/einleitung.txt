@@ -1,9 +1,9 @@
 Hallo {{household.name1}} und {{household.name2}},
 
-es geht los mit Schlemmen Ohne Grenzen #8! Unten findest du deine Speisekarte für den Abend - eure Gäste und Gastgeber über den Abend.
+es geht los mit Schlemmen Ohne Grenzen #9! Unten findest du deine Speisekarte für den Abend - eure Gäste und Gastgeber über den Abend.
 
-Irgendwas hakt so richtig? Notfallnummern! Wir sind für euch da :)
-Dennis: +49 177 1976919
-Daniel: +49 176 39971855
+Irgendwas hakt so richtig? Im Notfall könnt ihr uns eine Email an diese Adresse schicken oder uns über unsere Notfallnummer erreichen! Wir sind für euch da :)
+
+Notfallnummer (Stefanie): +49 176 57729249
 
 Speisekarte:
