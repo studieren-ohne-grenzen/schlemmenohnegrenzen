@@ -1,3 +1,5 @@
+(Bitte ignoriert die vorherige Mail :D)
+
 Hey {{household.name1}} und {{household.name2}},
 
 Vielen Dank, dass ihr bei Schlemmen Ohne Grenzen dabei gewesen seid! Dank euch wurde es ein großartiger Abend und auch wir hoffen,
