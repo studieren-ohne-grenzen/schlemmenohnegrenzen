@@ -1,9 +1,6 @@
-(Bitte ignoriert die vorherige Mail :D)
+Hallo {{household.name1}} und {{household.name2}},
 
-Hey {{household.name1}} und {{household.name2}},
-
-Vielen Dank, dass ihr bei Schlemmen Ohne Grenzen dabei gewesen seid! Dank euch wurde es ein großartiger Abend und auch wir hoffen,
-dass es euch ebenso Spaß gemacht hat zu kochen und zu schlemmen.
+Vielen Dank, dass ihr bei unserem 10. Schlemmen Ohne Grenzen dabei gewesen seid! Dank euch wurde es ein großartiger Abend und wir hoffen, dass es euch Spaß gemacht hat zu kochen und zu schlemmen.
 
 Damit wir beim nächsten Mal ein noch besseres Event für euch vorbereiten können, haben wir ein paar Fragen an euch, die ihr mit einer Antwort auf diese Mail beantworten könnt.
 
@@ -11,7 +8,7 @@ Wie hast du von Schlemmen ohne Grenzen überhaupt und vom gestrigen Event erfahr
 Hast du vor beim nächsten Mal wieder teilzunehmen?
 Hast du coole Ideen, was wir besser machen könnten?
 Wie viel Interesse hast du an einem organisierten nächtlichen Zusammentreffen nach dem Nachtisch?
-Falls ja, fändest du es besser in einem Club feiern zu gehen oder sich gemütlich irgendwo zu treffen?
+Falls ja, fändest du es besser in einem Club feiern zu gehen oder sich wieder im AKK zu treffen?
 
 Vielen Dank für eure Hilfe!
 
